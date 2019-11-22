@@ -16,9 +16,6 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <modules>
-        <module>subsystems</module>
-    </modules>
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
@@ -40,8 +37,10 @@
         </license>
     </licenses>
     <properties>
-        <!-- Target WildFly version -->
+        <!-- Target WildFly version, and other parts needed for the Galleon maven plugin -->
         <version.org.wildfly>19.0.0.Beta1-SNAPSHOT</version.org.wildfly>
+        <version.org.wildfly.core>11.0.0.Beta2</version.org.wildfly.core>
+        <version.org.wildfly.common>1.5.1.Final</version.org.wildfly.common>
 
         <!-- Other dependency versions -->
         <version.io.smallrye.smallrye-context-propagation>1.0.12-SNAPSHOT</version.io.smallrye.smallrye-context-propagation>
@@ -65,6 +64,16 @@
         <maven.repository.protocol>https</maven.repository.protocol>
         <!-- The full remote maven repo URL; can be overridden via -D for special use cases -->
         <maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
+
+        <!-- Name of the built server -->
+        <server.name>wildfly-${version.org.wildfly}-mp-reactive-${project.version}</server.name>
+        <wildfly.build.output.dir>build/target/${server.name}</wildfly.build.output.dir>
+
+        <!-- Galleon -->
+        <galleon.fork.embedded>true</galleon.fork.embedded>
+        <galleon.log.time>true</galleon.log.time>
+        <!-- Builds need to override this -->
+        <galleon.wildfly.home>/tmp</galleon.wildfly.home>
     </properties>
     <repositories>
         <repository>
@@ -99,11 +108,23 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Subsystems -->
+            <!-- Project -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>wildfly-microprofile-context-propagation</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.extras.reactive</groupId>
+                <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.extras.reactive</groupId>
+                <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -253,6 +274,20 @@
                     <groupId>org.wildfly.galleon-plugins</groupId>
                     <artifactId>wildfly-galleon-maven-plugin</artifactId>
                     <version>${version.org.wildfly.galleon-plugins}</version>
+                    <dependencies>
+                        <!-- feature-spec-gen uses wildfly-embedded to generate the feature specs, hence the designated wildfly-embedded version must match the pack one -->
+                        <dependency>
+                            <groupId>org.wildfly.core</groupId>
+                            <artifactId>wildfly-embedded</artifactId>
+                            <version>${version.org.wildfly.core}</version>
+                        </dependency>
+                        <!-- If you add a dependency on wildfly-embedded you need to bring your own transitives -->
+                        <dependency>
+                            <groupId>org.wildfly.common</groupId>
+                            <artifactId>wildfly-common</artifactId>
+                            <version>${version.org.wildfly.common}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -263,4 +298,9 @@
         <url>${wildfly-extras.repo.scm.url}</url>
         <tag>HEAD</tag>
     </scm>
+    <modules>
+        <module>subsystems</module>
+        <module>galleon-pack</module>
+        <module>build</module>
+    </modules>
 </project>

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.wildfly.extension.microprofile.context.propagation;
+package org.wildfly.extension.microprofile.reactive.streams.operators;
 
-import static org.wildfly.extension.microprofile.context.propagation.MicroProfileContextPropagationExtension.WELD_CAPABILITY_NAME;
+import static org.wildfly.extension.microprofile.reactive.streams.operators.MicroProfileReactiveStreamsOperatorsExtension.WELD_CAPABILITY_NAME;
 
 import java.io.IOException;
 
@@ -29,22 +29,21 @@ import org.jboss.as.subsystem.test.AdditionalInitialization;
 public class MicroprofileReactiveStreamsOperatorsSubsystemTestCase extends AbstractSubsystemBaseTest {
 
     public MicroprofileReactiveStreamsOperatorsSubsystemTestCase() {
-        super(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, new MicroProfileContextPropagationExtension());
+        super(MicroProfileReactiveStreamsOperatorsExtension.SUBSYSTEM_NAME, new MicroProfileReactiveStreamsOperatorsExtension());
     }
 
     @Override
     protected String getSubsystemXml() throws IOException {
         //test configuration put in standalone.xml
-        return readResource("context-propagation.xml");
+        return readResource("reactive-streams-operators.xml");
     }
 
     @Override
     protected String getSubsystemXsdPath() throws Exception {
-        return "schema/wildfly-microprofile-context-propagation-smallrye_1_0.xsd";
+        return "schema/wildfly-microprofile-reactive-streams-operators-smallrye_1_0.xsd";
     }
-
+    
     protected AdditionalInitialization createAdditionalInitialization() {
         return AdditionalInitialization.withCapabilities(WELD_CAPABILITY_NAME);
     }
-
 }

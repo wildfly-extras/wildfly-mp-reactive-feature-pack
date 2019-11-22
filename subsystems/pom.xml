@@ -31,6 +31,7 @@
     <modules>
         <module>context-propagation</module>
         <module>reactive-streams-operators</module>
+        <module>reactive-messaging</module>
     </modules>
 
     <dependencies>

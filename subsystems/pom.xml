@@ -28,6 +28,8 @@
     <artifactId>wildfly-microprofile-subsystems</artifactId>
     <packaging>pom</packaging>
     <name>WildFly Reactive MicroProfile - Subsystems Parent</name>
-
+    <modules>
+        <module>context-propagation</module>
+    </modules>
 
 </project>

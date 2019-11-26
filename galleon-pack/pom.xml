@@ -30,6 +30,11 @@
 
     <name>WildFly Reactive MicroProfile - Galleon Pack</name>
 
+    <properties>
+        <license.output.directory>${project.build.directory}/resources/content/docs/licenses</license.output.directory>
+        <license.src.directory>${basedir}/src/license</license.src.directory>
+    </properties>
+
     <build>
         <finalName>${server.name}</finalName>
         <plugins>
@@ -67,6 +72,25 @@
                         <phase>compile</phase>
                         <configuration>
                             <fork-embedded>${galleon.fork.embedded}</fork-embedded>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.maven.plugins</groupId>
+                <artifactId>licenses-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>update-licenses-xml</id>
+                        <goals>
+                            <goal>insert-versions</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <sortByGroupIdAndArtifactId>true</sortByGroupIdAndArtifactId>
+                            <licensesConfigFile>${license.src.directory}/microprofile-reactive-feature-pack-licenses.xml</licensesConfigFile>
+                            <licensesOutputFile>${license.output.directory}/microprofile-reactive-feature-pack-licenses.xml</licensesOutputFile>
                         </configuration>
                     </execution>
                 </executions>

@@ -127,7 +127,7 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.wildfly.extras.reactive</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>wildfly-microprofile-galleon-pack</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
@@ -139,7 +139,7 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.wildfly.extras.reactive</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>wildfly-microprofile-galleon-pack</artifactId>
                 <version>${project.version}</version>
                 <type>zip</type>

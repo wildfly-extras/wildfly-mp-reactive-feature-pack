@@ -106,6 +106,7 @@
                                     <name>standalone.xml</name>
                                     <layers>
                                         <layer>context-propagation</layer>
+                                        <layer>reactive-messaging</layer>
                                         <layer>reactive-streams-operators</layer>
                                     </layers>
                                 </config>

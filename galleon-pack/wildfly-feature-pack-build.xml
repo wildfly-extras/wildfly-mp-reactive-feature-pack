@@ -39,6 +39,7 @@
         <extensions>
             <standalone>
                 <extension>org.wildfly.extension.microprofile.context-propagation-smallrye</extension>
+                <extension>org.wildfly.extension.microprofile.reactive-messaging-smallrye</extension>
                 <extension>org.wildfly.extension.microprofile.reactive-streams-operators-smallrye</extension>
             </standalone>
         </extensions>

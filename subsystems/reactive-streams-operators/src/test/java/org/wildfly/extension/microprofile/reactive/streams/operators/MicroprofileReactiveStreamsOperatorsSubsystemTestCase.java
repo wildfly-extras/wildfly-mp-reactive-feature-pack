@@ -42,7 +42,7 @@ public class MicroprofileReactiveStreamsOperatorsSubsystemTestCase extends Abstr
     protected String getSubsystemXsdPath() throws Exception {
         return "schema/wildfly-microprofile-reactive-streams-operators-smallrye_1_0.xsd";
     }
-    
+
     protected AdditionalInitialization createAdditionalInitialization() {
         return AdditionalInitialization.withCapabilities(WELD_CAPABILITY_NAME);
     }

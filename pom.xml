@@ -50,7 +50,8 @@
         <version.org.eclipse.microprofile.reactive-streams-operators>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators>
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
 
-        <!-- Plugin versions -->
+        <!-- Plugin versions and their dependency versions -->
+        <version.org.wildfly.checkstyle-config>1.0.8.Final</version.org.wildfly.checkstyle-config>
         <version.org.wildfly.galleon-plugins>4.0.4.Final</version.org.wildfly.galleon-plugins>
 
         <!-- Misc. -->
@@ -74,6 +75,9 @@
         <galleon.log.time>true</galleon.log.time>
         <!-- Builds need to override this -->
         <galleon.wildfly.home>/tmp</galleon.wildfly.home>
+
+        <!-- Checkstyle configuration -->
+        <linkXRef>false</linkXRef>
     </properties>
     <repositories>
         <repository>
@@ -265,6 +269,12 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- This does not go into the modules so don't worry about exclusions -->
+            <dependency>
+                <groupId>org.wildfly.checkstyle</groupId>
+                <artifactId>wildfly-checkstyle-config</artifactId>
+                <version>${version.org.wildfly.checkstyle-config}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
@@ -289,8 +299,45 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <!-- Checkstyle -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.checkstyle.plugin}</version>
+                    <executions>
+                        <execution>
+                            <id>check-style</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>checkstyle</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.wildfly.checkstyle</groupId>
+                            <artifactId>wildfly-checkstyle-config</artifactId>
+                            <version>${version.org.wildfly.checkstyle-config}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <configLocation>wildfly-checkstyle/checkstyle.xml</configLocation>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>true</failsOnError>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <excludes>**/*$logger.java,**/*$bundle.java</excludes>
+                        <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                        <useFile></useFile>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
     <scm>
         <connection>scm:git:${wildfly-extras.repo.scm.connection}</connection>

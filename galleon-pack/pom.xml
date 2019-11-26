@@ -82,6 +82,18 @@
             <type>zip</type>
         </dependency>
 
+        <!-- Project modules -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-microprofile-context-propagation</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-microprofile-reactive-streams-operators</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Normal dependencies -->
         <dependency>
             <groupId>io.smallrye</groupId>
@@ -104,13 +116,33 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-converter-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-streams-operators</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-streams-operators-cdi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.microprofile.context-propagation</groupId>
             <artifactId>microprofile-context-propagation-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-microprofile-context-propagation</artifactId>
+            <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
+            <artifactId>microprofile-reactive-streams-operators-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
+            <artifactId>microprofile-reactive-streams-operators-core</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>

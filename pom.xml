@@ -52,6 +52,9 @@
         <version.org.eclipse.microprofile.reactive-streams-operators>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators>
         <version.org.jboss.arquillian.junit>1.4.0.Final</version.org.jboss.arquillian.junit>
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
+        <!-- Same testng version as the MP TCK uses -->
+        <version.testng>6.14.3</version.testng>
+
 
         <!-- Plugin versions and their dependency versions -->
         <version.org.wildfly.checkstyle-config>1.0.8.Final</version.org.wildfly.checkstyle-config>
@@ -342,6 +345,36 @@
                 <artifactId>arquillian-junit-core</artifactId>
                 <scope>test</scope>
                 <version>${version.org.jboss.arquillian.junit}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.microprofile.context-propagation</groupId>
+                <artifactId>microprofile-context-propagation-tck</artifactId>
+                <version>${version.org.eclipse.microprofile.context-propagation.api}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
+                <artifactId>microprofile-reactive-streams-operators-tck</artifactId>
+                <version>${version.org.eclipse.microprofile.reactive-streams-operators}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.testng</groupId>
+                        <artifactId>testng</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
+                <artifactId>microprofile-reactive-messaging-tck</artifactId>
+                <version>${version.org.eclipse.microprofile.reactive-messaging}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <scope>test</scope>
+                <version>${version.testng}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

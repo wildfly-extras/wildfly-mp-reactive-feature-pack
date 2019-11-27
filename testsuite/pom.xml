@@ -30,9 +30,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>integration</module>
+        <module>tcks</module>
     </modules>
 
     <properties>
+        <debug.jvm.args></debug.jvm.args>
+
         <!-- Used to provide an absolute location for the distribution under test. -->
         <jboss.dist>${project.basedir}/target/wildfly</jboss.dist>
         <jboss.home>${jboss.dist}</jboss.home>
@@ -102,7 +105,7 @@
             Used in arquillian.xml - arguments for all JBoss AS instances.
             System properties are duplicated here until ARQ-647 is implemented.
         -->
-        <server.jvm.args>${surefire.system.args} ${jvm.args.ip.server} ${jvm.args.other} ${jvm.args.timeouts} -Dnode0=${node0} -Dnode1=${node1} -Dmcast=${mcast} -Dmcast.ttl=${mcast.ttl} ${jvm.args.dirs} ${extra.server.jvm.args}</server.jvm.args>
+        <server.jvm.args>${surefire.system.args} ${jvm.args.ip.server} ${jvm.args.other} ${jvm.args.timeouts} -Dnode0=${node0} -Dnode1=${node1} -Dmcast=${mcast} -Dmcast.ttl=${mcast.ttl} ${jvm.args.dirs} ${extra.server.jvm.args} ${debug.jvm.args}</server.jvm.args>
         <cli.jvm.args>${modular.jdk.args} -Dmaven.repo.local=${settings.localRepository}</cli.jvm.args>
     </properties>
     <build>
@@ -209,6 +212,18 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <!-- Debug server profile -->
+            <id>debug.profile</id>
+            <activation>
+                <property>
+                    <name>debug</name>
+                </property>
+            </activation>
+            <properties>
+                <debug.jvm.args>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8787</debug.jvm.args>
+            </properties>
         </profile>
     </profiles>
 </project>

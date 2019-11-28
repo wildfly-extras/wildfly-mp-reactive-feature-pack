@@ -15,13 +15,12 @@
   ~ limitations under the License.
   -->
 
-<module xmlns="urn:jboss:module:1.8" name="io.smallrye.reactive.messaging.connector">
-    <properties>
-        <property name="jboss.api" value="private"/>
-    </properties>
-
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-messaging-amqp">
     <dependencies>
-        <module name="io.smallrye.reactive.messaging.connector.amqp" optional="true" export="true" services="export"/>
-        <module name="io.smallrye.reactive.messaging.connector.kafka" optional="true" export="true" services="export"/>
+        <layer name="reactive-messaging"/>
     </dependencies>
-</module>
+
+    <packages>
+        <package name="io.smallrye.reactive.messaging.connector.amqp"/>
+    </packages>
+</layer-spec>

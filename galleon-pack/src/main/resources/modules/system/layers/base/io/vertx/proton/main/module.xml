@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   ~ Copyright 2019 Red Hat, Inc.
   ~
@@ -15,13 +16,18 @@
   ~ limitations under the License.
   -->
 
-<module xmlns="urn:jboss:module:1.8" name="io.smallrye.reactive.messaging.connector">
+<module xmlns="urn:jboss:module:1.8" name="io.vertx.proton">
     <properties>
         <property name="jboss.api" value="private"/>
     </properties>
 
+    <resources>
+        <artifact name="${io.vertx:vertx-proton}"/>
+    </resources>
     <dependencies>
-        <module name="io.smallrye.reactive.messaging.connector.amqp" optional="true" export="true" services="export"/>
-        <module name="io.smallrye.reactive.messaging.connector.kafka" optional="true" export="true" services="export"/>
+        <module name="io.vertx.core"/>
+        <module name="io.netty"/>
+        <module name="org.apache.qpid.proton"/>
+        <module name="java.security.sasl"/>
     </dependencies>
 </module>

@@ -28,6 +28,7 @@
         <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="io.smallrye.reactive.streams-operators"/>
         <module name="io.smallrye.reactive.messaging"/>
+        <module name="io.vertx.client"/>
         <module name="javax.annotation.api" />
         <module name="javax.enterprise.api" />
         <module name="javax.json.api" />

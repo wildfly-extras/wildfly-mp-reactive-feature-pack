@@ -47,6 +47,8 @@
         <version.io.smallrye.smallrye-reactive-messaging>1.0.8</version.io.smallrye.smallrye-reactive-messaging>
         <version.io.smallrye.smallrye-reactive-streams-operators>1.0.10</version.io.smallrye.smallrye-reactive-streams-operators>
         <version.io.reactivex.rxjava>2.2.13</version.io.reactivex.rxjava>
+        <version.io.vertx>3.8.3</version.io.vertx>
+        <version.org.apache.kafka>2.3.1</version.org.apache.kafka>
         <version.org.eclipse.microprofile.context-propagation.api>1.0.1</version.org.eclipse.microprofile.context-propagation.api>
         <version.org.eclipse.microprofile.reactive-messaging>1.0</version.org.eclipse.microprofile.reactive-messaging>
         <version.org.eclipse.microprofile.reactive-streams-operators>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators>
@@ -246,6 +248,17 @@
             </dependency>
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
+                <artifactId>smallrye-reactive-messaging-kafka</artifactId>
+                <version>${version.io.smallrye.smallrye-reactive-messaging}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-reactive-messaging-provider</artifactId>
                 <version>${version.io.smallrye.smallrye-reactive-messaging}</version>
                 <exclusions>
@@ -270,6 +283,107 @@
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-reactive-streams-operators-cdi</artifactId>
                 <version>${version.io.smallrye.smallrye-reactive-streams-operators}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-core</artifactId>
+                <version>${version.io.vertx}</version>
+                <exclusions>
+                    <!--
+                        For some reason a wildcard exclusion here triggers a dependency convergence
+                        error in the enforcer plugin. List them all individually.
+
+                        TODO replace with a wildcard exclusion once the world is on maven 3.6.2+
+                    -->
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-buffer</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-transport</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-handler</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-handler-proxy</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-codec-http</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-codec-http2</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-resolver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-resolver-dns</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-kafka-client</artifactId>
+                <version>${version.io.vertx}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-rx-gen</artifactId>
+                <version>${version.io.vertx}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-rx-java2</artifactId>
+                <version>${version.io.vertx}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${version.org.apache.kafka}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>

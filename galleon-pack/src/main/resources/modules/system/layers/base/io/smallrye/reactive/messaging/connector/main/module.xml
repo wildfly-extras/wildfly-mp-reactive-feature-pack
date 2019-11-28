@@ -23,5 +23,6 @@
     <dependencies>
         <module name="io.smallrye.reactive.messaging.connector.amqp" optional="true" export="true" services="export"/>
         <module name="io.smallrye.reactive.messaging.connector.kafka" optional="true" export="true" services="export"/>
+        <module name="io.smallrye.reactive.messaging.connector.mqtt" optional="true" export="true" services="export"/>
     </dependencies>
 </module>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright 2019 Red Hat, Inc.
   ~
@@ -16,15 +15,12 @@
   ~ limitations under the License.
   -->
 
-<module xmlns="urn:jboss:module:1.8" name="io.vertx.client">
-    <properties>
-        <property name="jboss.api" value="private"/>
-    </properties>
-
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-messaging-mqtt">
     <dependencies>
-        <!-- Add optional dependencies to the possible clients -->
-        <module name="io.vertx.client.amqp" optional="true" export="true"/>
-        <module name="io.vertx.client.kafka" optional="true" export="true"/>
-        <module name="io.vertx.client.mqtt" optional="true" export="true"/>
+        <layer name="reactive-messaging"/>
     </dependencies>
-</module>
+
+    <packages>
+        <package name="io.smallrye.reactive.messaging.connector.mqtt"/>
+    </packages>
+</layer-spec>

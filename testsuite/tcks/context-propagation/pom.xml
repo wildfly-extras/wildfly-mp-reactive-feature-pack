@@ -62,7 +62,6 @@
                             <plugin-options>
                                 <jboss-maven-dist/>
                                 <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
-                                <optional-packages>passive+</optional-packages>
                             </plugin-options>
                             <feature-packs>
                                 <feature-pack>
@@ -100,6 +99,7 @@
                                         -->
                                         <layer>web-server</layer>
                                         <layer>jaxrs</layer>
+                                        <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>
                                     </layers>

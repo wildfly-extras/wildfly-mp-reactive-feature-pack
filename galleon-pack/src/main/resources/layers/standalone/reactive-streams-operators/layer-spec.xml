@@ -18,6 +18,8 @@
 <layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-streams-operators">
     <dependencies>
         <layer name="cdi"/>
+        <layer name="microprofile-config"/>
+        <layer name="transactions" optional="true"/>
     </dependencies>
 
     <feature-group name="reactive-streams-operators"/>

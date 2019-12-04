@@ -107,6 +107,13 @@
                                     <model>standalone</model>
                                     <name>standalone.xml</name>
                                     <layers>
+                                        <!--
+                                            Layers needed to have a base server that makes sense,
+                                            which are not required by this FP's layers
+                                        -->
+                                        <layer>web-server</layer>
+                                        <layer>jaxrs</layer>
+                                        <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>
                                         <layer>reactive-messaging</layer>
                                         <layer>reactive-streams-operators</layer>

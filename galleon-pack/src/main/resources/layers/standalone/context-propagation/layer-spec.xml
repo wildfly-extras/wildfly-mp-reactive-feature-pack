@@ -18,8 +18,7 @@
 <layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="context-propagation">
     <dependencies>
         <layer name="cdi"/>
-        <!-- TODO All we really need is config - would be better if it was its own layer -->
-        <layer name="observability"/>
+        <layer name="microprofile-config"/>
         <layer name="transactions" optional="true"/>
     </dependencies>
 

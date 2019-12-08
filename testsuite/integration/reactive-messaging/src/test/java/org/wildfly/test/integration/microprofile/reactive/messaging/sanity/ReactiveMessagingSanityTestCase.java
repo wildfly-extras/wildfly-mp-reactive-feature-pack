@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wildfly.test.integration.microprofile.reactive.messaging;
+package org.wildfly.test.integration.microprofile.reactive.messaging.sanity;
 
 import java.util.concurrent.TimeUnit;
 

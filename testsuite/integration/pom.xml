@@ -30,6 +30,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>context-propagation</module>
+        <module>combined</module>
         <module>reactive-messaging</module>
         <module>reactive-streams-operators</module>
         <module>shared</module>

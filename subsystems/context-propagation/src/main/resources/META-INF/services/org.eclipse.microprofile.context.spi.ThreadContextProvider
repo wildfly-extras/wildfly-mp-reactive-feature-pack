@@ -15,3 +15,4 @@
 #
 
 org.wildfly.extension.microprofile.context.propagation.providers.ApplicationContextProvider
+org.wildfly.extension.microprofile.context.propagation.providers.ServletRequestContextProvider

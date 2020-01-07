@@ -30,6 +30,8 @@ import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PersistentResourceDefinition;
 import org.jboss.as.controller.SimpleResourceDefinition;
 import org.jboss.as.controller.capability.RuntimeCapability;
+import org.jboss.as.controller.registry.ManagementResourceRegistration;
+import org.jboss.as.controller.registry.RuntimePackageDependency;
 import org.jboss.as.server.AbstractDeploymentChainStep;
 import org.jboss.as.server.DeploymentProcessorTarget;
 import org.jboss.dmr.ModelNode;
@@ -57,6 +59,13 @@ public class MicroProfileReactiveStreamsOperatorsSubsystemDefinition extends Per
                 .setRemoveHandler(new ModelOnlyRemoveStepHandler())
                 .setCapabilities(REACTIVE_STREAMS_OPERATORS_CAPABILITY)
         );
+    }
+
+    @Override
+    public void registerAdditionalRuntimePackages(ManagementResourceRegistration resourceRegistration) {
+        resourceRegistration.registerAdditionalRuntimePackages(
+                RuntimePackageDependency.optional("io.smallrye.reactive.converters.rxjava2"),
+                RuntimePackageDependency.optional("org.jboss.resteasy.resteasy-rxjava2"));
     }
 
     @Override

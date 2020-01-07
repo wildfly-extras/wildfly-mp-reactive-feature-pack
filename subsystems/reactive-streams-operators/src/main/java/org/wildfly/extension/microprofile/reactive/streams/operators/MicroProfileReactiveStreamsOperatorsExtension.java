@@ -79,4 +79,5 @@ public class MicroProfileReactiveStreamsOperatorsExtension implements Extension 
     public void initializeParsers(ExtensionParsingContext extensionParsingContext) {
         extensionParsingContext.setSubsystemXmlMapping(SUBSYSTEM_NAME, MicroProfileReactiveStreamsOperatorsParser_1_0.NAMESPACE, CURRENT_PARSER);
     }
+
 }

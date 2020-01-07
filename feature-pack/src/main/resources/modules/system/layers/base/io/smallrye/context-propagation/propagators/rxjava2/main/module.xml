@@ -14,28 +14,18 @@
   ~ limitations under the License.
   -->
 
-<module xmlns="urn:jboss:module:1.9" name="org.wildfly.extension.microprofile.context-propagation-smallrye">
+<module xmlns="urn:jboss:module:1.9" name="io.smallrye.context-propagation.propagators.rxjava2">
     <properties>
         <property name="jboss.api" value="private"/>
     </properties>
 
     <resources>
-        <artifact name="${org.wildfly.extras.reactive:wildfly-microprofile-context-propagation}"/>
+        <artifact name="${io.smallrye:smallrye-context-propagation-propagators-rxjava2}"/>
     </resources>
 
     <dependencies>
-        <module name="org.jboss.as.controller"/>
-        <module name="org.jboss.as.server"/>
-
-        <module name="org.jboss.logging"/>
-        <module name="org.jboss.modules"/>
-        <module name="org.jboss.staxmapper"/>
-
+        <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="org.eclipse.microprofile.context-propagation.api"/>
-        <module name="io.smallrye.context-propagation.api"/>
-        <module name="io.smallrye.context-propagation" services="import"/>
-        <module name="javax.enterprise.api"/>
-        <module name="org.wildfly.security.manager"/>
-        <module name="io.undertow.servlet"/>
+        <module name="org.reactivestreams"/>
     </dependencies>
 </module>

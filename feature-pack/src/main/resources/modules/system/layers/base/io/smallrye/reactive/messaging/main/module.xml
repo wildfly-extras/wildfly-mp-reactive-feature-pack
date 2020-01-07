@@ -27,6 +27,7 @@
         <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="io.smallrye.config" services="import"/>
         <module name="io.smallrye.reactive.messaging.connector"/>
+        <module name="io.smallrye.reactive.converters.api"/>
         <module name="io.smallrye.reactive.streams-operators"/>
         <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="javax.annotation.api" />

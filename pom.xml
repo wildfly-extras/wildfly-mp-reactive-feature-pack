@@ -51,6 +51,7 @@
         <version.io.rest-assured>4.1.2</version.io.rest-assured>
         <version.io.vertx>3.8.3</version.io.vertx>
         <version.org.apache.kafka>2.3.1</version.org.apache.kafka>
+        <version.org.waitility>4.0.2</version.org.waitility>
         <version.org.eclipse.microprofile.context-propagation.api>1.0.1</version.org.eclipse.microprofile.context-propagation.api>
         <version.org.eclipse.microprofile.reactive-messaging>1.0</version.org.eclipse.microprofile.reactive-messaging>
         <version.org.eclipse.microprofile.reactive-streams-operators>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators>
@@ -275,6 +276,17 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>io.smallrye</groupId>
+                <artifactId>smallrye-context-propagation-propagators-rxjava2</artifactId>
+                <version>${version.io.smallrye.smallrye-context-propagation}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-axle-amqp-client</artifactId>
                 <version>${version.io.smallrye.reactive-utils}</version>
@@ -310,6 +322,17 @@
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-reactive-converter-api</artifactId>
+                <version>${version.io.smallrye.smallrye-reactive-streams-operators}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.smallrye.reactive</groupId>
+                <artifactId>smallrye-reactive-converter-rxjava2</artifactId>
                 <version>${version.io.smallrye.smallrye-reactive-streams-operators}</version>
                 <exclusions>
                     <exclusion>
@@ -591,6 +614,12 @@
                 <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>${version.io.rest-assured}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>${version.org.waitility}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

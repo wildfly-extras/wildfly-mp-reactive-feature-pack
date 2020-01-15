@@ -57,7 +57,7 @@
                 <include name="reactive-messaging-mqtt"/>
             -->
 
-            <!-- Reactive streams operators -->
+            <!-- Reactive streams operators. Not really needed since reactive-messaging depends on this -->
             <include name="reactive-streams-operators"/>
         </layers>
     </config>

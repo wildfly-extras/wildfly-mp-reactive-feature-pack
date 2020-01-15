@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Red Hat, Inc.
+ * Copyright 2020 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wildfly.test.integration.microprofile.reactive.streams.operators;
+package org.wildfly.test.integration.microprofile.reactive.streams.operators.sanity;
 
 import java.util.List;
 import java.util.concurrent.CompletionStage;

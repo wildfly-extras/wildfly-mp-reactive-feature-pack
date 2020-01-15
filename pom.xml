@@ -547,6 +547,12 @@
 
             <!-- Test dependencies -->
             <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>wildfly-microprofile-testsuite-shared</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>${version.io.rest-assured}</version>

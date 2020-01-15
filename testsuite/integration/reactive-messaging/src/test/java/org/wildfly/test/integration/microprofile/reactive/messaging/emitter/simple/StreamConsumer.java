@@ -14,33 +14,33 @@
  * limitations under the License.
  */
 
-package org.wildfly.test.integration.microprofile.reactive.messaging.sanity;
+package org.wildfly.test.integration.microprofile.reactive.messaging.emitter.simple;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import org.eclipse.microprofile.reactive.messaging.Message;
+
+import io.reactivex.Flowable;
+import io.smallrye.reactive.messaging.annotations.Channel;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @ApplicationScoped
-public class Bean {
-    private final CountDownLatch latch = new CountDownLatch(4);
-    private StringBuilder phrase = new StringBuilder();
+public class StreamConsumer {
 
-    public CountDownLatch getLatch() {
-        return latch;
+    @Inject
+    @Channel("source")
+    Flowable<Message<String>> sourceStream;
+
+    public List<String> consume() {
+        return Flowable.fromPublisher(sourceStream)
+                .map(Message::getPayload)
+                .toList()
+                .blockingGet();
     }
 
-    public void addWord(String word) {
-        if (phrase.length() > 0) {
-            phrase.append(" ");
-        }
-        this.phrase.append(word);
-        latch.countDown();
-    }
-
-    public String getPhrase() {
-        return phrase.toString();
-    }
 }

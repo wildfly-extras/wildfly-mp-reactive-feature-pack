@@ -48,6 +48,7 @@
         <version.io.smallrye.smallrye-reactive-messaging>1.0.8</version.io.smallrye.smallrye-reactive-messaging>
         <version.io.smallrye.smallrye-reactive-streams-operators>1.0.10</version.io.smallrye.smallrye-reactive-streams-operators>
         <version.io.reactivex.rxjava>2.2.13</version.io.reactivex.rxjava>
+        <version.io.rest-assured>4.1.2</version.io.rest-assured>
         <version.io.vertx>3.8.3</version.io.vertx>
         <version.org.apache.kafka>2.3.1</version.org.apache.kafka>
         <version.org.eclipse.microprofile.context-propagation.api>1.0.1</version.org.eclipse.microprofile.context-propagation.api>
@@ -58,6 +59,7 @@
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
         <!-- Same testng version as the MP TCK uses -->
         <version.testng>6.14.3</version.testng>
+
 
 
         <!-- Plugin versions and their dependency versions -->
@@ -544,6 +546,12 @@
             </dependency>
 
             <!-- Test dependencies -->
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${version.io.rest-assured}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.junit</groupId>
                 <artifactId>arquillian-junit-core</artifactId>

@@ -14,33 +14,42 @@
  * limitations under the License.
  */
 
-package org.wildfly.test.integration.microprofile.reactive.messaging.sanity;
+package org.wildfly.test.integration.microprofile.reactive.messaging.emitter.simple;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+
+import io.smallrye.reactive.messaging.annotations.Channel;
+import io.smallrye.reactive.messaging.annotations.Emitter;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @ApplicationScoped
-public class Bean {
-    private final CountDownLatch latch = new CountDownLatch(4);
-    private StringBuilder phrase = new StringBuilder();
+public class StreamEmitter {
 
-    public CountDownLatch getLatch() {
-        return latch;
+    @Inject
+    @Channel("sink")
+    Emitter<String> emitter;
+
+    private List<String> list = new CopyOnWriteArrayList<>();
+
+    public void run() {
+        emitter.send("a").send("b").send("c").complete();
     }
 
-    public void addWord(String word) {
-        if (phrase.length() > 0) {
-            phrase.append(" ");
-        }
-        this.phrase.append(word);
-        latch.countDown();
+    @Incoming("sink")
+    public void consume(String s) {
+        list.add(s);
     }
 
-    public String getPhrase() {
-        return phrase.toString();
+    public List<String> list() {
+        return list;
     }
+
 }

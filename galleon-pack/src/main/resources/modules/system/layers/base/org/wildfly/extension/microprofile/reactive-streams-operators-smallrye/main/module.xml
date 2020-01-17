@@ -36,6 +36,7 @@
         <module name="org.eclipse.microprofile.reactive-streams-operators.api"/>
         <module name="org.eclipse.microprofile.reactive-streams-operators.core"/>
         <module name="org.reactivestreams"/>
+        <module name="org.wildfly.security.manager"/>
         <module name="io.reactivex.rxjava2.rxjava"/>
     </dependencies>
 </module>

@@ -15,12 +15,11 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-streams-operators">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-reactive-all">
     <dependencies>
-        <layer name="cdi"/>
+        <layer name="context-propagation"/>
+        <layer name="reactive-messaging-connectors"/>
     </dependencies>
-
-    <feature-group name="reactive-streams-operators"/>
 
     <packages>
         <package name="org.wildfly.extension.microprofile.reactive-streams-operators-smallrye"/>

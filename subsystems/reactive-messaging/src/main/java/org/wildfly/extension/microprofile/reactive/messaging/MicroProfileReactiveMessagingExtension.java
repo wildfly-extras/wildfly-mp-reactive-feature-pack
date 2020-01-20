@@ -28,6 +28,14 @@ import org.jboss.as.controller.descriptions.StandardResourceDescriptionResolver;
 import org.jboss.as.controller.operations.common.GenericSubsystemDescribeHandler;
 import org.jboss.as.controller.parsing.ExtensionParsingContext;
 import org.jboss.as.controller.registry.ManagementResourceRegistration;
+import org.jboss.modules.Module;
+import org.jboss.modules.ModuleClassLoader;
+import org.jboss.modules.ModuleLoadException;
+import org.jboss.modules.ModuleLoader;
+import org.wildfly.security.manager.WildFlySecurityManager;
+
+import io.netty.util.internal.logging.InternalLoggerFactory;
+import io.netty.util.internal.logging.JdkLoggerFactory;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -70,6 +78,18 @@ public class MicroProfileReactiveMessagingExtension implements Extension {
 
     @Override
     public void initialize(ExtensionContext extensionContext) {
+        // Initialize the Netty logger factory or we get horrible stack traces
+        ClassLoader cl = WildFlySecurityManager.getClassLoaderPrivileged(this.getClass());
+        if (cl instanceof ModuleClassLoader) {
+            ModuleLoader loader = ((ModuleClassLoader) cl).getModule().getModuleLoader();
+            try {
+                Module module = loader.loadModule("io.netty");
+                InternalLoggerFactory.setDefaultFactory(JdkLoggerFactory.INSTANCE);
+            } catch (ModuleLoadException e) {
+                // The netty module is not there so don't do anything
+            }
+        }
+
         final SubsystemRegistration sr =  extensionContext.registerSubsystem(SUBSYSTEM_NAME, CURRENT_MODEL_VERSION);
         sr.registerXMLElementWriter(CURRENT_PARSER);
         final ManagementResourceRegistration root = sr.registerSubsystemModel(new MicroProfileReactiveMessagingSubsystemDefinition());

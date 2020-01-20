@@ -26,6 +26,7 @@
 
     <dependencies>
         <module name="io.reactivex.rxjava2.rxjava"/>
+        <module name="io.netty" optional="true"/>
         <module name="io.smallrye.reactive.streams-operators"/>
         <module name="io.smallrye.reactive.messaging"/>
         <module name="io.vertx.client"/>

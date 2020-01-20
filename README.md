@@ -1,3 +1,5 @@
+![CI](https://github.com/kabir/wildfly-mp-reactive-galleon-pack/workflows/Galleon%20Pack%20Template%20Java%20CI/badge.svg)
+
 # WildFly Microprofile Reactive Feature Pack
 
 This repository contains a Galleon feature pack to add the MicroProfile reactive subsystems to WildFly.

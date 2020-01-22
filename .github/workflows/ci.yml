@@ -1,4 +1,4 @@
-name: MP Reactive Feature Pack Java CI
+name: Galleon Pack Template Java CI
 
 on: [push, pull_request]
 
@@ -28,6 +28,17 @@ jobs:
 
       - name: Maven Install
         run: mvn -B install
+
+      - name: Zip Artifacts
+        run: zip -R artifacts.zip 'server.log' 'surefire-reports/*.txt' 'surefire-reports/*.xml'
+
+      - uses: actions/upload-artifact@v1
+        with:
+          # Expressions in the name don't seem to get resolved
+          #name: ci-artifacts-galleon-mp-reactive-raw-{{job.container.id}}
+          name: ci-artifacts-mp-reactive-raw
+          path: artifacts.zip
+
 
   wildfly-master:
     # This adjusts the build to use the versions from wildfly master
@@ -128,3 +139,14 @@ jobs:
             exit 1
           fi
         working-directory: main
+
+      - name: Zip Artifacts
+        run: zip -R artifacts.zip 'server.log' 'surefire-reports/*.txt' 'surefire-reports/*.xml'
+        working-directory: main
+
+      - uses: actions/upload-artifact@v1
+        with:
+          # Expressions in the name don't seem to get resolved
+          #name: ci-artifacts-galleon-mp-reactive-wf-master-{{job.container.id}}
+          name: ci-artifacts-mp-reactive-wf-master
+          path: main/artifacts.zip

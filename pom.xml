@@ -44,7 +44,7 @@
 
         <!-- Other dependency versions -->
         <version.io.smallrye.reactive-utils>0.0.10</version.io.smallrye.reactive-utils>
-        <version.io.smallrye.smallrye-context-propagation>1.0.12-SNAPSHOT</version.io.smallrye.smallrye-context-propagation>
+        <version.io.smallrye.smallrye-context-propagation>1.0.12</version.io.smallrye.smallrye-context-propagation>
         <version.io.smallrye.smallrye-reactive-messaging>1.0.8</version.io.smallrye.smallrye-reactive-messaging>
         <version.io.smallrye.smallrye-reactive-streams-operators>1.0.10</version.io.smallrye.smallrye-reactive-streams-operators>
         <version.io.reactivex.rxjava>2.2.13</version.io.reactivex.rxjava>

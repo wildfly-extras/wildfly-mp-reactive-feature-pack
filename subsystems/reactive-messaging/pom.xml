@@ -28,4 +28,10 @@
     <artifactId>wildfly-microprofile-reactive-messaging</artifactId>
     <name>WildFly Reactive MicroProfile - Reactive Messaging</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+    </dependencies>
 </project>

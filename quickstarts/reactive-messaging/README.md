@@ -4,7 +4,7 @@
 You will need to have the following installed on your machine:
 
 * A Docker environment
-* Galleon downloaded and available on your path as described in the [main README](../..). The main README also provides
+* Galleon downloaded and available on your path as described in the [main README](/). The main README also provides
 background on how to provision WildFly servers and which Galleon layers are available. 
 
 ## Structure
@@ -29,7 +29,7 @@ system by running:
 docker-compose up
 ```
 Next you need to provision a server (remember you need to have Galleon installed as described in 
-the [main README](../..)). You can do this by going to the relevant child module (e.g. `kafka/`) in a new
+the [main README](/)). You can do this by going to the relevant child module (e.g. `kafka/`) in a new
 terminal, and then run:
 ```
 galleon.sh provision ./provision.xml --dir=target/my-wildfly

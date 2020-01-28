@@ -1,6 +1,6 @@
 # Reactive Messaging AMQP Connector Quickstart
 
-See the [parent README](../..) for a description of the application and how to run it. 
+See the [parent README](..) for a description of the application and how to run it. 
 
 This module is only concerned with:
 * Reusing the code from the [../core](../core) module which contains the application java code

@@ -1,6 +1,10 @@
 name: Galleon Pack Template Java CI
 
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
+  schedule:
+    - cron: '* 0 * * *'
 
 jobs:
   # This just runs mvn install like a user would on cloning the repository

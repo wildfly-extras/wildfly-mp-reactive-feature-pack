@@ -30,13 +30,6 @@
             </packages>
             <default-configs inherit="false"/>
         </dependency>
-        <dependency group-id="org.wildfly" artifact-id="wildfly-servlet-galleon-pack">
-            <name>org.wildfly:wildfly-servlet-galleon-pack</name>
-            <packages inherit="false">
-                <exclude name="product.conf"/>
-            </packages>
-            <default-configs inherit="false"/>
-        </dependency>
         <dependency group-id="org.wildfly" artifact-id="wildfly-ee-galleon-pack">
             <name>org.wildfly:wildfly-ee-galleon-pack</name>
             <packages inherit="false">

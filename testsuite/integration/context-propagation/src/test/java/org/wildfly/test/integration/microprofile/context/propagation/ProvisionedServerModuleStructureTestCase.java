@@ -30,7 +30,7 @@ public class ProvisionedServerModuleStructureTestCase {
     public void checkModuleStructure() {
         ModulesChecker checker = ModulesChecker.builder()
                 .addExpected("io/smallrye/context-propagation/main")
-                .addNotExpected("io/smallrye/reactive/streams-operators")
+                .addExpected("io/smallrye/reactive/streams-operators")
                 .addNotExpected("io/smallrye/reactive/messaging")
                 .addNotExpected("io/vertx")
                 .build();

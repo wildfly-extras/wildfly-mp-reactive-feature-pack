@@ -71,6 +71,7 @@ Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 * `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
+* `reactive-streams-operators` - From this feature pack, as described above. 
 * `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
 `TransactionManager`. This is needed for propagation of the current transaction.
 
@@ -95,7 +96,7 @@ Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 * `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
-* `reactive-streams-operations` - From this feature pack, as described above. 
+* `reactive-streams-operators` - From this feature pack, as described above. 
 * `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
 `TransactionManager`.
 

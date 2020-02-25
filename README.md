@@ -149,7 +149,7 @@ spec subsystems.
 
 It contains a reference to the WildFly feature pack. It's version is `current` which means it will download the 
 latest released version (which at the time of writing is 19.0.0.Final. If you want to choose a different version, 
-you can modify the file and append the version as `current:19.0.0.Beta1` for example. Note that WildFly 19.0.0.Final
+you can modify the file and append the version as `current:19.0.0.Beta2` for example. Note that WildFly 19.0.0.Final
 is the first version this feature pack can be installed into.
 
 Next it contains a reference to this feature pack.
@@ -183,7 +183,7 @@ at the time of writing is 19.0.0.Final. If you want to install a particular vers
 WildFly, you can append the version, e.g:
 
 * `wildfly:current#18.0.0.Final` - installs WildFly 18.0.0.Final
-* `wildfly:current#19.0.0.Beta1-SNAPSHOT` - installs WildFly from locally build maven artifacts
+* `wildfly:current#19.0.0.Beta2-SNAPSHOT` - installs WildFly from locally build maven artifacts
 
 Note that the minimal supported WildFly version for this feature pack is 19.0.0.Final. 
 

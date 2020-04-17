@@ -45,6 +45,7 @@ However, if you want to understand better what their dependencies are, you can l
 layer-spec.xml for the various layers in the following locations:
 * WildFly Core's [Core Feature Pack](https://github.com/wildfly/wildfly-core/tree/11.0.0.Final/core-galleon-pack/src/main/resources/layers/standalone)
 * WildFly's [Servlet Feature Pack](https://github.com/wildfly/wildfly/tree/19.0.0.Final/servlet-galleon-pack/src/main/resources/layers/standalone)
+* WildFly's [EE Feature Pack](https://github.com/wildfly/wildfly/tree/19.0.0.Final/ee-galleon-pack/src/main/resources/layers/standalone)
 * WildFly's [Full Feature Pack](https://github.com/wildfly/wildfly/tree/19.0.0.Final/galleon-pack/src/main/resources/layers/standalone)
 
 Note that the above links take you to the versions used for WildFly 19.0.0.Final. If you
@@ -182,8 +183,7 @@ The `wildfly:current` above tells Galleon to provision the latest version of Wil
 at the time of writing is 19.0.0.Final. If you want to install a particular version of 
 WildFly, you can append the version, e.g:
 
-* `wildfly:current#18.0.0.Final` - installs WildFly 18.0.0.Final
-* `wildfly:current#19.0.0.Beta2-SNAPSHOT` - installs WildFly from locally build maven artifacts
+* `wildfly:current#20.0.0.Beta1-SNAPSHOT` - installs WildFly from locally build maven artifacts
 
 Note that the minimal supported WildFly version for this feature pack is 19.0.0.Final. 
 

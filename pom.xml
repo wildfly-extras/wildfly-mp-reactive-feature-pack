@@ -38,8 +38,8 @@
     </licenses>
     <properties>
         <!-- Target WildFly version, and other parts needed for the Galleon maven plugin -->
-        <version.org.wildfly>19.0.0.Beta2</version.org.wildfly>
-        <version.org.wildfly.core>11.0.0.Beta8</version.org.wildfly.core>
+        <version.org.wildfly>19.0.0.Final</version.org.wildfly>
+        <version.org.wildfly.core>11.0.0.Final</version.org.wildfly.core>
         <version.org.wildfly.common>1.5.2.Final</version.org.wildfly.common>
 
         <!-- Other dependency versions -->

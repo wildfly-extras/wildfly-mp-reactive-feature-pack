@@ -90,8 +90,7 @@
                                             Layers needed to have a base server that makes sense,
                                             which are not required by this FP's layers
                                         -->
-                                        <layer>web-server</layer>
-                                        <layer>jaxrs</layer>
+                                        <layer>jaxrs-server</layer>
                                         <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>

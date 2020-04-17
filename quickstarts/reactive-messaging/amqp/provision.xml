@@ -39,8 +39,7 @@
     <config model="standalone" name="standalone.xml">
         <layers>
             <!-- The base server -->
-            <include name="web-server"/>
-            <include name="jaxrs"/>
+            <include name="jaxrs-server"/>
             <include name="jmx-remoting"/>
             <include name="management"/>
             <include name="reactive-messaging-amqp"/>

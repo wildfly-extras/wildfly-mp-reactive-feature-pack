@@ -69,8 +69,8 @@
         <version.wildfly.maven.plugin>2.0.0.Final</version.wildfly.maven.plugin>
 
         <!-- Misc. -->
-        <wildfly-extras.repo.scm.connection>git@github.com:wildfly-extras/wildfly-mp-reactive-galleon-pack.git</wildfly-extras.repo.scm.connection>
-        <wildfly-extras.repo.scm.url>https://github.com/wildfly-extras/wildfly-mp-reactive-galleon-pack</wildfly-extras.repo.scm.url>
+        <wildfly-extras.repo.scm.connection>git@github.com:wildfly-extras/wildfly-mp-reactive-feature-pack.git</wildfly-extras.repo.scm.connection>
+        <wildfly-extras.repo.scm.url>https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack</wildfly-extras.repo.scm.url>
         <!-- Protocol to use for communication with remote maven repositories.
             You can set to 'http' if you are using a maven proxy and 'https'
             interferes with that. Use 'https' for builds that will be released
@@ -162,7 +162,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+                <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <exclusions>
@@ -174,7 +174,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+                <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
                 <version>${project.version}</version>
                 <type>zip</type>
                 <exclusions>
@@ -723,7 +723,7 @@
     </scm>
     <modules>
         <module>subsystems</module>
-        <module>galleon-pack</module>
+        <module>feature-pack</module>
         <module>build</module>
         <module>testsuite</module>
         <module>quickstarts</module>

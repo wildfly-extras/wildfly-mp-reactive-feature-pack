@@ -38,7 +38,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           # Expressions in the name don't seem to get resolved
-          #name: ci-artifacts-galleon-mp-reactive-raw-{{job.container.id}}
+          #name: ci-artifacts-mp-reactive-raw-{{job.container.id}}
           name: ci-artifacts-mp-reactive-raw
           path: artifacts.zip
 
@@ -149,6 +149,6 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           # Expressions in the name don't seem to get resolved
-          #name: ci-artifacts-galleon-mp-reactive-wf-master-{{job.container.id}}
+          #name: ci-artifacts-mp-reactive-wf-master-{{job.container.id}}
           name: ci-artifacts-mp-reactive-wf-master
           path: main/artifacts.zip

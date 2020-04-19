@@ -31,13 +31,13 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+            <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+            <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
             <type>zip</type>
             <exclusions>
                 <exclusion>
@@ -92,7 +92,7 @@
                                 </feature-pack>
                                 <feature-pack>
                                     <groupId>${project.groupId}</groupId>
-                                    <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+                                    <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
                                     <version>${project.version}</version>
                                     <inherit-packages>false</inherit-packages>
                                     <inherit-configs>false</inherit-configs>

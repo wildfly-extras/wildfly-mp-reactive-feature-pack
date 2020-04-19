@@ -1,4 +1,4 @@
-![CI](https://github.com/kabir/wildfly-mp-reactive-galleon-pack/workflows/Galleon%20Pack%20Template%20Java%20CI/badge.svg)
+![CI](https://github.com/kabir/wildfly-mp-reactive-feature-pack/workflows/Galleon%20Pack%20Template%20Java%20CI/badge.svg)
 
 # WildFly MicroProfile Reactive Feature Pack
 
@@ -55,7 +55,7 @@ are interested in another/newer WildFly version, adjust the tag name in the URL.
 ## Layers in this Feature Pack 
 
 The layers from this feature pack are contained in the 
-[galleon-pack/src/main/resources/layers/standalone](galleon-pack/src/main/resources/layers/standalone)
+[feature-pack/src/main/resources/layers/standalone](feature-pack/src/main/resources/layers/standalone)
 folder. We'll explain what each of them contains, and their direct dependencies on other layers.
 
 ### context-propagation
@@ -207,13 +207,13 @@ can rerun the above command, and pass in more layers in the `--layers` option if
 #### Install the MicroProfile Reactive Feature Pack
 Now to install our feature pack, we can run:
 ```
-galleon.sh install org.wildfly.extras.galleon-feature-pack-template:template-galleon-pack:1.0.0.Alpha-SNAPSHOT --layers=microprofile-reactive-all --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT --layers=microprofile-reactive-all --dir=wildfly
 ``` 
 which will install all the layers from the MicroProfile reactive feature pack.
 
 To just install the `reactive-streams-operators` and `context-propagation` layers, we run this instead:
 ```
-galleon.sh install org.wildfly.extras.galleon-feature-pack-template:template-galleon-pack:1.0.0.Alpha-SNAPSHOT --layers=reactive-streams-operators,context-propagation --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT --layers=reactive-streams-operators,context-propagation --dir=wildfly
 ``` 
 ----
 ## Quickstarts

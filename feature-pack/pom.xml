@@ -25,7 +25,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wildfly-microprofile-galleon-pack</artifactId>
+    <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
     <packaging>pom</packaging>
 
     <name>WildFly Reactive MicroProfile - Galleon Pack</name>

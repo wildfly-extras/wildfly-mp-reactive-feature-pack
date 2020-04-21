@@ -28,7 +28,7 @@
     <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
     <packaging>pom</packaging>
 
-    <name>WildFly Reactive MicroProfile - Galleon Pack</name>
+    <name>WildFly Reactive MicroProfile - Feature Pack</name>
 
     <properties>
         <license.output.directory>${project.build.directory}/resources/content/docs/licenses</license.output.directory>

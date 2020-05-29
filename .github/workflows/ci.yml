@@ -30,7 +30,7 @@ jobs:
       - name: Build and Test
         run: |
           mvn --version
-          mvn -B install
+          mvn -B install -Dqs.test
 
       - name: Zip Artifacts
         run: zip -R artifacts.zip 'server.log' 'surefire-reports/*.txt' 'surefire-reports/*.xml'
@@ -118,7 +118,7 @@ jobs:
       - name: Build and Test
         run: |
           mvn --version
-          mvn -B install -Dversion.org.wildfly=${WILDFLY_VERSION} -Dversion.org.wildfly.core=${WILDFLY_CORE_VERSION}
+          mvn -B install -Dversion.org.wildfly=${WILDFLY_VERSION} -Dversion.org.wildfly.core=${WILDFLY_CORE_VERSION} -Dqs.test
         working-directory: main
 
       - name: Calculate directories to check

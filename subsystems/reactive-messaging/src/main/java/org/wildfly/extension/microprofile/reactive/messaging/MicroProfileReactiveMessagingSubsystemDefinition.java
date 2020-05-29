@@ -34,6 +34,8 @@ import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PersistentResourceDefinition;
 import org.jboss.as.controller.SimpleResourceDefinition;
 import org.jboss.as.controller.capability.RuntimeCapability;
+import org.jboss.as.controller.registry.ManagementResourceRegistration;
+import org.jboss.as.controller.registry.RuntimePackageDependency;
 import org.jboss.as.server.AbstractDeploymentChainStep;
 import org.jboss.as.server.DeploymentProcessorTarget;
 import org.jboss.dmr.ModelNode;
@@ -68,6 +70,19 @@ public class MicroProfileReactiveMessagingSubsystemDefinition extends Persistent
     @Override
     public Collection<AttributeDefinition> getAttributes() {
         return Collections.emptyList();
+    }
+
+    @Override
+    public void registerAdditionalRuntimePackages(ManagementResourceRegistration resourceRegistration) {
+        resourceRegistration.registerAdditionalRuntimePackages(
+                RuntimePackageDependency.required("io.reactivex.rxjava2.rxjava"),
+                RuntimePackageDependency.required("io.smallrye.reactive.messaging"),
+                RuntimePackageDependency.required("io.smallrye.reactive.messaging.connector"),
+                RuntimePackageDependency.required("io.vertx.client"),
+                RuntimePackageDependency.required("org.apache.commons.lang3"),
+                RuntimePackageDependency.required("org.eclipse.microprofile.reactive-messaging.api"),
+                RuntimePackageDependency.required("org.slf4j"));
+
     }
 
     static class AddHandler extends AbstractBoottimeAddStepHandler {

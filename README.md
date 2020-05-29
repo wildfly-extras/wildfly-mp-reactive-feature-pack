@@ -71,7 +71,7 @@ Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 * `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
-* `reactive-streams-operators` - From this feature pack, as described above. 
+* `reactive-streams-operators` - From this feature pack, as described in this document. 
 * `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
 `TransactionManager`. This is needed for propagation of the current transaction.
 
@@ -82,6 +82,18 @@ classes from your application.
 
 Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
+
+#### reactive-streams-operators-rxjava2
+This layer enables the use of classes for RxJjava2, e.g. `io.reactivex.Flowable` and `io.reactivex.Single`. 
+
+If provisioned, you will get:
+* Transactions extended to the end of methods returning an RxJava2 type, assuming that you have also provisioned 
+`context-propagation`
+* Automatic context propagation for RxJava2 classes, again assuming that you have also provisioned `context-propagation`
+* REST endpoints returning an RxJava2 type will be treated as asynchronous calls
+
+Layer Dependencies:
+* `reactive-streams-operators` - From this feature pack, as described in this document. 
 
 ### reactive-messaging
 The `reactive-messaging` layer installs the `microprofile-reactive-messaging-smallrye` subsystem,

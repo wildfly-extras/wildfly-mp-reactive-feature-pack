@@ -99,7 +99,7 @@
                                         <layer>context-propagation</layer>
                                         <layer>reactive-messaging</layer>
                                         <layer>reactive-streams-operators</layer>
-                                        <layer>reactive-messaging-kafka</layer>
+                                        <layer>reactive-streams-operators-rxjava2</layer>
                                     </layers>
                                 </config>
                             </configurations>

@@ -137,6 +137,7 @@
                                         <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>
                                         <layer>reactive-streams-operators</layer>
+                                        <layer>reactive-streams-operators-rxjava2</layer>
                                     </layers>
                                 </config>
                             </configurations>

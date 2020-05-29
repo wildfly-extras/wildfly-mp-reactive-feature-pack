@@ -35,7 +35,6 @@
 
         <module name="io.smallrye.config" services="import"/>
         <module name="io.smallrye.context-propagation.api"/>
-        <module name="io.smallrye.context-propagation.propagators.rxjava2" services="import"/>
 
         <module name="org.eclipse.microprofile.context-propagation.api"/>
         <module name="org.eclipse.microprofile.config.api"/>
@@ -50,5 +49,8 @@
         <module name="java.logging"/>
 
         <module name="org.jboss.jts" services="import"/>
+
+        <!-- Pulled in by reactive-streams-operators-rxjava2 layer -->
+        <module name="io.smallrye.context-propagation.propagators.rxjava2" services="import" optional="true"/>
     </dependencies>
 </module>

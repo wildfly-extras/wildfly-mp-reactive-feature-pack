@@ -63,9 +63,12 @@ public class MicroProfileReactiveStreamsOperatorsSubsystemDefinition extends Per
 
     @Override
     public void registerAdditionalRuntimePackages(ManagementResourceRegistration resourceRegistration) {
+        // Set up the dependencies needed by the deployments
         resourceRegistration.registerAdditionalRuntimePackages(
-                RuntimePackageDependency.optional("io.smallrye.reactive.converters.rxjava2"),
-                RuntimePackageDependency.optional("org.jboss.resteasy.resteasy-rxjava2"));
+                RuntimePackageDependency.required("io.smallrye.reactive.converters.rxjava2"),
+                RuntimePackageDependency.required("io.smallrye.reactive.streams-operators"),
+                RuntimePackageDependency.required("org.jboss.resteasy.resteasy-rxjava2"),
+                RuntimePackageDependency.required("org.wildfly.security.manager"));
     }
 
     @Override

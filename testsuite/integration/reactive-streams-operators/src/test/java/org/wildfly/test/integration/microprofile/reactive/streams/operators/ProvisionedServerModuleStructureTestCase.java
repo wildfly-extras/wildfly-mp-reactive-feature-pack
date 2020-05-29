@@ -29,7 +29,13 @@ public class ProvisionedServerModuleStructureTestCase {
     @Test
     public void checkModuleStructure() {
         ModulesChecker checker = ModulesChecker.builder()
+                .addExpected("io/reactivex/rxjava2/rxjava/main")
                 .addExpected("io/smallrye/reactive/streams-operators/main")
+                .addExpected("org/eclipse/microprofile/reactive-streams-operators/api/main")
+                .addExpected("org/eclipse/microprofile/reactive-streams-operators/core/main")
+                .addExpected("org/jboss/resteasy/resteasy-rxjava2/main")
+                .addExpected("org/reactivestreams/main")
+                .addExpected("org/wildfly/security/manager/main")
                 .addNotExpected("io/smallrye/context-propagation")
                 .addNotExpected("io/smallrye/reactive/messaging")
                 .addNotExpected("io/vertx")

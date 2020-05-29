@@ -32,11 +32,9 @@
         <module name="org.jboss.modules"/>
         <module name="org.jboss.staxmapper"/>
 
-        <module name="io.smallrye.reactive.streams-operators"/>
-        <module name="org.eclipse.microprofile.reactive-streams-operators.api"/>
-        <module name="org.eclipse.microprofile.reactive-streams-operators.core"/>
-        <module name="org.reactivestreams"/>
-        <module name="org.wildfly.security.manager"/>
-        <module name="io.reactivex.rxjava2.rxjava"/>
+        <!--
+            The RSO dependencies are provisioned in the subsystem definition, as they are not
+            required by the subsystem itself, only by the deployments
+        -->
     </dependencies>
 </module>

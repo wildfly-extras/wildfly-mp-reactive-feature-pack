@@ -29,8 +29,12 @@ public class ProvisionedServerModuleStructureTestCase {
     @Test
     public void checkModuleStructure() {
         ModulesChecker checker = ModulesChecker.builder()
+                .addExpected("io/smallrye/context-propagation/api/main")
                 .addExpected("io/smallrye/context-propagation/main")
-                .addExpected("io/smallrye/reactive/streams-operators")
+                .addExpected("io/smallrye/reactive/streams-operators/main")
+                .addExpected("io/undertow/servlet/main")
+                .addExpected("org/eclipse/microprofile/context-propagation/api/main")
+                .addExpected("org/wildfly/reactive/dep/jts/main")
                 .addNotExpected("io/smallrye/reactive/messaging")
                 .addNotExpected("io/vertx")
                 .build();

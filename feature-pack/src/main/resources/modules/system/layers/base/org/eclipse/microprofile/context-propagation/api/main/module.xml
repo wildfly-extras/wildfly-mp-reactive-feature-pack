@@ -21,5 +21,10 @@
 
     <dependencies>
         <module name="javax.enterprise.api" />
+
+        <!-- Needed to avoid warnings in logs -->
+        <module name="org.jboss.weld.api" />
+        <module name="org.jboss.weld.core" />
+        <module name="org.jboss.weld.spi" />
     </dependencies>
 </module>

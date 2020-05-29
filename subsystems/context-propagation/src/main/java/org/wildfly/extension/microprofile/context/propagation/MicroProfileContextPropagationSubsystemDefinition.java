@@ -72,7 +72,11 @@ public class MicroProfileContextPropagationSubsystemDefinition extends Persisten
     @Override
     public void registerAdditionalRuntimePackages(ManagementResourceRegistration resourceRegistration) {
         resourceRegistration.registerAdditionalRuntimePackages(
-                RuntimePackageDependency.required("org.wildfly.reactive.dep.jts"));
+                RuntimePackageDependency.required("io.smallrye.context-propagation.api"),
+                RuntimePackageDependency.required("io.smallrye.context-propagation"),
+                RuntimePackageDependency.required("javax.enterprise.api"),
+                RuntimePackageDependency.required("org.wildfly.reactive.dep.jts"),
+                RuntimePackageDependency.required("org.wildfly.security.manager"));
     }
 
     static class AddHandler extends AbstractBoottimeAddStepHandler {

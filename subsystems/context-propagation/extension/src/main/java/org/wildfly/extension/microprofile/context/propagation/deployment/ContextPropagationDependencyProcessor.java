@@ -50,7 +50,11 @@ public class ContextPropagationDependencyProcessor implements DeploymentUnitProc
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.eclipse.microprofile.context-propagation.api", false, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation.api", false, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation", false, false, true, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.jboss.jts", false, false, true, false));
+
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.wildfly.security.manager", false, false, true, false));
+
+        // From the context-propagation-jta layer
+        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.jboss.jts", true, false, true, false));
+        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation.providers.jta", true, false, true, false));
     }
 }

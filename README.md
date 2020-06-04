@@ -63,15 +63,30 @@ The `context-propagation` layer installs the `microprofile-context-propagation-s
 the MicroProfile [Context Propagation](https://github.com/eclipse/microprofile-context-propagation) APIs 
 from your application.
 
-**Note:** although the core context propagation mechanism works, we are still missing things in WildFly 19 for this
-to work properly. Currently the only things which are propagated properly are `cdi` and `application` (which essentially
-means the Thread Context ClassLoader)
+Note although the core context propagation mechanism works, we are still missing things in WildFly 20 for this
+to work totally. You currently get context propagation for the following:
+* `Application` - This propagates the Thread Context ClassLoader
+* `CDI` - propagates the CDI context
+* `Transaction` - **not** enabled by default, see the `context-propagation-jta` layer below
+
+What is missing is:
+* `Web` = propagation of parameter injected web context
+* `RestEasy` - propagation of parameter injected RestEasy context
+* `Security` - propagation of the security context
+
+This might still be enough for your application, and we hope to be able to add these soon. 
 
 Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 * `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
 * `reactive-streams-operators` - From this feature pack, as described in this document. 
+
+#### context-propagation-jta
+The `context-propagation-jta` layer installs the ThreadContextProvider propagating transactions/
+
+Layer Dependencies:
+* `context-propagation` - From this feature pack, as described in this document. 
 * `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
 `TransactionManager`. This is needed for propagation of the current transaction.
 

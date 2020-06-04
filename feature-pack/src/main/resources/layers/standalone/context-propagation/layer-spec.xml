@@ -19,7 +19,6 @@
     <dependencies>
         <layer name="cdi"/>
         <layer name="microprofile-config"/>
-        <layer name="transactions" optional="true"/>
         <layer name="reactive-streams-operators"/>
     </dependencies>
 

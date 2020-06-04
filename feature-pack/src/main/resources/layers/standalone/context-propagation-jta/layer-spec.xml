@@ -15,15 +15,13 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-reactive-all">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="context-propagation-jta">
     <dependencies>
         <layer name="context-propagation"/>
-        <layer name="context-propagation-jta"/>
-        <layer name="reactive-messaging-connectors"/>
-        <layer name="reactive-stream-operators-rxjava2"/>
+        <layer name="transactions"/>
     </dependencies>
 
     <packages>
-        <package name="org.wildfly.extension.microprofile.reactive-streams-operators-smallrye"/>
+        <package name="io.smallrye.context-propagation.providers.jta"/>
     </packages>
 </layer-spec>

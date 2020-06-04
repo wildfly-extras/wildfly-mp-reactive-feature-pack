@@ -136,6 +136,7 @@
                                         <layer>h2-default-datasource</layer>
                                         <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>
+                                        <layer>context-propagation-jta</layer>
                                         <layer>reactive-streams-operators</layer>
                                         <layer>reactive-streams-operators-rxjava2</layer>
                                     </layers>

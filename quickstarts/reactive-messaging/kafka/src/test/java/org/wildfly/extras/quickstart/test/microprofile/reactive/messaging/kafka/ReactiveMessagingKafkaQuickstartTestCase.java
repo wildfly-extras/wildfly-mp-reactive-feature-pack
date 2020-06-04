@@ -48,7 +48,7 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-@ServerSetup(ReactiveMessagingKafkaQuickstartTestCase.KafkaBootstrapServerSetupTask.class)
+@ServerSetup(ReactiveMessagingKafkaQuickstartTestCase.AmqpBootstrapServerSetupTask.class)
 public class ReactiveMessagingKafkaQuickstartTestCase {
     private static final KafkaContainer KAFKA = new KafkaContainer();
 
@@ -89,7 +89,7 @@ public class ReactiveMessagingKafkaQuickstartTestCase {
         Assert.assertTrue(size + " entries, expected at least 3", size >= 3);
     }
 
-    public static class KafkaBootstrapServerSetupTask extends CLIServerSetupTask {
+    public static class AmqpBootstrapServerSetupTask extends CLIServerSetupTask {
 
         @Override
         public void setup(ManagementClient managementClient, String containerId) throws Exception {

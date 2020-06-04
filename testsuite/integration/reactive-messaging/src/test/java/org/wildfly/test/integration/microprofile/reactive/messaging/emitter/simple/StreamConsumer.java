@@ -21,10 +21,10 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Message;
 
 import io.reactivex.Flowable;
-import io.smallrye.reactive.messaging.annotations.Channel;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>

@@ -89,6 +89,11 @@ all subscribers will receive the value.
 **Note:** `my-data-stream` is an in-memory stream which is not connected to a messaging provider. We will consume this
 stream in the `PriceResource` in the next step.
 
+**Note:** The MQTT example is exactly the same but lives in the [mqtt](mqtt/src/main/) source folder. The only
+difference is the signature of the [PriceConverter.process()](mqtt/src/main/java/org/wildfly/extras/quickstart/microprofile/reactive/messaging/PriceConverter.java#L36)
+method. MQTT can only handle byte arrays for `@Incoming` methods. For the other quickstarts
+we use an `int` for this method as shown above.
+
 ### Price Resource
 Finally we have a JAX-RS resource implemented in [PriceResource](core/src/main/java/org/wildfly/extras/quickstart/microprofile/reactive/messaging/PriceResource.java)
 ```

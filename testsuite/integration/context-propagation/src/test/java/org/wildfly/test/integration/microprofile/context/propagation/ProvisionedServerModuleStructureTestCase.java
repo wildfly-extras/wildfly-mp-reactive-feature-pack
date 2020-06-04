@@ -31,10 +31,12 @@ public class ProvisionedServerModuleStructureTestCase {
         ModulesChecker checker = ModulesChecker.builder()
                 .addExpected("io/smallrye/context-propagation/api/main")
                 .addExpected("io/smallrye/context-propagation/main")
-                .addExpected("io/smallrye/reactive/streams-operators/main")
+                .addExpected("io/smallrye/reactive/mutiny/reactive-streams-operators/main")
+                .addExpected("io/smallrye/reactive/mutiny/context-propagation/main")
                 .addExpected("io/undertow/servlet/main")
                 .addExpected("org/eclipse/microprofile/context-propagation/api/main")
                 .addExpected("org/wildfly/reactive/dep/jts/main")
+                .addExpected("org/wildfly/reactive/mutiny/reactive-streams-operators/cdi-provider/main")
                 .addNotExpected("io/smallrye/reactive/messaging")
                 .addNotExpected("io/vertx")
                 .build();

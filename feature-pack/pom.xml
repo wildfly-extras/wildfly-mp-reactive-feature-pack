@@ -121,6 +121,11 @@
             <artifactId>wildfly-microprofile-reactive-streams-operators</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-microprofile-reactive-streams-operators-cdi-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Normal dependencies -->
         <dependency>
@@ -149,17 +154,47 @@
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-axle-core</artifactId>
+            <artifactId>mutiny</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-axle-amqp-client</artifactId>
+            <artifactId>mutiny-context-propagation</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-axle-generator</artifactId>
+            <artifactId>mutiny-reactive-streams-operators</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>mutiny-rxjava</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-runtime</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-amqp-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-kafka-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-mqtt</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -170,6 +205,11 @@
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
             <artifactId>smallrye-reactive-converter-rxjava2</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -190,16 +230,6 @@
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
             <artifactId>smallrye-reactive-messaging-provider</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-reactive-streams-operators</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-reactive-streams-operators-cdi</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -225,16 +255,6 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-proton</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-rx-gen</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-rx-java2</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

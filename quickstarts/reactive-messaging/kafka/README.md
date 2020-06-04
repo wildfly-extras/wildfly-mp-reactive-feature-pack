@@ -39,5 +39,5 @@ The `prices` segment specifies that we should read from/write to a stream called
 
 Since we are using Integers in our example, we use the Kafka `IntegerDeserializer`. The 
 Kafka [Producer](https://kafka.apache.org/documentation/#producerconfigs) and 
-[Consumer](https://kafka.apache.org/documentation/#consumerconfigs) documentation contains more information about more 
+[Consumer](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2/kafka/kafka.html) documentation contains more information about more 
 values you can use to configure how you interact with Kafka.

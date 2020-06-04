@@ -25,7 +25,7 @@
     <dependencies>
         <module name="org.eclipse.microprofile.reactive-streams-operators.api" export="true" optional="true"/>
         <module name="org.reactivestreams" export="true" optional="true"/>
-        <module name="io.smallrye.reactive.streams-operators" export="true" optional="true"/>
+        <module name="io.smallrye.reactive.mutiny.reactive-streams-operators" export="true" optional="true"/>
         <module name="io.smallrye.reactive.converters.api" export="true" optional="true"/>
     </dependencies>
 </module>

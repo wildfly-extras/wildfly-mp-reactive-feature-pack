@@ -62,6 +62,18 @@
                 </license>
             </licenses>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-microprofile-reactive-streams-operators-cdi-provider</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+
 
         <!-- External dependencies -->
         <dependency>
@@ -121,7 +133,7 @@
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-axle-amqp-client</artifactId>
+            <artifactId>mutiny</artifactId>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -132,7 +144,7 @@
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-axle-core</artifactId>
+            <artifactId>mutiny-context-propagation</artifactId>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -143,7 +155,73 @@
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-axle-generator</artifactId>
+            <artifactId>mutiny-reactive-streams-operators</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>mutiny-rxjava</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-core</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-amqp-client</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-kafka-client</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-mqtt</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-mutiny-vertx-runtime</artifactId>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -155,6 +233,17 @@
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
             <artifactId>smallrye-reactive-converter-api</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-converter-rxjava2</artifactId>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -199,28 +288,6 @@
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
             <artifactId>smallrye-reactive-messaging-provider</artifactId>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                    <distribution>repo</distribution>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-reactive-streams-operators</artifactId>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                    <distribution>repo</distribution>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-reactive-streams-operators-cdi</artifactId>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -281,28 +348,6 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-proton</artifactId>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                    <distribution>repo</distribution>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-rx-gen</artifactId>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                    <distribution>repo</distribution>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-rx-java2</artifactId>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>

@@ -4,7 +4,7 @@ See the [parent README](..) for a description of the application and how to run 
 
 This module is only concerned with:
 * Reusing the code from the [../core](../core) module which contains the application java code
-* Providing a `docker-compose.yml` file to start up a Kafka server
+* Providing a `docker-compose.yml` file to start up a AMQP server
 * Providing a `provision.xml` file to make it simple to use Galleon to provision a WildFly server that contains the
 needed layers
 * Providing a `META-INF/microprofile-config.properties` file to map the streams used by the core application to the AMQP
@@ -36,5 +36,5 @@ The `connector` segment has a value of `smallrye-amqp` which makes SmallRye use 
 
 The `address` segment specifies the name of the topic to use.
 
-The [SmallRye Reactive Messaging AMQP connector](https://smallrye.io/smallrye-reactive-messaging/#_interacting_using_amqp) 
+The [SmallRye Reactive Messaging AMQP connector](https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/2/amqp/amqp.html) 
 documentation contains more information about the available options.

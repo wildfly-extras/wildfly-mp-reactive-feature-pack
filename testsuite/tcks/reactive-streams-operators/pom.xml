@@ -29,10 +29,12 @@
     <name>WildFly Test Suite: MicroProfile TCK - Reactive Streams Operators</name>
 
     <dependencies>
+<!--
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
             <artifactId>smallrye-reactive-streams-operators-cdi</artifactId>
         </dependency>
+-->
         <dependency>
             <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
             <artifactId>microprofile-reactive-streams-operators-tck</artifactId>

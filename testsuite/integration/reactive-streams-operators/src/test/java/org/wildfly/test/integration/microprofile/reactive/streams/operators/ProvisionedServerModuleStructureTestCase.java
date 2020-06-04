@@ -30,14 +30,17 @@ public class ProvisionedServerModuleStructureTestCase {
     public void checkModuleStructure() {
         ModulesChecker checker = ModulesChecker.builder()
                 .addExpected("io/reactivex/rxjava2/rxjava/main")
-                .addExpected("io/smallrye/reactive/streams-operators/main")
+                .addExpected("io/smallrye/reactive/mutiny/main")
+                .addExpected("io/smallrye/reactive/mutiny/reactive-streams-operators/main")
                 .addExpected("org/eclipse/microprofile/reactive-streams-operators/api/main")
                 .addExpected("org/eclipse/microprofile/reactive-streams-operators/core/main")
                 .addExpected("org/reactivestreams/main")
+                .addExpected("org/wildfly/reactive/mutiny/reactive-streams-operators/cdi-provider/main")
                 .addExpected("org/wildfly/security/manager/main")
                 .addNotExpected("io/smallrye/context-propagation")
                 .addNotExpected("io/smallrye/reactive/messaging")
                 .addNotExpected("io/vertx")
+                .addNotExpected("io/smallrye/reactive/mutiny/context-propagation/main")
                 // These are in the reactive-streams-operators-rxjava2 layer which is not provisioned here
                 .addNotExpected("io/smallrye/reactive/converters/rxjava2/main")
                 .addNotExpected("org/jboss/resteasy/resteasy-rxjava2/main")

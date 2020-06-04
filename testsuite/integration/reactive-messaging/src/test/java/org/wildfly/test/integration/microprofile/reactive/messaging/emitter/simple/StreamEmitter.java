@@ -22,10 +22,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.reactive.messaging.Channel;
+import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
-
-import io.smallrye.reactive.messaging.annotations.Channel;
-import io.smallrye.reactive.messaging.annotations.Emitter;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -40,7 +39,10 @@ public class StreamEmitter {
     private List<String> list = new CopyOnWriteArrayList<>();
 
     public void run() {
-        emitter.send("a").send("b").send("c").complete();
+        emitter.send("a");
+        emitter.send("b");
+        emitter.send("c");
+        emitter.complete();
     }
 
     @Incoming("sink")

@@ -25,17 +25,19 @@
         <artifact name="${io.smallrye.reactive:smallrye-reactive-messaging-mqtt}"/>
     </resources>
     <dependencies>
-        <module name="io.netty"/>
         <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="io.smallrye.config" services="import"/>
+        <module name="io.smallrye.reactive.converters.api"/>
         <module name="io.smallrye.reactive.messaging"/>
-        <module name="io.smallrye.reactive.streams-operators"/>
+        <module name="io.smallrye.reactive.mutiny"/>
+        <module name="io.smallrye.reactive.mutiny.reactive-streams-operators"/>
+        <module name="io.smallrye.reactive.mutiny.vertx-core"/>
+        <module name="io.smallrye.reactive.mutiny.vertx-mqtt"/>
+        <module name="io.netty"/>
         <module name="io.vertx.core"/>
         <module name="io.vertx.client.mqtt"/>
-        <module name="io.vertx.rx-java2"/>
         <module name="javax.annotation.api"/>
         <module name="javax.enterprise.api" />
-        <module name="org.apache.commons.lang3"/>
         <module name="org.eclipse.microprofile.reactive-messaging.api"/>
         <module name="org.eclipse.microprofile.reactive-streams-operators.api"/>
         <module name="org.eclipse.microprofile.reactive-streams-operators.core" services="import"/>

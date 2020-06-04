@@ -74,6 +74,7 @@ public class MicroProfileContextPropagationSubsystemDefinition extends Persisten
         resourceRegistration.registerAdditionalRuntimePackages(
                 RuntimePackageDependency.required("io.smallrye.context-propagation.api"),
                 RuntimePackageDependency.required("io.smallrye.context-propagation"),
+                RuntimePackageDependency.required("io.smallrye.reactive.mutiny.context-propagation"),
                 RuntimePackageDependency.required("javax.enterprise.api"),
                 RuntimePackageDependency.required("org.wildfly.reactive.dep.jts"),
                 RuntimePackageDependency.required("org.wildfly.security.manager"));

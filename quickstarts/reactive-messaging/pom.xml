@@ -32,12 +32,18 @@
         <module>amqp</module>
         <module>core</module>
         <module>kafka</module>
+        <module>mqtt</module>
     </modules>
 
     <dependencies>
         <dependency>
             <groupId>io.reactivex.rxjava2</groupId>
             <artifactId>rxjava</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

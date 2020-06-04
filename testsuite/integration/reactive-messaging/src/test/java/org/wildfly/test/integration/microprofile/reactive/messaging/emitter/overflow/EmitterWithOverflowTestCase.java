@@ -39,7 +39,7 @@ import org.junit.runner.RunWith;
 public class EmitterWithOverflowTestCase {
 
     @Inject
-    StreamEmitterWithOverflow streamEmitter;
+    ChannelEmitterWithOverflow streamEmitter;
 
     @Deployment
     public static Archive<?> getDeployment(){

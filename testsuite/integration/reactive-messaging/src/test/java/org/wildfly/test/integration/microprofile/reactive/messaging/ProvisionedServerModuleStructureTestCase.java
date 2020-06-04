@@ -32,7 +32,7 @@ public class ProvisionedServerModuleStructureTestCase {
                 .addExpected("io/smallrye/reactive/messaging/main")
                 .addExpected("io/smallrye/reactive/messaging/connector/main")
                 .addExpected("io/vertx/client/main")
-                .addExpected("io/smallrye/reactive/streams-operators")
+                .addExpected("io/smallrye/reactive/mutiny/reactive-streams-operators/main/")
                 .addNotExpected("io/smallrye/reactive/messaging/connector/kafka")
                 .addNotExpected("io/smallrye/reactive/messaging/connector/amqp")
                 .addNotExpected("io/smallrye/reactive/messaging/connector/mqtt")

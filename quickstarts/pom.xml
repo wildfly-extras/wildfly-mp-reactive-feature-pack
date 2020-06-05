@@ -29,6 +29,7 @@
     <name>WildFly Reactive MicroProfile - Quickstarts</name>
     <packaging>pom</packaging>
     <modules>
+        <module>context-propagation</module>
         <module>reactive-messaging</module>
     </modules>
 

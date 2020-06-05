@@ -43,6 +43,7 @@
         <version.org.wildfly.common>1.5.4.Final</version.org.wildfly.common>
 
         <!-- Other dependency versions -->
+        <version.com.fasterxml.jackson>2.10.4</version.com.fasterxml.jackson>
         <version.io.smallrye.reactive-utils>0.0.16</version.io.smallrye.reactive-utils>
         <version.io.smallrye.smallrye-context-propagation>1.0.13</version.io.smallrye.smallrye-context-propagation>
         <version.io.smallrye.smallrye-reactive-messaging>2.0.4</version.io.smallrye.smallrye-reactive-messaging>
@@ -679,6 +680,12 @@
             </dependency>
 
             <!-- Test dependencies -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.com.fasterxml.jackson}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>wildfly-microprofile-testsuite-shared</artifactId>

@@ -21,7 +21,7 @@ public class VerifyProvisionXmlFeaturePackVersionsTestCase {
 
     private static final String FEATURE_PACK_NAME = "wildfly-microprofile-reactive-feature-pack";
     private static final int EXPECTED_README_COUNT = 2;
-    private static final int EXPECTED_PROVISION_XML_COUNT = 4;
+    private static final int EXPECTED_PROVISION_XML_COUNT = 5;
     private int readMeCount = 0;
     private int provisionXmlCount = 0;
 

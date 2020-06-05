@@ -6,8 +6,8 @@ This repository contains a Galleon feature pack to add the MicroProfile reactive
 Galleon is the tool we use internally to build the WildFly server. See the Galleon 
 [documentation](https://docs.wildfly.org/galleon/) for more background about the concepts.
 
-To install the feature pack you need to [download Galleon](https://github.com/wildfly/galleon/releases) and unzip
-it somewhere. The rest of this document assumes that you have added the resulting `galleon-x.y.z.Final/bin/` folder
+To install the feature pack you need to [download Galleon](https://github.com/wildfly/galleon/releases) (use the 4.x series)
+and unzip it somewhere. The rest of this document assumes that you have added the resulting `galleon-x.y.z.Final/bin/` folder
 to your path. 
 
 The easiest way to install a WildFly Server with MicroProfile reactive specs is 

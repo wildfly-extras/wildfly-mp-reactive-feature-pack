@@ -3,6 +3,7 @@
 ## Prerequisites 
 You will need to have the following installed on your machine:
 
+* JDK 1.8+
 * A Docker environment
 * Galleon downloaded and available on your path as described in the [main README](/). The main README also provides
 background on how to provision WildFly servers and which Galleon layers are available. 
@@ -35,7 +36,8 @@ terminal, and then run:
 galleon.sh provision ./provision.xml --dir=target/my-wildfly
 ./target/my-wildfly/bin/standalone.sh
 ```
-This provisions the server with the relevant Galleon layers, and starts it.
+This provisions the server with the relevant Galleon layers, and starts it.The
+[main README](/) contains information about the layers in this feature pack.
 
 Then in another terminal window, go to the relevant child module directory and run:
 ```
@@ -115,7 +117,8 @@ This does a few things:
 * The `@Path` annotation binds the JAX-RS resource to the `/prices` path.
 * We inject the `my-data-stream` channel using the `@Channel` qualifier. This allows us to take data from reactive 
 messaging and push them to the 'imperative' part of our application. `@Channel` is a SmallRye extension to the
-Reactive Messaging specification.
+Reactive Messaging specification. It has however been merged to the upstream branch of the specification, so
+it is expected to be part of the next version (1.1) of the specification.
 * The `stream()` method produces server side events of type `text/plain`, and returns the `prices` stream that was 
 injected in the previous step.
 

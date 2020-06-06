@@ -751,6 +751,7 @@
         <tag>HEAD</tag>
     </scm>
     <modules>
+        <module>provision-xml-verifier</module>
         <module>subsystems</module>
         <module>feature-pack</module>
         <module>build</module>

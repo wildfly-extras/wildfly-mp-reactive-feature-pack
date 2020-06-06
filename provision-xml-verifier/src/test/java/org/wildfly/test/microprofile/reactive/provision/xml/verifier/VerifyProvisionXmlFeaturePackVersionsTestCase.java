@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -19,24 +20,45 @@ import org.junit.Test;
 public class VerifyProvisionXmlFeaturePackVersionsTestCase {
 
     private static final String FEATURE_PACK_NAME = "wildfly-microprofile-reactive-feature-pack";
+    private static final int EXPECTED_README_COUNT = 2;
     private static final int EXPECTED_PROVISION_XML_COUNT = 3;
+    private int readMeCount = 0;
     private int provisionXmlCount = 0;
 
 
     List<String> errors = new ArrayList<>();
 
-    @Test
-    public void verifyProvisionXmls() throws Exception {
+    String projectVersion;
+    Path checkoutFolder;
 
-        String projectVersion = System.getProperty("test.project.version");
+    @Before
+    public void before() {
+        projectVersion = System.getProperty("test.project.version");
         Assert.assertNotNull(projectVersion);
 
-        Path checkoutFolder = Paths.get("").toAbsolutePath();
+        checkoutFolder = Paths.get("").toAbsolutePath();
 
         while (checkoutFolder != null && checkoutFolder.getFileName().toString().equals("provision-xml-verifier")) {
             checkoutFolder = checkoutFolder.getParent();
         }
         Assert.assertNotNull(checkoutFolder);
+    }
+
+
+    @Test
+    public void verifyReadMe() throws Exception {
+        Path path = checkoutFolder.resolve("README.md");
+        List<String> lines = Files.readAllLines(path);
+        for (String line : lines) {
+            if (line.contains(projectVersion)) {
+                readMeCount++;
+            }
+        }
+        Assert.assertEquals(EXPECTED_README_COUNT, readMeCount);
+    }
+
+    @Test
+    public void verifyProvisionXmls() throws Exception {
 
         Files.walkFileTree(checkoutFolder, new SimpleFileVisitor<Path>(){
             @Override

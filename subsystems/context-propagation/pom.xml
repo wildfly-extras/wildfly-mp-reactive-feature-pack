@@ -19,29 +19,53 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>wildfly-microprofile-subsystems</artifactId>
+        <artifactId>wildfly-microprofile-reactive-parent</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
         <version>1.0.0.Alpha-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wildfly-microprofile-context-propagation</artifactId>
-    <name>WildFly Reactive MicroProfile - Context Propagation</name>
+    <artifactId>wildfly-microprofile-context-propagation-parent</artifactId>
+    <packaging>pom</packaging>
+    <name>WildFly Reactive MicroProfile - Context Propagation Parent</name>
+    <modules>
+        <module>extension</module>
+    </modules>
 
     <dependencies>
         <dependency>
-            <groupId>org.eclipse.microprofile.context-propagation</groupId>
-            <artifactId>microprofile-context-propagation-api</artifactId>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-servlet</artifactId>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-processor</artifactId>
+            <!--
+                This is a compile-time dependency of this project, but is not needed at compile or runtime by other
+                projects that depend on this project.
+            -->
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>io.smallrye</groupId>
-            <artifactId>smallrye-context-propagation</artifactId>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-controller</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-subsystem-test</artifactId>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

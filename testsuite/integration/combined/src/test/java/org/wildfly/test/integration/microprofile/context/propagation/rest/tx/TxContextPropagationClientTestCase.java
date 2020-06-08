@@ -35,7 +35,6 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -91,7 +90,6 @@ public class TxContextPropagationClientTestCase {
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
-    @Ignore("Needs WildFly 20.0.0.Final")
     @Test()
     public void testTransactionContextPropagationSingle() {
         RestAssured.when().get(url.toExternalForm() + "context/transaction-single").then()
@@ -101,7 +99,6 @@ public class TxContextPropagationClientTestCase {
                 .statusCode(Response.Status.OK.getStatusCode()));
     }
 
-    @Ignore("Needs WildFly 20.0.0.Final")
     @Test()
     public void testTransactionContextPropagationPublisher() {
         RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher").then()

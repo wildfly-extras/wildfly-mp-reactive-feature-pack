@@ -94,6 +94,7 @@
                                         <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>
+                                        <layer>context-propagation-jta</layer>
                                     </layers>
                                 </config>
                             </configurations>

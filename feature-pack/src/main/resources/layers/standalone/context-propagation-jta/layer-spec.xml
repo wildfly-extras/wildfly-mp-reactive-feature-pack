@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
   ~ Copyright 2019 Red Hat, Inc.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +14,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<module xmlns="urn:jboss:module:1.8" name="org.eclipse.microprofile.reactive-streams-operators.api">
 
-    <resources>
-        <artifact name="${org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api}"/>
-    </resources>
-
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="context-propagation-jta">
     <dependencies>
-        <module name="org.reactivestreams"/>
+        <layer name="context-propagation"/>
+        <layer name="transactions"/>
     </dependencies>
-</module>
+
+    <packages>
+        <package name="io.smallrye.context-propagation.providers.jta"/>
+    </packages>
+</layer-spec>

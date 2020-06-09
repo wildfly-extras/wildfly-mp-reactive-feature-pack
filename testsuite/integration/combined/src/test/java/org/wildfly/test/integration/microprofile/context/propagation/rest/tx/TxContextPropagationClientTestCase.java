@@ -108,6 +108,15 @@ public class TxContextPropagationClientTestCase {
                 .statusCode(Response.Status.OK.getStatusCode()));
     }
 
+    @Test()
+    public void testTransactionContextPropagationRsoPublisher() {
+        RestAssured.when().get(url.toExternalForm() + "context/transaction-rso-publisher").then()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .body(equalTo("OK"));
+        awaitState(() -> RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher2").then()
+                .statusCode(Response.Status.OK.getStatusCode()));
+    }
+
     private void awaitState(ThrowingRunnable task) {
         Awaitility.await().atMost(5, TimeUnit.SECONDS)
                 .pollInterval(100, TimeUnit.MILLISECONDS)

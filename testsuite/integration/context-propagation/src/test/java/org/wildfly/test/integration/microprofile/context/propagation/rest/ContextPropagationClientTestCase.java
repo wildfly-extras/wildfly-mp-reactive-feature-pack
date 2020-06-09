@@ -69,8 +69,14 @@ public class ContextPropagationClientTestCase {
     }
 
     @Test
-    public void testTcclPublisherPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/tccl-pub").then()
+    public void testTcclRxJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/tccl-rxjava").then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Test
+    public void testTcclRsoJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/tccl-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -90,8 +96,15 @@ public class ContextPropagationClientTestCase {
 
     @Ignore("TODO we don't have RestEasy context propagation yet")
     @Test
-    public void testRESTEasyPublisherPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/resteasy-pub").then()
+    public void testRESTEasyRxJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/resteasy-rxjava").then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Ignore("TODO we don't have RestEasy context propagation yet")
+    @Test
+    public void testRESTEasyRsoJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/resteasy-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -111,8 +124,15 @@ public class ContextPropagationClientTestCase {
 
     @Ignore("we don't have servlet context propagation yet")
     @Test
-    public void testServletContextPublisherPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/servlet-pub").then()
+    public void testServletContextRxJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/servlet-rxjava").then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Ignore("we don't have servlet context propagation yet")
+    @Test
+    public void testServletContextRsoPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/servlet-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -129,8 +149,14 @@ public class ContextPropagationClientTestCase {
     }
 
     @Test
-    public void testCdiPublisherPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/cdi-pub").then()
+    public void testCdiRxJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/cdi-rxjava").then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Test
+    public void testCdiRsoPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/cdi-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -148,8 +174,15 @@ public class ContextPropagationClientTestCase {
 
     @Ignore("This is not possible, since the Publisher uses the 'all' context")
     @Test
-    public void testNoCdiPublisherPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/nocdi-pub").then()
+    public void testNoCdiRxJavaPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/nocdi-rxjava").then()
+                .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Ignore("This is not possible, since the Publisher uses the 'all' context")
+    @Test
+    public void testNoCdiRsoPropagation() {
+        RestAssured.when().get(url.toExternalForm() + "context/nocdi-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 

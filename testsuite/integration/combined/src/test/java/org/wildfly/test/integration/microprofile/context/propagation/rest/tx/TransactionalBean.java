@@ -22,6 +22,9 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
+import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
+import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
+
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
@@ -51,6 +54,7 @@ public class TransactionalBean {
 
         return Single.just("OK");
     }
+
     @Transactional(value = TxType.REQUIRES_NEW)
     public Flowable<String> doInTxPublisher() {
         TestUtils.assertEquals(0, TestUtils.count(em));
@@ -60,5 +64,16 @@ public class TransactionalBean {
         em.persist(entity);
 
         return Flowable.fromArray("OK");
+    }
+
+    @Transactional(value = TxType.REQUIRES_NEW)
+    public PublisherBuilder<String> doInTxRsoPublisher() {
+        TestUtils.assertEquals(0, TestUtils.count(em));
+
+        ContextEntity entity = new ContextEntity();
+        entity.setName("Stef");
+        em.persist(entity);
+
+        return ReactiveStreams.of("OK");
     }
 }

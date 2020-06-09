@@ -39,6 +39,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.eclipse.microprofile.context.ManagedExecutor;
 import org.eclipse.microprofile.context.ThreadContext;
+import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.reactivestreams.Publisher;
 import org.wildfly.security.manager.WildFlySecurityManager;
 
@@ -94,8 +95,8 @@ public class ContextPropagationEndpoint {
     }
 
     @GET
-    @Path("/tccl-pub")
-    public Publisher<String> tcclPublisherTest() {
+    @Path("/tccl-rxjava")
+    public Publisher<String> tcclRxJavaTest() {
         ClassLoader tccl = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
         return Flowable.fromArray("OK")
                 // this makes sure we get executed in another scheduler
@@ -107,6 +108,30 @@ public class ContextPropagationEndpoint {
                     }
                     return text;
                 });
+    }
+
+    @GET
+    @Path("/tccl-rso")
+    public Publisher<String> tcclRsoJavaTest() {
+        ClassLoader tccl = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
+        return ReactiveStreams.of("OK")
+                .map(v -> {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    return v;
+                })
+                .map(text -> {
+                    ClassLoader tccl2 = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
+                    if (tccl != tccl2) {
+                        throw new IllegalStateException("TCCL was not the same");
+                    }
+                    return text;
+                })
+                .buildRs();
     }
 
     @GET
@@ -132,15 +157,35 @@ public class ContextPropagationEndpoint {
     }
 
     @GET
-    @Path("/resteasy-pub")
-    public Publisher<String> resteasyPubTest(@Context UriInfo uriInfo) {
+    @Path("/resteasy-rxjava")
+    public Publisher<String> resteasyRxJavaTest(@Context UriInfo uriInfo) {
         return Flowable.fromArray("OK")
                 // this makes sure we get executed in another scheduler
                 .delay(100, TimeUnit.MILLISECONDS)
                 .map(text -> {
-            uriInfo.getAbsolutePath();
-            return text;
-        });
+                    uriInfo.getAbsolutePath();
+                    return text;
+                });
+    }
+
+    @GET
+    @Path("/resteasy-rso")
+    public Publisher<String> resteasyRsoTest(@Context UriInfo uriInfo) {
+        return ReactiveStreams.of("OK")
+                .map(v -> {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    return v;
+                })
+                .map(text -> {
+                    uriInfo.getAbsolutePath();
+                    return text;
+                })
+                .buildRs();
     }
 
     @GET
@@ -166,16 +211,37 @@ public class ContextPropagationEndpoint {
     }
 
     @GET
-    @Path("/servlet-pub")
-    public Publisher<String> servletPubTest(@Context HttpServletRequest servletRequest) {
+    @Path("/servlet-rxjava")
+    public Publisher<String> servletRxJavaTest(@Context HttpServletRequest servletRequest) {
         CompletableFuture<String> ret = allExecutor.completedFuture("OK");
         return Flowable.fromArray("OK")
                 // this makes sure we get executed in another scheduler
                 .delay(100, TimeUnit.MILLISECONDS)
                 .map(text -> {
-            servletRequest.getContentType();
-            return text;
-        });
+                    servletRequest.getContentType();
+                    return text;
+                });
+    }
+
+    @GET
+    @Path("/servlet-rso")
+    public Publisher<String> servletRsoTest(@Context HttpServletRequest servletRequest) {
+        CompletableFuture<String> ret = allExecutor.completedFuture("OK");
+        return ReactiveStreams.of("OK")
+                .map(v -> {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    return v;
+                })
+                .map(text -> {
+                    servletRequest.getContentType();
+                    return text;
+                })
+                .buildRs();
     }
 
     @GET
@@ -209,8 +275,8 @@ public class ContextPropagationEndpoint {
     }
 
     @GET
-    @Path("/cdi-pub")
-    public Publisher<String> cdiPubTest() {
+    @Path("/cdi-rxjava")
+    public Publisher<String> cdiRxJavaTest() {
         RequestBean instance = getRequestBean();
 
         return Flowable.fromArray("OK")
@@ -223,6 +289,31 @@ public class ContextPropagationEndpoint {
                     }
                     return text;
                 });
+    }
+
+    @GET
+    @Path("/cdi-rso")
+    public Publisher<String> cdiRsoTest() {
+        RequestBean instance = getRequestBean();
+
+        return ReactiveStreams.of("OK")
+                .map(v -> {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    return v;
+                })
+                .map(text -> {
+                    RequestBean instance2 = getRequestBean();
+                    if (instance.id() != instance2.id()) {
+                        throw new IllegalStateException("Instances were not the same");
+                    }
+                    return text;
+                })
+                .buildRs();
     }
 
     @GET
@@ -265,7 +356,13 @@ public class ContextPropagationEndpoint {
 
     @GET
     @Path("/nocdi-pub")
-    public Publisher<String> noCdiPubTest() {
+    public Publisher<String> noCdiRxJavaTest() {
+        throw new IllegalStateException("Not possible to clear contexts");
+    }
+
+    @GET
+    @Path("/nocdi-rso")
+    public Publisher<String> noRsoJavaTest() {
         throw new IllegalStateException("Not possible to clear contexts");
     }
 

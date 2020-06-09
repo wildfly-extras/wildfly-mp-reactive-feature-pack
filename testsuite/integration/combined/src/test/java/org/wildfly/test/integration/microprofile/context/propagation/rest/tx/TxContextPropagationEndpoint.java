@@ -255,6 +255,52 @@ public class TxContextPropagationEndpoint {
 
     @Transactional
     @GET
+    @Path("/transaction-rso-publisher")
+    @Stream(value = Stream.MODE.RAW)
+    public Publisher<String> transactionRsoPublisher() throws SystemException {
+        ContextEntity entity = new ContextEntity();
+        entity.setName("Stef");
+        em.persist(entity);
+
+        Transaction t1 = tm.getTransaction();
+        TestUtils.assertNotNull("No tx", t1);
+
+        // our entity
+        TestUtils.assertEquals(1, TestUtils.count(em));
+
+        return txBean.doInTxRsoPublisher()
+                .map(v -> {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    return v;
+                })
+                .map(text -> {
+                    Transaction t2;
+                    try {
+                        t2 = tm.getTransaction();
+                    } catch (SystemException e) {
+                        throw new RuntimeException(e);
+                    }
+                    TestUtils.assertEquals(t1, t2);
+                    int status2;
+                    try {
+                        status2 = t2.getStatus();
+                    } catch (SystemException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    TestUtils.assertEquals(Status.STATUS_ACTIVE, status2);
+                    return text;
+                })
+                .buildRs();
+    }
+
+    @Transactional
+    @GET
     @Path("/transaction-publisher2")
     public Publisher<String> transactionPublisher2() throws SystemException {
         Publisher<String> ret = ReactiveStreams.of("OK").buildRs();

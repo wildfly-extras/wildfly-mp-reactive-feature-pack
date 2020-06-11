@@ -42,6 +42,7 @@
             <include name="jaxrs-server"/>
             <include name="jmx-remoting"/>
             <include name="management"/>
+            <!-- Layers from this FP -->
             <include name="reactive-messaging-mqtt"/>
         </layers>
     </config>

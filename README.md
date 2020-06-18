@@ -252,3 +252,12 @@ To just install the `reactive-streams-operators` and `context-propagation` layer
 galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT --layers=reactive-streams-operators,context-propagation --dir=wildfly
 ``` 
 ----
+## References
+* [MicroProfile Reactive Messaging specification](https://github.com/eclipse/microprofile-reactive-messaging/releases)
+* [SmallRye Reactive Messaging documentation](https://smallrye.io/smallrye-reactive-messaging/)
+* [SmallRye Reactive Messaging Source](https://github.com/smallrye/smallrye-reactive-messaging)  
+* [MicroProfile Reactive Streams Operators specification](https://github.com/eclipse/microprofile-reactive-streams-operators/releases)
+* [SmallRye Reactive Streams Operators documentation](https://smallrye.io/smallrye-reactive-streams-operators/)
+* [SmallRye Reactive Streams Operators source code](https://github.com/smallrye/smallrye-mutiny/tree/master/reactive-streams-operators)
+* [MicroProfile Context Propagation specification](https://github.com/eclipse/microprofile-context-propagation/releases)
+* [SmallRye Context Propagation source code](https://github.com/smallrye/smallrye-context-propagation)

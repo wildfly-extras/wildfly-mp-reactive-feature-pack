@@ -172,6 +172,5 @@ See each of the child modules for how we map our application's streams to the un
 
 
 ## Further reading
-* [MicroProfile Reactive Messaging specification](https://github.com/eclipse/microprofile-reactive-messaging/releases)
-* [SmallRye Reactive Messaging documentation](https://smallrye.io/smallrye-reactive-messaging/)
-* [SmallRye Reactive Messaging Source](https://github.com/smallrye/smallrye-reactive-messaging)  
+See the [References](../../README.md#references) section of the main README for links to the specs, and the 
+[SmallRye](https://smallrye.io) implementations and documentation.

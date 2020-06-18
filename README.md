@@ -26,6 +26,7 @@ specifications in your applications.
 The rest of this README will explain the structure of this feature pack in more detail. If you 
 are itching to get going try the quickstarts first and come back to this.
 
+-----------
 
 ## Layers Introduction
 To provision a server containing the microprofile reactive specs, you use Galleon to first install the base 
@@ -44,7 +45,6 @@ There are some 'aggregate' layers, provided for convenience, such as `cloud-serv
 that we deem important for a server running on OpenShift. It results in a server with JAX-RS, JPA, Transactions amd 
 Weld (CDI) amongst other things. 
 
------------
 ## WildFly Layers
 There is a list of all our layers defined by WildFly and WildFly Core in our 
 [documentation](https://docs.wildfly.org/18/Admin_Guide.html#wildfly-galleon-layers).

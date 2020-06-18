@@ -225,10 +225,9 @@ then returns the list of names to the caller.
 
 For both the examples to check that the names were stored, you can run `http :8080/quickstart/names/all`.
 
-##Further reading
+## Further reading
 * [MicroProfile Reactive Streams Operators specification](https://github.com/eclipse/microprofile-reactive-streams-operators/releases)
 * [SmallRye Reactive Streams Operators documentation](https://smallrye.io/smallrye-reactive-streams-operators/)
 * [SmallRye Reactive Streams Operators source code](https://github.com/smallrye/smallrye-mutiny/tree/master/reactive-streams-operators)
 * [MicroProfile Context Propagation specification](https://github.com/eclipse/microprofile-context-propagation)
 * [SmallRye Context Propagation source code](https://github.com/smallrye/smallrye-context-propagation)
-* 

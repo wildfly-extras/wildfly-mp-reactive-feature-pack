@@ -1,5 +1,12 @@
 # WildFly Microprofile Reactive Messaging Quickstarts
 
+# Motivation
+MicroProfile Reactive Messaging is a framework for building event-driven, data streaming and event-sourcing applications
+using CDI. It lets your application interact with various messaging technologies such as Apache Kafka, AMQP, MQTT etc.
+
+MicroProfile Config is used to do the mapping of the messaging providers, so in a lot of cases you can leave the code
+unchanged.
+ 
 ## Prerequisites 
 You will need to have the following installed on your machine:
 
@@ -16,8 +23,10 @@ the target messaging system. They also provide a `provision.xml` to provision a 
 Galleon layers installed. Finally they contain a 
 `src/main/resources/META-INF/microprofile-config.properties` which configures the application for use with the target
 messaging system while reusing the code. These are in the following sub-modules
-    * [kafka/](kafka) - This uses Kafka as the messaging system
-    * [amqp/](amqp) - This uses AMQP as the messaging system
+    * [kafka/](kafka) - Uses Kafka as the messaging system
+    * [amqp/](amqp) - Uses AMQP as the messaging system
+    * [mqtt/](mqtt) - Uses MQTT as the messaging system. Due to some limitations in the MQTT protocol, this example
+    copies the code from `core/` and adjusts it slightly.
 
 ## How to run it
 First you need to build the contents of this repository:

@@ -50,7 +50,8 @@ public class VerifyProvisionXmlFeaturePackVersionsTestCase {
         Path path = checkoutFolder.resolve("README.md");
         List<String> lines = Files.readAllLines(path);
         for (String line : lines) {
-            if (line.contains(projectVersion)) {
+            if (line.contains(":" + projectVersion) || line.contains("#" + projectVersion)) {
+                System.out.println(line);
                 readMeCount++;
             }
         }

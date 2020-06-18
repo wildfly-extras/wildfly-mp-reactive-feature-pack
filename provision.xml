@@ -29,7 +29,10 @@
             <!-- include name="docs.licenses"/ -->
         </packages>
     </feature-pack>
-    <feature-pack location="org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT">
+    <!--
+        When relasing and updating the version here. Remember to also update the version in the main README!!!
+    -->
+    <feature-pack location="org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta1">
         <default-configs inherit="false"/>
         <packages inherit="false">
             <!-- If docs/licenses is desired, uncomment this line -->

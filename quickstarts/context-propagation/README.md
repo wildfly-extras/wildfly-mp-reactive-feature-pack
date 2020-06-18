@@ -24,7 +24,8 @@ background on how to provision WildFly servers and which Galleon layers are avai
 * httpie (or curl)
 
 ## How to run it
-First you need to build the contents of this repository:
+First you need to build the contents of this repository You can skip this step if you have checked out a tag since 
+then the artifacts are deployed to Maven:
 ```
 mvn install -DskipTests
 ```

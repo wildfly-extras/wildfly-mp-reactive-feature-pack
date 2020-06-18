@@ -245,13 +245,13 @@ can rerun the above command, and pass in more layers in the `--layers` option if
 #### Install the MicroProfile Reactive Feature Pack
 Now to install our feature pack, we can run:
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT --layers=microprofile-reactive-all --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta1 --layers=microprofile-reactive-all --dir=wildfly
 ``` 
 which will install all the layers from the MicroProfile reactive feature pack.
 
 To just install the `reactive-streams-operators` and `context-propagation` layers, we run this instead:
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT --layers=reactive-streams-operators,context-propagation --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta1 --layers=reactive-streams-operators,context-propagation --dir=wildfly
 ``` 
 ----
 ## References

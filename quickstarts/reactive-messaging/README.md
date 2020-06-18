@@ -29,7 +29,8 @@ messaging system while reusing the code. These are in the following sub-modules
     copies the code from `core/` and adjusts it slightly.
 
 ## How to run it
-First you need to build the contents of this repository:
+First you need to build the contents of this repository. You can skip this step if you have checked out a tag since 
+then the artifacts are deployed to Maven:
 ```
 mvn install -DskipTests
 ```

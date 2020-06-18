@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wildfly.extras.reactive</groupId>
         <artifactId>wildfly-microprofile-reactive-tcks</artifactId>
-        <version>1.0.0.Alpha-SNAPSHOT</version>
+        <version>1.0.0.Beta1</version>
     </parent>
 
     <artifactId>wildfly-microprofile-tck-reactive-messaging</artifactId>

@@ -19,6 +19,8 @@ This installs a full WildFly installation and everything from this feature pack 
 Later we will look at what the above command means, other ways to install the server and how to tweak what is
 installed. 
 
+-------------
+
 ## Quickstarts
 Take a look at our [Quickstarts](quickstarts/) for examples of how to use the MicroProfile Reactive
 specifications in your applications.

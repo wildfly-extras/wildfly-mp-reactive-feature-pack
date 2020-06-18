@@ -47,7 +47,7 @@ Weld (CDI) amongst other things.
 
 ## WildFly Layers
 There is a list of all our layers defined by WildFly and WildFly Core in our 
-[documentation](https://docs.wildfly.org/18/Admin_Guide.html#wildfly-galleon-layers).
+[documentation](https://docs.wildfly.org/20/Admin_Guide.html#wildfly-galleon-layers).
 
 However, if you want to understand better what their dependencies are, you can look at the 
 layer-spec.xml for the various layers in the following locations:

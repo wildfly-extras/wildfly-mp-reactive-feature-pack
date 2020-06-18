@@ -19,7 +19,7 @@ You will need to have the following installed on your machine:
 
 * JDK 1.8+
 * A Docker environment
-* Galleon downloaded and available on your path as described in the [main README](/). The main README also provides
+* Galleon downloaded and available on your path as described in the [main README](../../README.md). The main README also provides
 background on how to provision WildFly servers and which Galleon layers are available.
 * httpie (or curl)
 
@@ -30,14 +30,14 @@ mvn install -DskipTests
 ```
 
 Next you need to provision a server (remember you need to have Galleon installed as described in 
-the [main README](/)). Go to the folder containing this README in a new
+the [main README](../../README.md)). Go to the folder containing this README in a new
 terminal, and then run:
 ```
 galleon.sh provision ./provision.xml --dir=target/my-wildfly
 ./target/my-wildfly/bin/standalone.sh
 ```
 This provisions the server with the relevant Galleon layers, and starts it. The
-[main README](/) contains information about the layers in this feature pack.
+[main README](../../README.md) contains information about the layers in this feature pack.
 
 Then in another terminal window, go to the same folder and run:
 ```

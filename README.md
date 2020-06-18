@@ -51,12 +51,12 @@ There is a list of all our layers defined by WildFly and WildFly Core in our
 
 However, if you want to understand better what their dependencies are, you can look at the 
 layer-spec.xml for the various layers in the following locations:
-* WildFly Core's [Core Feature Pack](https://github.com/wildfly/wildfly-core/tree/11.0.0.Final/core-galleon-pack/src/main/resources/layers/standalone)
-* WildFly's [Servlet Feature Pack](https://github.com/wildfly/wildfly/tree/19.0.0.Final/servlet-galleon-pack/src/main/resources/layers/standalone)
-* WildFly's [EE Feature Pack](https://github.com/wildfly/wildfly/tree/19.0.0.Final/ee-galleon-pack/src/main/resources/layers/standalone)
-* WildFly's [Full Feature Pack](https://github.com/wildfly/wildfly/tree/19.0.0.Final/galleon-pack/src/main/resources/layers/standalone)
+* WildFly Core's [Core Feature Pack](https://github.com/wildfly/wildfly-core/tree/12.0.1.Final/core-galleon-pack/src/main/resources/layers/standalone)
+* WildFly's [Servlet Feature Pack](https://github.com/wildfly/wildfly/tree/20.0.0.Final/servlet-galleon-pack/src/main/resources/layers/standalone)
+* WildFly's [EE Feature Pack](https://github.com/wildfly/wildfly/tree/20.0.0.Final/ee-galleon-pack/src/main/resources/layers/standalone)
+* WildFly's [Full Feature Pack](https://github.com/wildfly/wildfly/tree/20.0.0.Final/galleon-pack/src/main/resources/layers/standalone)
 
-Note that the above links take you to the versions used for WildFly 19.0.0.Final. If you
+Note that the above links take you to the versions used for WildFly 20.0.0.Final. If you
 are interested in another/newer WildFly version, adjust the tag name in the URL. 
 
 -------------
@@ -91,7 +91,7 @@ which implements MicroProfile Config.
 * `reactive-streams-operators` - From this feature pack, as described in this document. 
 
 #### context-propagation-jta
-The `context-propagation-jta` layer installs the ThreadContextProvider propagating transactions/
+The `context-propagation-jta` layer installs the ThreadContextProvider propagating transactions.
 
 Layer Dependencies:
 * `context-propagation` - From this feature pack, as described in this document. 
@@ -107,7 +107,7 @@ Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 
 #### reactive-streams-operators-rxjava2
-This layer enables the use of classes for RxJjava2, e.g. `io.reactivex.Flowable` and `io.reactivex.Single`. 
+This layer enables the use of classes for RxJava2, e.g. `io.reactivex.Flowable` and `io.reactivex.Single`. 
 
 If provisioned, you will get:
 * Transactions extended to the end of methods returning an RxJava2 type, assuming that you have also provisioned 
@@ -170,14 +170,14 @@ The `microprofile-reactive-all` layer is a convenience layer, which installs all
 
 ## Installing the MicroProfile Reactive Layers
 Download Galleon as mentioned in the introduction. There are two main ways of provisioning a server containing the 
-MicroProfile. The first is to provision from a file, as we saw in the introduction. The second is to 
+MicroProfile Reactive specifications. The first is to provision from a file, as we saw in the introduction. The second is to 
 execute all the Galleon commands individually.
 
 In both cases we install the main WildFly server (possibly with some tweaks) and then we install layers
 we choose from this feature pack.
 
 Galleon can not modify the server you download from the [wildfly.org downloads page](https://wildfly.org/downloads/). 
-Instead you have to install WildFly using Galleon before adding the layers from this feature pack. Both the ways do 
+Instead you have to install WildFly using Galleon before adding the layers from this feature pack. Both the ways shown do 
 this.
 
 ### Provision from a File
@@ -185,9 +185,9 @@ The [provision.xml](provision.xml) file contains everything we need to install a
 spec subsystems.
 
 It contains a reference to the WildFly feature pack. It's version is `current` which means it will download the 
-latest released version (which at the time of writing is 19.0.0.Final. If you want to choose a different version, 
-you can modify the file and append the version as `current:19.0.0.Beta2` for example. Note that WildFly 19.0.0.Final
-is the first version this feature pack can be installed into.
+latest released version (which at the time of writing is 20.0.0.Final. If you want to choose a different version, 
+you can modify the file and append the version as `current:19.0.0.Final` for example. Note that WildFly 19.0.0.Final
+is the first version this feature pack can be installed into, although some of the functionality requires WildFly 20.0.0.Final.
 
 Next it contains a reference to this feature pack.
 
@@ -216,12 +216,12 @@ result will be the same as the zip you download from the [wildfly.org downloads 
 galleon.sh install wildfly:current --dir=wildfly
 ```
 The `wildfly:current` above tells Galleon to provision the latest version of WildFly which
-at the time of writing is 19.0.0.Final. If you want to install a particular version of 
+at the time of writing is 20.0.0.Final. If you want to install a particular version of 
 WildFly, you can append the version, e.g:
 
-* `wildfly:current#20.0.0.Beta1-SNAPSHOT` - installs WildFly from locally build maven artifacts
+* `wildfly:current#21.0.0.Beta1-SNAPSHOT` - installs WildFly from locally build maven artifacts
 
-Note that the minimal supported WildFly version for this feature pack is 19.0.0.Final. 
+Note that the minimal supported WildFly version for this feature pack is 20.0.0.Final. 
 
 `--dir` specifies the directory to install the server into. In this case I am using 
 a relative directory called `wildfly`. 

@@ -19,6 +19,14 @@ This installs a full WildFly installation and everything from this feature pack 
 Later we will look at what the above command means, other ways to install the server and how to tweak what is
 installed. 
 
+## Quickstarts
+Take a look at our [Quickstarts](quickstarts/) for examples of how to use the MicroProfile Reactive
+specifications in your applications.
+
+The rest of this README will explain the structure of this feature pack in more detail. If you 
+are itching to get going try the quickstarts first and come back to this.
+
+
 ## Layers Introduction
 To provision a server containing the microprofile reactive specs, you use Galleon to first install the base 
 WildFly server, and then add `layers` from this feature pack. We will see exactly how this is done later in this guide,
@@ -244,6 +252,3 @@ To just install the `reactive-streams-operators` and `context-propagation` layer
 galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Alpha-SNAPSHOT --layers=reactive-streams-operators,context-propagation --dir=wildfly
 ``` 
 ----
-## Quickstarts
-Now that you know how to install a WildFly server with the MicroProfile reactive feature pack subsystems,
-take a look at our [Quickstarts](quickstarts/) for examples of how to use them.

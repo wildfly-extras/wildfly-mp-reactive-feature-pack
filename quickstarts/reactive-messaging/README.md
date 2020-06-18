@@ -36,7 +36,7 @@ terminal, and then run:
 galleon.sh provision ./provision.xml --dir=target/my-wildfly
 ./target/my-wildfly/bin/standalone.sh
 ```
-This provisions the server with the relevant Galleon layers, and starts it.The
+This provisions the server with the relevant Galleon layers, and starts it. The
 [main README](/) contains information about the layers in this feature pack.
 
 Then in another terminal window, go to the relevant child module directory and run:

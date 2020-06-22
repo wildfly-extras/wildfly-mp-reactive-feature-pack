@@ -1,6 +1,6 @@
 package org.wildfly.extras.quickstart.microprofile.context.propagation;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,7 +12,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
-@RequestScoped
+@ApplicationScoped
 @Path("/")
 public class PriceResource {
 

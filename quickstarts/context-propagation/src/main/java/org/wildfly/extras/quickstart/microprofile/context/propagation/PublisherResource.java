@@ -2,7 +2,7 @@ package org.wildfly.extras.quickstart.microprofile.context.propagation;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +24,7 @@ import org.reactivestreams.Publisher;
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @Path("/")
-@RequestScoped
+@ApplicationScoped
 public class PublisherResource {
     @PersistenceContext(unitName = "quickstart")
     EntityManager em;

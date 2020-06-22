@@ -72,7 +72,7 @@ Bound to the REST `/quickstart` endpoint is the
 prices and publishes them to a Reactive Messaging channel.
 
 ```
-@RequestScoped
+@ApplicationScoped
 @Path("/")
 public class PriceResource {
 

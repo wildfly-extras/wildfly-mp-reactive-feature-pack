@@ -20,7 +20,7 @@
         <layer name="context-propagation"/>
         <layer name="context-propagation-jta"/>
         <layer name="reactive-messaging-connectors"/>
-        <layer name="reactive-stream-operators-rxjava2"/>
+        <layer name="reactive-streams-operators-rxjava2"/>
     </dependencies>
 
     <packages>

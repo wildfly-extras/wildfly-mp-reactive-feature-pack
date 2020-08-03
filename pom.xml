@@ -59,8 +59,8 @@
         <version.org.apache.kafka>2.5.0</version.org.apache.kafka>
         <version.org.waitility>4.0.2</version.org.waitility>
         <version.org.eclipse.microprofile.context-propagation.api>1.0.1</version.org.eclipse.microprofile.context-propagation.api>
-        <version.org.eclipse.microprofile.reactive-messaging>1.0</version.org.eclipse.microprofile.reactive-messaging>
-        <version.org.eclipse.microprofile.reactive-streams-operators>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators>
+        <version.org.eclipse.microprofile.reactive-messaging.api>1.0</version.org.eclipse.microprofile.reactive-messaging.api>
+        <version.org.eclipse.microprofile.reactive-streams-operators.api>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators.api>
         <version.org.jboss.arquillian.junit>1.4.0.Final</version.org.jboss.arquillian.junit>
         <version.org.jboss.galleon>4.2.5.Final</version.org.jboss.galleon>
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
@@ -631,7 +631,7 @@
             <dependency>
                 <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
                 <artifactId>microprofile-reactive-messaging-api</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-messaging}</version>
+                <version>${version.org.eclipse.microprofile.reactive-messaging.api}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>
@@ -642,7 +642,7 @@
             <dependency>
                 <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
                 <artifactId>microprofile-reactive-streams-operators-api</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-streams-operators}</version>
+                <version>${version.org.eclipse.microprofile.reactive-streams-operators.api}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>
@@ -653,7 +653,7 @@
             <dependency>
                 <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
                 <artifactId>microprofile-reactive-streams-operators-core</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-streams-operators}</version>
+                <version>${version.org.eclipse.microprofile.reactive-streams-operators.api}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>
@@ -719,7 +719,7 @@
             <dependency>
                 <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
                 <artifactId>microprofile-reactive-streams-operators-tck</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-streams-operators}</version>
+                <version>${version.org.eclipse.microprofile.reactive-streams-operators.api}</version>
                 <scope>test</scope>
                 <exclusions>
                     <exclusion>
@@ -731,7 +731,7 @@
             <dependency>
                 <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
                 <artifactId>microprofile-reactive-messaging-tck</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-messaging}</version>
+                <version>${version.org.eclipse.microprofile.reactive-messaging.api}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

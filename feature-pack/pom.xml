@@ -151,6 +151,7 @@
         <dependency>
             <groupId>io.smallrye</groupId>
             <artifactId>smallrye-context-propagation-propagators-rxjava2</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>

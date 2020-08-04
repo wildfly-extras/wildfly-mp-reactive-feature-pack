@@ -30,5 +30,6 @@
         <module name="org.eclipse.microprofile.reactive-streams-operators.api"/>
         <module name="org.eclipse.microprofile.config.api"/>
         <module name="javax.enterprise.api" />
+        <module name="java.logging"/>
     </dependencies>
 </module>

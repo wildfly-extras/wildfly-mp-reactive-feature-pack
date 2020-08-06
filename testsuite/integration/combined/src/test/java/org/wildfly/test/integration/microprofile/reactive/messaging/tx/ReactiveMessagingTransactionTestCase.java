@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-package org.wildfly.test.integration.microprofile.reactive.messaging.sanity;
+package org.wildfly.test.integration.microprofile.reactive.messaging.tx;
 
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.context.ManagedExecutor;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
@@ -34,47 +39,63 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.test.integration.microprofile.context.propagation.rest.tx.TxContextPropagationClientTestCase;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @RunWith(Arquillian.class)
 @ApplicationScoped
-public class ReactiveMessagingSanityTestCase {
+public class ReactiveMessagingTransactionTestCase {
 
-    private static final long TIMEOUT = TimeoutUtil.adjust(5000);
+    private static final long TIMEOUT = TimeoutUtil.adjust(15000);
 
     @Inject
     Bean bean;
+
+    @Inject
+    @Any // TODO why is this needed here and not in TxContextPropagationEndpoint?
+    ManagedExecutor executor;
+
+    @Inject
+    TransactionalBean txBean;
 
     @Deployment
     public static WebArchive getDeployment() {
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "rx-messaging.war")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addClass(ReactiveMessagingSanityTestCase.class)
-                .addClass(Bean.class)
+                .addPackage(ReactiveMessagingTransactionTestCase.class.getPackage())
+                .addAsWebInfResource(TxContextPropagationClientTestCase.class.getPackage(), "persistence.xml", "classes/META-INF/persistence.xml")
                 .addClass(TimeoutUtil.class);
         return webArchive;
     }
 
     @Outgoing("source")
     public PublisherBuilder<String> source() {
-        return ReactiveStreams.of("hello", "with", "SmallRye", "reactive", "message");
+        txBean.checkValues(Collections.emptySet());
+        return ReactiveStreams.of("hello", "reactive", "messaging");
     }
 
     @Incoming("source")
-    @Outgoing("processed-a")
-    public String toUpperCase(String payload) {
-        return payload.toUpperCase();
+    @Outgoing("sink")
+    public CompletionStage<String> store(String payload) {
+        // Use the executor to make sure it is on a separate thread
+        CompletableFuture<String> ret = executor.completedFuture(payload);
+        return ret.thenApplyAsync(v -> {
+            if (v.equals("reactive")) {
+                // Add a sleep here to make sure the calling method has returned
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e){
+                    throw new RuntimeException(e);
+                }
+                txBean.storeValue(v);
+            }
+            return v;
+        });
     }
 
-    @Incoming("processed-a")
-    @Outgoing("processed-b")
-    public PublisherBuilder<String> filter(PublisherBuilder<String> input) {
-        return input.filter(item -> item.length() > 4);
-    }
-
-    @Incoming("processed-b")
+    @Incoming("sink")
     public void sink(String word) {
         bean.addWord(word);
     }
@@ -83,6 +104,9 @@ public class ReactiveMessagingSanityTestCase {
     public void test() throws InterruptedException {
         boolean wait = bean.getLatch().await(TIMEOUT, TimeUnit.MILLISECONDS);
         Assert.assertTrue("Timed out", wait);
-        Assert.assertEquals("HELLO SMALLRYE REACTIVE MESSAGE", bean.getPhrase());
+        Assert.assertEquals("hello reactive messaging", bean.getPhrase());
+
+        // Check the data was stored
+        txBean.checkValues(Collections.singleton("reactive"));
     }
 }

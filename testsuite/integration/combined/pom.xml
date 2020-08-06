@@ -58,6 +58,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
+            <artifactId>microprofile-reactive-messaging-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
             <artifactId>microprofile-reactive-streams-operators-api</artifactId>
             <scope>test</scope>
@@ -137,6 +142,7 @@
                                         <!-- Layers from this FP -->
                                         <layer>context-propagation</layer>
                                         <layer>context-propagation-jta</layer>
+                                        <layer>reactive-messaging</layer>
                                         <layer>reactive-streams-operators</layer>
                                         <layer>reactive-streams-operators-rxjava2</layer>
                                     </layers>

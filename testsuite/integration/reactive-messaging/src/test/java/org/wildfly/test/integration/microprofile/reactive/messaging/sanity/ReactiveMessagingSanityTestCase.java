@@ -18,13 +18,8 @@ package org.wildfly.test.integration.microprofile.reactive.messaging.sanity;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.eclipse.microprofile.reactive.messaging.Incoming;
-import org.eclipse.microprofile.reactive.messaging.Outgoing;
-import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
-import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.as.test.shared.TimeoutUtil;
@@ -39,7 +34,6 @@ import org.junit.runner.RunWith;
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @RunWith(Arquillian.class)
-@ApplicationScoped
 public class ReactiveMessagingSanityTestCase {
 
     private static final long TIMEOUT = TimeoutUtil.adjust(5000);
@@ -55,28 +49,6 @@ public class ReactiveMessagingSanityTestCase {
                 .addClass(Bean.class)
                 .addClass(TimeoutUtil.class);
         return webArchive;
-    }
-
-    @Outgoing("source")
-    public PublisherBuilder<String> source() {
-        return ReactiveStreams.of("hello", "with", "SmallRye", "reactive", "message");
-    }
-
-    @Incoming("source")
-    @Outgoing("processed-a")
-    public String toUpperCase(String payload) {
-        return payload.toUpperCase();
-    }
-
-    @Incoming("processed-a")
-    @Outgoing("processed-b")
-    public PublisherBuilder<String> filter(PublisherBuilder<String> input) {
-        return input.filter(item -> item.length() > 4);
-    }
-
-    @Incoming("processed-b")
-    public void sink(String word) {
-        bean.addWord(word);
     }
 
     @Test

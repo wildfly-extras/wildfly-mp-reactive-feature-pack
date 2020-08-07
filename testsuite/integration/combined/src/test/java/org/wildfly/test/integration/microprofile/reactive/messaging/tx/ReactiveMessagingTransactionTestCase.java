@@ -17,19 +17,10 @@
 package org.wildfly.test.integration.microprofile.reactive.messaging.tx;
 
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
-import org.eclipse.microprofile.context.ManagedExecutor;
-import org.eclipse.microprofile.reactive.messaging.Incoming;
-import org.eclipse.microprofile.reactive.messaging.Outgoing;
-import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
-import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.as.test.shared.TimeoutUtil;
@@ -45,7 +36,6 @@ import org.wildfly.test.integration.microprofile.context.propagation.rest.tx.TxC
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @RunWith(Arquillian.class)
-@ApplicationScoped
 public class ReactiveMessagingTransactionTestCase {
 
     private static final long TIMEOUT = TimeoutUtil.adjust(15000);
@@ -54,50 +44,16 @@ public class ReactiveMessagingTransactionTestCase {
     Bean bean;
 
     @Inject
-    @Any // TODO why is this needed here and not in TxContextPropagationEndpoint?
-    ManagedExecutor executor;
-
-    @Inject
     TransactionalBean txBean;
 
     @Deployment
     public static WebArchive getDeployment() {
-        final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "rx-messaging.war")
+        final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "rx-messaging-tx.war")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addPackage(ReactiveMessagingTransactionTestCase.class.getPackage())
                 .addAsWebInfResource(TxContextPropagationClientTestCase.class.getPackage(), "persistence.xml", "classes/META-INF/persistence.xml")
                 .addClass(TimeoutUtil.class);
         return webArchive;
-    }
-
-    @Outgoing("source")
-    public PublisherBuilder<String> source() {
-        txBean.checkValues(Collections.emptySet());
-        return ReactiveStreams.of("hello", "reactive", "messaging");
-    }
-
-    @Incoming("source")
-    @Outgoing("sink")
-    public CompletionStage<String> store(String payload) {
-        // Use the executor to make sure it is on a separate thread
-        CompletableFuture<String> ret = executor.completedFuture(payload);
-        return ret.thenApplyAsync(v -> {
-            if (v.equals("reactive")) {
-                // Add a sleep here to make sure the calling method has returned
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e){
-                    throw new RuntimeException(e);
-                }
-                txBean.storeValue(v);
-            }
-            return v;
-        });
-    }
-
-    @Incoming("sink")
-    public void sink(String word) {
-        bean.addWord(word);
     }
 
     @Test

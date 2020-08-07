@@ -16,12 +16,18 @@
 
 package org.wildfly.extension.microprofile.reactive.messaging.deployment;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.jboss.as.server.deployment.Attachments;
 import org.jboss.as.server.deployment.DeploymentPhaseContext;
 import org.jboss.as.server.deployment.DeploymentUnit;
 import org.jboss.as.server.deployment.DeploymentUnitProcessor;
+import org.jboss.as.server.deployment.annotation.CompositeIndex;
 import org.jboss.as.server.deployment.module.ModuleDependency;
 import org.jboss.as.server.deployment.module.ModuleSpecification;
+import org.jboss.jandex.DotName;
 import org.jboss.modules.DependencySpec;
 import org.jboss.modules.Module;
 import org.jboss.modules.ModuleDependencySpec;
@@ -34,11 +40,21 @@ import org.wildfly.extension.microprofile.reactive.messaging._private.MicroProfi
  */
 public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProcessor {
 
+    private static final List<DotName> REACTIVE_MESSAGING_ANNOTATIONS;
+    static {
+        List<DotName> annotations = new ArrayList<>();
+        String rmPackage = "org.eclipse.microprofile.reactive.messaging.";
+        annotations.add(DotName.createSimple(rmPackage + "Incoming"));
+        annotations.add(DotName.createSimple(rmPackage + "Outgoing"));
+        REACTIVE_MESSAGING_ANNOTATIONS = Collections.unmodifiableList(annotations);
+    }
+
     @Override
     public void deploy(DeploymentPhaseContext phaseContext) {
         DeploymentUnit deploymentUnit = phaseContext.getDeploymentUnit();
-
-        addModuleDependencies(deploymentUnit);
+        if (isReactiveMessagingDeployment(deploymentUnit)) {
+            addModuleDependencies(deploymentUnit);
+        }
     }
 
     @Override
@@ -83,5 +99,17 @@ public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProce
             // The module was not provisioned
             MicroProfileReactiveMessagingLogger.LOGGER.intermediateModuleNotPresent(intermediateModuleName);
         }
+    }
+
+    private boolean isReactiveMessagingDeployment(DeploymentUnit deploymentUnit) {
+        CompositeIndex index = deploymentUnit.getAttachment(Attachments.COMPOSITE_ANNOTATION_INDEX);
+        for (DotName dotName : REACTIVE_MESSAGING_ANNOTATIONS) {
+            if (!index.getAnnotations(dotName).isEmpty()) {
+                MicroProfileReactiveMessagingLogger.LOGGER.debugf("Deployment '%s' is a MicroProfile Reactive Messaging deployment – @%s annotation found.", deploymentUnit.getName(), dotName);
+                return true;
+            }
+        }
+        MicroProfileReactiveMessagingLogger.LOGGER.debugf("Deployment '%s' is not a MicroProfile Fault Tolerance deployment.", deploymentUnit.getName());
+        return false;
     }
 }

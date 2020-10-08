@@ -29,7 +29,6 @@ public class ProvisionedServerModuleStructureTestCase {
     @Test
     public void checkModuleStructure() {
         ModulesChecker checker = ModulesChecker.builder()
-                .addExpected("io/reactivex/rxjava2/rxjava/main")
                 .addExpected("io/smallrye/reactive/mutiny/main")
                 .addExpected("io/smallrye/reactive/mutiny/reactive-streams-operators/main")
                 .addExpected("org/eclipse/microprofile/reactive-streams-operators/api/main")

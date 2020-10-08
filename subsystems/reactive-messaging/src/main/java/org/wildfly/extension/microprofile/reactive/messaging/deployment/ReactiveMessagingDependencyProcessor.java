@@ -46,6 +46,8 @@ public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProce
         String rmPackage = "org.eclipse.microprofile.reactive.messaging.";
         annotations.add(DotName.createSimple(rmPackage + "Incoming"));
         annotations.add(DotName.createSimple(rmPackage + "Outgoing"));
+        // Extension to 1.0 spec
+        annotations.add(DotName.createSimple(rmPackage + "Channel"));
         REACTIVE_MESSAGING_ANNOTATIONS = Collections.unmodifiableList(annotations);
     }
 

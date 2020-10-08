@@ -64,7 +64,11 @@
         <version.org.jboss.arquillian.junit>1.4.0.Final</version.org.jboss.arquillian.junit>
         <version.org.jboss.galleon>4.2.5.Final</version.org.jboss.galleon>
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
-        <version.org.testcontainers>1.12.4</version.org.testcontainers>
+        <!--
+            Temporarily need this RC to include https://github.com/testcontainers/testcontainers-java/pull/3159
+            as latest Docker for Mac does not work with earlier versions of TestContainers.
+        -->
+        <version.org.testcontainers>1.15.0-rc2</version.org.testcontainers>
         <!-- Same testng version as the MP TCK uses -->
         <version.testng>6.14.3</version.testng>
 

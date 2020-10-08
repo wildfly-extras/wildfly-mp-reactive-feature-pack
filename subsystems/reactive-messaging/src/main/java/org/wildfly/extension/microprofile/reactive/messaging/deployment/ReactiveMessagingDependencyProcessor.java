@@ -66,7 +66,9 @@ public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProce
         final ModuleLoader moduleLoader = Module.getBootModuleLoader();
 
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.eclipse.microprofile.reactive-messaging.api", false, false, true, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.reactive.messaging", false, false, true, false));
+        moduleSpecification.addSystemDependency(
+                cdiDependency(
+                        new ModuleDependency(moduleLoader, "io.smallrye.reactive.messaging", false, false, true, false)));
 
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.config", false, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.eclipse.microprofile.config.api", false, false, true, false));
@@ -92,7 +94,8 @@ public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProce
             for (DependencySpec dep : module.getDependencies()) {
                 if (dep instanceof ModuleDependencySpec) {
                     ModuleDependencySpec mds = (ModuleDependencySpec) dep;
-                    moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, mds.getName(), mds.isOptional(), false, true, false));
+                    moduleSpecification.addSystemDependency(
+                            cdiDependency(new ModuleDependency(moduleLoader, mds.getName(), mds.isOptional(), false, true, false)));
                 }
             }
         } catch (ModuleLoadException e) {
@@ -111,5 +114,12 @@ public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProce
         }
         MicroProfileReactiveMessagingLogger.LOGGER.debugf("Deployment '%s' is not a MicroProfile Fault Tolerance deployment.", deploymentUnit.getName());
         return false;
+    }
+
+
+    private ModuleDependency cdiDependency(ModuleDependency moduleDependency) {
+        // This is needed following https://issues.redhat.com/browse/WFLY-13641 / https://github.com/wildfly/wildfly/pull/13406
+        moduleDependency.addImportFilter(s -> s.equals("META-INF"), true);
+        return moduleDependency;
     }
 }

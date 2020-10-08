@@ -161,6 +161,30 @@
                         <server.jvm.args>${server.jvm.args}</server.jvm.args>
                     </systemPropertyVariables>
                 </configuration>
+                <executions>
+                    <!--
+                        Workaround until we can turn off context propagation for the reactive messaging streams
+                    -->
+                    <execution>
+                        <id>default-test</id>
+                        <configuration>
+                            <excludes>
+                                <exclude>org/wildfly/test/integration/microprofile/reactive/messaging/tx/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>reactive-messaging</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>org/wildfly/test/integration/microprofile/reactive/messaging/tx/**</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -61,12 +61,17 @@
         <version.org.eclipse.microprofile.context-propagation.api>1.0.1</version.org.eclipse.microprofile.context-propagation.api>
         <version.org.eclipse.microprofile.reactive-messaging.api>1.0</version.org.eclipse.microprofile.reactive-messaging.api>
         <version.org.eclipse.microprofile.reactive-streams-operators.api>1.0.1</version.org.eclipse.microprofile.reactive-streams-operators.api>
-        <version.org.jboss.arquillian.junit>1.4.0.Final</version.org.jboss.arquillian.junit>
+        <version.org.jboss.arquillian.core>1.6.0.Final</version.org.jboss.arquillian.core>
         <version.org.jboss.galleon>4.2.5.Final</version.org.jboss.galleon>
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
-        <version.org.testcontainers>1.12.4</version.org.testcontainers>
+        <!--
+            Temporarily need this RC to include https://github.com/testcontainers/testcontainers-java/pull/3159
+            as latest Docker for Mac does not work with earlier versions of TestContainers.
+        -->
+        <version.org.testcontainers>1.15.0-rc2</version.org.testcontainers>
         <!-- Same testng version as the MP TCK uses -->
         <version.testng>6.14.3</version.testng>
+        <version.org.wildfly.arquillian>3.0.0.Final</version.org.wildfly.arquillian>
 
 
 
@@ -706,9 +711,21 @@
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.junit</groupId>
-                <artifactId>arquillian-junit-core</artifactId>
+                <artifactId>arquillian-junit-container</artifactId>
+                <version>${version.org.jboss.arquillian.core}</version>
                 <scope>test</scope>
-                <version>${version.org.jboss.arquillian.junit}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.test</groupId>
+                <artifactId>arquillian-test-spi</artifactId>
+                <version>${version.org.jboss.arquillian.core}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.testng</groupId>
+                <artifactId>arquillian-testng-container</artifactId>
+                <version>${version.org.jboss.arquillian.core}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.microprofile.context-propagation</groupId>
@@ -721,18 +738,55 @@
                 <artifactId>microprofile-reactive-streams-operators-tck</artifactId>
                 <version>${version.org.eclipse.microprofile.reactive-streams-operators.api}</version>
                 <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.testng</groupId>
-                        <artifactId>testng</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
                 <artifactId>microprofile-reactive-messaging-tck</artifactId>
                 <version>${version.org.eclipse.microprofile.reactive-messaging.api}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-common</artifactId>
+                <version>${version.org.wildfly.arquillian}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-container-managed</artifactId>
+                <version>${version.org.wildfly.arquillian}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.sasl</groupId>
+                        <artifactId>jboss-sasl</artifactId>
+                    </exclusion>
+                    <!-- TODO remove this exclusion once this depends on Jakarta Inject -->
+                    <!-- superseded by jakarta.inject:jakarta.inject-api -->
+                    <exclusion>
+                        <groupId>javax.inject</groupId>
+                        <artifactId>javax.inject</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-container-domain-managed</artifactId>
+                <version>${version.org.wildfly.arquillian}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-protocol-jmx</artifactId>
+                <version>${version.org.wildfly.arquillian}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.wildfly.security</groupId>
+                        <artifactId>wildfly-security-manager</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-testenricher-msc</artifactId>
+                <version>${version.org.wildfly.arquillian}</version>
             </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>

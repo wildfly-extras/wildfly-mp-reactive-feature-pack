@@ -49,7 +49,7 @@ public class ReactiveStreamsOperatorsDependencyProcessor implements DeploymentUn
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.eclipse.microprofile.reactive-streams-operators.api", false, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.reactivestreams", false, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.reactive.mutiny.reactive-streams-operators", false, false, true, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.wildfly.reactive.mutiny.reactive-streams-operators.cdi-provider", false, false, true, false));
+        moduleSpecification.addSystemDependency(cdiDependency(new ModuleDependency(moduleLoader, "org.wildfly.reactive.mutiny.reactive-streams-operators.cdi-provider", false, false, true, false)));
 
         // Converters
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.reactive.converters.api", true, false, false, false));
@@ -58,4 +58,10 @@ public class ReactiveStreamsOperatorsDependencyProcessor implements DeploymentUn
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.jboss.resteasy.resteasy-rxjava2", true, false, true, false));
     }
 
+
+    private ModuleDependency cdiDependency(ModuleDependency moduleDependency) {
+        // This is needed following https://issues.redhat.com/browse/WFLY-13641 / https://github.com/wildfly/wildfly/pull/13406
+        moduleDependency.addImportFilter(s -> s.equals("META-INF"), true);
+        return moduleDependency;
+    }
 }

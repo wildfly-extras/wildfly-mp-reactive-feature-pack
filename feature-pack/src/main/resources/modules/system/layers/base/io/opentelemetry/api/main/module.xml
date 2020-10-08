@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright 2019 Red Hat, Inc.
   ~
@@ -14,16 +13,16 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<module xmlns="urn:jboss:module:1.8" name="io.smallrye.reactive.messaging.connector">
+<module xmlns="urn:jboss:module:1.9" name="io.opentelemetry.api">
     <properties>
         <property name="jboss.api" value="private"/>
     </properties>
+    <resources>
+        <artifact name="${io.opentelemetry:opentelemetry-api}"/>
+    </resources>
 
     <dependencies>
-        <module name="io.smallrye.reactive.messaging.connector.amqp" optional="true" export="true" services="export"/>
-        <module name="io.smallrye.reactive.messaging.connector.kafka" optional="true" export="true" services="export"/>
-        <module name="org.wildfly.reactive.messaging.kafka-config" optional="true" export="true" services="export"/>
-        <module name="io.smallrye.reactive.messaging.connector.mqtt" optional="true" export="true" services="export"/>
+        <module name="io.opentelemetry.context-prop"/>
+        <module name="java.logging"/>
     </dependencies>
 </module>

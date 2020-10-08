@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2019 Red Hat, Inc.
+  ~ Copyright 2020 Red Hat, Inc.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,15 +15,16 @@
   ~ limitations under the License.
   -->
 
-<module xmlns="urn:jboss:module:1.8" name="io.smallrye.reactive.messaging.connector">
+<module xmlns="urn:jboss:module:1.8" name="org.wildfly.reactive.messaging.kafka-config">
     <properties>
         <property name="jboss.api" value="private"/>
     </properties>
 
+    <resources>
+        <artifact name="${org.wildfly.extras.reactive:wildfly-microprofile-reactive-messaging-kafka-config}"/>
+    </resources>
+
     <dependencies>
-        <module name="io.smallrye.reactive.messaging.connector.amqp" optional="true" export="true" services="export"/>
-        <module name="io.smallrye.reactive.messaging.connector.kafka" optional="true" export="true" services="export"/>
-        <module name="org.wildfly.reactive.messaging.kafka-config" optional="true" export="true" services="export"/>
-        <module name="io.smallrye.reactive.messaging.connector.mqtt" optional="true" export="true" services="export"/>
+        <module name="org.eclipse.microprofile.config.api"/>
     </dependencies>
 </module>

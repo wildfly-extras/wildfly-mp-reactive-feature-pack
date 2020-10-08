@@ -49,7 +49,7 @@ public class ContextPropagationDependencyProcessor implements DeploymentUnitProc
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation.propagators.rxjava2", true, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.eclipse.microprofile.context-propagation.api", false, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation.api", false, false, true, false));
-        moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation", false, false, true, false));
+        moduleSpecification.addSystemDependency(cdiDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation", false, false, true, false)));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.reactive.mutiny.context-propagation", false, false, true, false));
 
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.wildfly.security.manager", false, false, true, false));
@@ -58,4 +58,12 @@ public class ContextPropagationDependencyProcessor implements DeploymentUnitProc
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "org.jboss.jts", true, false, true, false));
         moduleSpecification.addSystemDependency(new ModuleDependency(moduleLoader, "io.smallrye.context-propagation.providers.jta", true, false, true, false));
     }
+
+
+    private ModuleDependency cdiDependency(ModuleDependency moduleDependency) {
+        // This is needed following https://issues.redhat.com/browse/WFLY-13641 / https://github.com/wildfly/wildfly/pull/13406
+        moduleDependency.addImportFilter(s -> s.equals("META-INF"), true);
+        return moduleDependency;
+    }
+
 }

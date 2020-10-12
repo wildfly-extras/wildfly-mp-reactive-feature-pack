@@ -24,6 +24,8 @@
         <artifact name="${io.smallrye.reactive:smallrye-reactive-messaging-kafka}"/>
     </resources>
     <dependencies>
+        <module name="io.opentelemetry.api"/>
+        <module name="io.opentelemetry.context-prop"/>
         <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="io.smallrye.config" services="import"/>
         <module name="io.smallrye.reactive.converters.api"/>
@@ -41,6 +43,7 @@
         <module name="org.eclipse.microprofile.reactive-streams-operators.api"/>
         <module name="org.eclipse.microprofile.reactive-streams-operators.core" services="import"/>
         <module name="org.eclipse.microprofile.config.api"/>
+        <module name="org.jboss.logging" />
         <module name="org.jboss.weld.api"/>
         <module name="org.jboss.weld.core"/>
         <module name="org.jboss.weld.spi"/>

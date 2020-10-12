@@ -19,19 +19,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>wildfly-microprofile-subsystems</artifactId>
+        <artifactId>wildfly-microprofile-reactive-messaging-parent</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
         <version>1.0.0.Beta3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>wildfly-microprofile-reactive-messaging-parent</artifactId>
-    <name>WildFly Reactive MicroProfile - Reactive Messaging Parent</name>
-    <packaging>pom</packaging>
+    <artifactId>wildfly-microprofile-reactive-messaging-kafka-config</artifactId>
+    <name>WildFly Reactive MicroProfile - Kafka Config</name>
 
-    <modules>
-        <module>extension</module>
-        <module>kafka-config</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

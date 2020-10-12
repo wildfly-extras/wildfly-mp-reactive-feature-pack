@@ -93,7 +93,7 @@ public class ReactiveMessagingDependencyProcessor implements DeploymentUnitProce
                 if (dep instanceof ModuleDependencySpec) {
                     ModuleDependencySpec mds = (ModuleDependencySpec) dep;
                     moduleSpecification.addSystemDependency(
-                            cdiDependency(new ModuleDependency(moduleLoader, mds.getName(), mds.isOptional(), false, true, false)));
+                            cdiDependency(new ModuleDependency(moduleLoader, mds.getName(), mds.isOptional(), true, true, false)));
                 }
             }
         } catch (ModuleLoadException e) {

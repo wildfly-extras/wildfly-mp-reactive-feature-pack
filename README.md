@@ -224,7 +224,7 @@ The `wildfly:current` above tells Galleon to provision the latest version of Wil
 at the time of writing is 20.0.0.Final. If you want to install a particular version of 
 WildFly, you can append the version, e.g:
 
-* `wildfly:current#21.0.0.Beta3-SNAPSHOT` - installs WildFly from locally build maven artifacts
+* `wildfly:current#21.0.0.Beta3` - installs WildFly from locally build maven artifacts
 
 Note that the minimal supported WildFly version for this feature pack is 20.0.0.Final. 
 
@@ -248,7 +248,7 @@ can rerun the above command, and pass in more layers in the `--layers` option if
 #### Install the MicroProfile Reactive Feature Pack
 Now to install our feature pack, we can run:
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta3-SNAPSHOT --layers=microprofile-reactive-all --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta3 --layers=microprofile-reactive-all --dir=wildfly
 ``` 
 which will install all the layers from the MicroProfile reactive feature pack.
 

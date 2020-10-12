@@ -82,7 +82,7 @@ public class VerifyProvisionXmlFeaturePackVersionsTestCase {
         for (String line : lines) {
             if (line.contains(FEATURE_PACK_NAME)) {
                 foundFeaturePack = true;
-                if (!line.contains(projectVersion)) {
+                if (!line.contains(projectVersion) || line.contains(projectVersion + "-SNAPSHOT")) {
                     errors.add(path.toAbsolutePath() + " does not contain the correct version for " + FEATURE_PACK_NAME);
                 }
                 break;

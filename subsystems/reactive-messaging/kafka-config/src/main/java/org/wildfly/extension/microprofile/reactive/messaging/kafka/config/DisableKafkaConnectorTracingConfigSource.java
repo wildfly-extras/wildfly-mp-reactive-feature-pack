@@ -30,6 +30,6 @@ public class DisableKafkaConnectorTracingConfigSource implements ConfigSource {
     @Override
     public int getOrdinal() {
         // Make the ordinal high so it cannot be overridden
-        return 1000;
+        return Integer.MAX_VALUE;
     }
 }

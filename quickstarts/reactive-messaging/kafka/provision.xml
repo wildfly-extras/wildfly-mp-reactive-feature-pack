@@ -43,7 +43,7 @@
             <include name="jmx-remoting"/>
             <include name="management"/>
             <!-- Layers from this FP -->
-            <include name="reactive-messaging-kafka"/>
+            <include name="microprofile-reactive-messaging-kafka"/>
         </layers>
     </config>
     <options>

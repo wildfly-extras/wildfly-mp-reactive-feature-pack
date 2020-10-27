@@ -130,10 +130,10 @@
                                         <layer>jaxrs-server</layer>
                                         <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
-                                        <layer>context-propagation</layer>
-                                        <layer>context-propagation-jta</layer>
-                                        <layer>reactive-streams-operators</layer>
-                                        <layer>reactive-streams-operators-rxjava2</layer>
+                                        <layer>microprofile-context-propagation</layer>
+                                        <layer>microprofile-context-propagation-jta</layer>
+                                        <layer>microprofile-reactive-streams-operators</layer>
+                                        <layer>microprofile-reactive-streams-operators-rxjava2</layer>
                                     </layers>
                                 </config>
                             </configurations>

@@ -121,7 +121,7 @@
                                                 <layer>jmx-remoting</layer>
                                                 <layer>management</layer>
                                                 <!-- Layers from this FP -->
-                                                <layer>reactive-messaging-mqtt</layer>
+                                                <layer>microprofile-reactive-messaging-mqtt</layer>
                                             </layers>
                                         </config>
                                     </configurations>

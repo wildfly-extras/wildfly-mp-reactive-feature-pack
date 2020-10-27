@@ -15,16 +15,13 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="context-propagation">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-reactive-messaging-kafka">
     <dependencies>
-        <layer name="cdi"/>
-        <layer name="microprofile-config"/>
-        <layer name="reactive-streams-operators"/>
+        <layer name="microprofile-reactive-messaging"/>
     </dependencies>
 
-    <feature-group name="context-propagation"/>
-
     <packages>
-        <package name="org.wildfly.extension.microprofile.context-propagation-smallrye"/>
+        <package name="io.smallrye.reactive.messaging.connector.kafka"/>
+        <package name="org.wildfly.reactive.messaging.kafka-config"/>
     </packages>
 </layer-spec>

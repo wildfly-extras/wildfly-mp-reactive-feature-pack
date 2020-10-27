@@ -44,8 +44,8 @@
             <include name="jmx-remoting"/>
             <include name="management"/>
             <!-- Layers from this FP -->
-            <include name="context-propagation-jta"/>
-            <include name="reactive-messaging"/>
+            <include name="microprofile-context-propagation-jta"/>
+            <include name="microprofile-reactive-messaging"/>
         </layers>
     </config>
     <options>

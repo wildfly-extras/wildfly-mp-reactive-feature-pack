@@ -123,7 +123,7 @@
                                                 <layer>jmx-remoting</layer>
                                                 <layer>management</layer>
                                                 <!-- Layers from this FP -->
-                                                <layer>reactive-messaging-kafka</layer>
+                                                <layer>microprofile-reactive-messaging-kafka</layer>
                                             </layers>
                                         </config>
                                     </configurations>

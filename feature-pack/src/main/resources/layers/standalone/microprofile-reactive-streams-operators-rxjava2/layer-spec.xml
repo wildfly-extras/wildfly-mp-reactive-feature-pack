@@ -15,14 +15,16 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-streams-operators">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-reactive-streams-operators-rxjava2">
     <dependencies>
-        <layer name="cdi"/>
+        <layer name="microprofile-reactive-streams-operators"/>
     </dependencies>
 
-    <feature-group name="reactive-streams-operators"/>
-
     <packages>
-        <package name="org.wildfly.extension.microprofile.reactive-streams-operators-smallrye"/>
+        <package name="io.smallrye.context-propagation.propagators.rxjava2"/>
+        <package name="io.smallrye.reactive.converters.api"/>
+        <package name="io.smallrye.reactive.converters.rxjava2"/>
+        <package name="io.smallrye.reactive.mutiny.converter-rxjava"/>
+        <package name="org.jboss.resteasy.resteasy-rxjava2"/>
     </packages>
 </layer-spec>

@@ -233,8 +233,8 @@
                                                 <layer>jmx-remoting</layer>
                                                 <layer>management</layer>
                                                 <!-- Layers from this FP -->
-                                                <layer>context-propagation-jta</layer>
-                                                <layer>reactive-messaging</layer>
+                                                <layer>microprofile-context-propagation-jta</layer>
+                                                <layer>microprofile-reactive-messaging</layer>
                                             </layers>
                                         </config>
                                     </configurations>

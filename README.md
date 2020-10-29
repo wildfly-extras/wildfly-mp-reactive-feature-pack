@@ -71,8 +71,8 @@ The layers from this feature pack are contained in the
 [feature-pack/src/main/resources/layers/standalone](feature-pack/src/main/resources/layers/standalone)
 folder. We'll explain what each of them contains, and their direct dependencies on other layers.
 
-### context-propagation
-The `context-propagation` layer installs the `microprofile-context-propagation-smallrye` subsystem, so you can use
+### microprofile-context-propagation
+The `microprofile-context-propagation` layer installs the `microprofile-context-propagation-smallrye` subsystem, so you can use
 the MicroProfile [Context Propagation](https://github.com/eclipse/microprofile-context-propagation) APIs 
 from your application.
 
@@ -80,7 +80,7 @@ Note although the core context propagation mechanism works, we are still missing
 to work totally. You currently get context propagation for the following:
 * `Application` - This propagates the Thread Context ClassLoader
 * `CDI` - propagates the CDI context
-* `Transaction` - **not** enabled by default, see the `context-propagation-jta` layer below
+* `Transaction` - **not** enabled by default, see the `microprofile-context-propagation-jta` layer below
 
 What is missing is:
 * `Web` = propagation of parameter injected web context
@@ -93,25 +93,25 @@ Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 * `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
-* `reactive-streams-operators` - From this feature pack, as described in this document. 
+* `microprofile-reactive-streams-operators` - From this feature pack, as described in this document.
 
-#### context-propagation-jta
-The `context-propagation-jta` layer installs the ThreadContextProvider propagating transactions.
+#### microprofile-context-propagation-jta
+The `microprofile-context-propagation-jta` layer installs the ThreadContextProvider propagating transactions.
 
 Layer Dependencies:
-* `context-propagation` - From this feature pack, as described in this document. 
+* `microprofile-context-propagation` - From this feature pack, as described in this document.
 * `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
 `TransactionManager`. This is needed for propagation of the current transaction.
 
-### reactive-streams-operators
-The `reactive-streams-operators` layer installs the `microprofile-reactive-streams-operators-smallrye` subsystem,
+### microprofile-reactive-streams-operators
+The `microprofile-reactive-streams-operators` layer installs the `microprofile-reactive-streams-operators-smallrye` subsystem,
 so you can use the MicroProfile [Reactive Streams Operators](https://github.com/eclipse/microprofile-reactive-streams-operators)
 classes from your application. 
 
 Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 
-#### reactive-streams-operators-rxjava2
+#### microprofile-reactive-streams-operators-rxjava2
 This layer enables the use of classes for RxJava2, e.g. `io.reactivex.Flowable` and `io.reactivex.Single`. 
 
 If provisioned, you will get:
@@ -121,10 +121,10 @@ If provisioned, you will get:
 * REST endpoints returning an RxJava2 type will be treated as asynchronous calls
 
 Layer Dependencies:
-* `reactive-streams-operators` - From this feature pack, as described in this document. 
+* `microprofile-reactive-streams-operators` - From this feature pack, as described in this document.
 
-### reactive-messaging
-The `reactive-messaging` layer installs the `microprofile-reactive-messaging-smallrye` subsystem,
+### microprofile-reactive-messaging
+The `microprofile-reactive-messaging` layer installs the `microprofile-reactive-messaging-smallrye` subsystem,
 which implements MicroProfile [Reactive Messaging](https://github.com/eclipse/microprofile-reactive-messaging) 
 functionality. 
 
@@ -136,37 +136,37 @@ Layer Dependencies:
 * `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
 * `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
-* `reactive-streams-operators` - From this feature pack, as described above. 
+* `microprofile-reactive-streams-operators` - From this feature pack, as described above.
 * `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
 `TransactionManager`.
 
-#### reactive-messaging-amqp
-The `reactive-messaging-amqp` layer installs the AMQP connector so you can interact with AMQP enabled message
+#### microprofile-reactive-messaging-amqp
+The `microprofile-reactive-messaging-amqp` layer installs the AMQP connector so you can interact with AMQP enabled message
 brokers.
 
 Layer Dependencies:
-* `reactive-messaging` - From this feature pack, as described above. 
+* `microprofile-reactive-messaging` - From this feature pack, as described above.
 
-#### reactive-messaging-kafka
-The `reactive-messaging-amqp` layer installs the Kafka connector so you can interact with Kafka streams.
-
-Layer Dependencies:
-* `reactive-messaging` - From this feature pack, as described above. 
-
-#### reactive-messaging-mqtt
-The `reactive-messaging-mqtt` layer installs the MQTT connector so you can interact with a MQTT server.
+#### microprofile-reactive-messaging-kafka
+The `microprofile-reactive-messaging-kafka` layer installs the Kafka connector so you can interact with Kafka streams.
 
 Layer Dependencies:
-* `reactive-messaging` - From this feature pack, as described above. 
+* `microprofile-reactive-messaging` - From this feature pack, as described above.
 
-#### reactive-messaging-connectors
-
-The `reactive-messaging-connectors` layer is a convenience layer, which installs all the connector layers mentioned above.
+#### microprofile-reactive-messaging-mqtt
+The `microprofile-reactive-messaging-mqtt` layer installs the MQTT connector so you can interact with a MQTT server.
 
 Layer Dependencies:
-* `reactive-messaging-amqp` - From this feature pack, as described above. 
-* `reactive-messaging-kafka` - From this feature pack, as described above. 
-* `reactive-messaging-mqtt` - From this feature pack, as described above. 
+* `microprofile-reactive-messaging` - From this feature pack, as described above.
+
+#### microprofile-reactive-messaging-connectors
+
+The `microprofile-reactive-messaging-connectors` layer is a convenience layer, which installs all the connector layers mentioned above.
+
+Layer Dependencies:
+* `microprofile-reactive-messaging-amqp` - From this feature pack, as described above.
+* `microprofile-reactive-messaging-kafka` - From this feature pack, as described above.
+* `microprofile-reactive-messaging-mqtt` - From this feature pack, as described above.
 
 ### microprofile-reactive-all
 The `microprofile-reactive-all` layer is a convenience layer, which installs all the layers mentioned above.
@@ -253,9 +253,9 @@ galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-fea
 ``` 
 which will install all the layers from the MicroProfile reactive feature pack.
 
-To just install the `reactive-streams-operators` and `context-propagation` layers, we run this instead:
+To just install the `microprofile-reactive-streams-operators` and `microprofile-context-propagation` layers, we run this instead:
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta4-SNAPSHOT --layers=reactive-streams-operators,context-propagation --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:1.0.0.Beta4-SNAPSHOT --layers=microprofile-reactive-streams-operators,microprofile-context-propagation --dir=wildfly
 ``` 
 ----
 ## References

@@ -93,8 +93,8 @@
                                         <layer>jaxrs-server</layer>
                                         <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
-                                        <layer>context-propagation</layer>
-                                        <layer>context-propagation-jta</layer>
+                                        <layer>microprofile-context-propagation</layer>
+                                        <layer>microprofile-context-propagation-jta</layer>
                                     </layers>
                                 </config>
                             </configurations>

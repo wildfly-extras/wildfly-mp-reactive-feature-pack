@@ -130,7 +130,7 @@
                                         <layer>jaxrs-server</layer>
                                         <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
-                                        <layer>reactive-messaging</layer>
+                                        <layer>microprofile-reactive-messaging</layer>
                                     </layers>
                                 </config>
                             </configurations>

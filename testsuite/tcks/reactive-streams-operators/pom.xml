@@ -99,7 +99,7 @@
                                         <layer>jaxrs-server</layer>
                                         <layer>jmx-remoting</layer>
                                         <!-- Layers from this FP -->
-                                        <layer>reactive-streams-operators</layer>
+                                        <layer>microprofile-reactive-streams-operators</layer>
                                     </layers>
                                 </config>
                             </configurations>

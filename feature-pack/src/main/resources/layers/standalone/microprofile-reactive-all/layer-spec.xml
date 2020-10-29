@@ -15,12 +15,12 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-reactive-all">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-microprofile-reactive-all">
     <dependencies>
-        <layer name="context-propagation"/>
-        <layer name="context-propagation-jta"/>
-        <layer name="reactive-messaging-connectors"/>
-        <layer name="reactive-streams-operators-rxjava2"/>
+        <layer name="microprofile-context-propagation"/>
+        <layer name="microprofile-context-propagation-jta"/>
+        <layer name="microprofile-reactive-messaging-connectors"/>
+        <layer name="microprofile-reactive-streams-operators-rxjava2"/>
     </dependencies>
 
     <packages>

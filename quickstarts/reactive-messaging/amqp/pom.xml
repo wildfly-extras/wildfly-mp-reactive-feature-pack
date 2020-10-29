@@ -123,7 +123,7 @@
                                                 <layer>jmx-remoting</layer>
                                                 <layer>management</layer>
                                                 <!-- Layers from this FP -->
-                                                <layer>reactive-messaging-amqp</layer>
+                                                <layer>microprofile-reactive-messaging-amqp</layer>
                                             </layers>
                                         </config>
                                     </configurations>

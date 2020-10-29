@@ -43,7 +43,7 @@
             <include name="jmx-remoting"/>
             <include name="management"/>
             <!-- Layers from this FP -->
-            <include name="reactive-messaging-amqp"/>
+            <include name="microprofile-reactive-messaging-amqp"/>
         </layers>
     </config>
     <options>

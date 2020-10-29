@@ -15,12 +15,10 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-messaging-amqp">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-reactive-messaging-connectors">
     <dependencies>
-        <layer name="reactive-messaging"/>
+        <layer name="microprofile-reactive-messaging-amqp"/>
+        <layer name="microprofile-reactive-messaging-kafka"/>
+        <layer name="microprofile-reactive-messaging-mqtt"/>
     </dependencies>
-
-    <packages>
-        <package name="io.smallrye.reactive.messaging.connector.amqp"/>
-    </packages>
 </layer-spec>

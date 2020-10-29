@@ -96,10 +96,10 @@
                                         -->
                                         <layer>jaxrs-server</layer>
                                         <!-- Layers from this FP -->
-                                        <layer>context-propagation</layer>
-                                        <layer>reactive-messaging</layer>
-                                        <layer>reactive-streams-operators</layer>
-                                        <layer>reactive-streams-operators-rxjava2</layer>
+                                        <layer>microprofile-context-propagation</layer>
+                                        <layer>microprofile-reactive-messaging</layer>
+                                        <layer>microprofile-reactive-streams-operators</layer>
+                                        <layer>microprofile-reactive-streams-operators-rxjava2</layer>
                                     </layers>
                                 </config>
                             </configurations>

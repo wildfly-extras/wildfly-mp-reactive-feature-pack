@@ -15,12 +15,16 @@
   ~ limitations under the License.
   -->
 
-<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="reactive-messaging-mqtt">
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:1.0" name="microprofile-context-propagation">
     <dependencies>
-        <layer name="reactive-messaging"/>
+        <layer name="cdi"/>
+        <layer name="microprofile-config"/>
+        <layer name="microprofile-reactive-streams-operators"/>
     </dependencies>
 
+    <feature spec="subsystem.microprofile-context-propagation-smallrye"/>
+
     <packages>
-        <package name="io.smallrye.reactive.messaging.connector.mqtt"/>
+        <package name="org.wildfly.extension.microprofile.context-propagation-smallrye"/>
     </packages>
 </layer-spec>

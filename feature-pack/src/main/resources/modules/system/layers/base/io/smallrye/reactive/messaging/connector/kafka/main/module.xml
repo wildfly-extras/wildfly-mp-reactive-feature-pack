@@ -49,5 +49,6 @@
         <module name="org.jboss.weld.spi"/>
         <module name="org.reactivestreams"/>
         <module name="org.slf4j"/>
+        <module name="org.wildfly.reactive.messaging.kafka-config" optional="true" export="true" services="export"/>
     </dependencies>
 </module>

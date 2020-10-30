@@ -31,6 +31,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-microprofile-context-propagation-mutiny-integration</artifactId>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                    <distribution>repo</distribution>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>wildfly-microprofile-reactive-feature-pack</artifactId>
             <licenses>
                 <license>

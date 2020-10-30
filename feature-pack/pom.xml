@@ -114,6 +114,11 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-microprofile-context-propagation-mutiny-integration</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>wildfly-microprofile-reactive-messaging</artifactId>
             <scope>provided</scope>
         </dependency>

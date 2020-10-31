@@ -30,5 +30,6 @@
     <name>WildFly Reactive MicroProfile - Context Propagation Parent</name>
     <modules>
         <module>extension</module>
+        <module>mutiny-integration</module>
     </modules>
 </project>

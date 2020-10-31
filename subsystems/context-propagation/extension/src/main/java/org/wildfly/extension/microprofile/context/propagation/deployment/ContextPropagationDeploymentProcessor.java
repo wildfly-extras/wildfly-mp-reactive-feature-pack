@@ -16,12 +16,18 @@
 
 package org.wildfly.extension.microprofile.context.propagation.deployment;
 
+import org.eclipse.microprofile.context.spi.ContextManager;
 import org.jboss.as.controller.capability.CapabilityServiceSupport;
 import org.jboss.as.server.deployment.Attachments;
 import org.jboss.as.server.deployment.DeploymentPhaseContext;
 import org.jboss.as.server.deployment.DeploymentUnit;
 import org.jboss.as.server.deployment.DeploymentUnitProcessingException;
 import org.jboss.as.server.deployment.DeploymentUnitProcessor;
+import org.jboss.modules.Module;
+import org.wildfly.extension.microprofile.context.propagation.mutiny.ThreadContextRegistry;
+import org.wildfly.security.manager.WildFlySecurityManager;
+
+import io.smallrye.context.SmallRyeContextManagerProvider;
 
 /**
  */
@@ -44,6 +50,25 @@ public class ContextPropagationDeploymentProcessor implements DeploymentUnitProc
 
     @Override
     public void undeploy(DeploymentUnit context) {
+        Module module = context.getAttachment(Attachments.MODULE);
+        ClassLoader classLoader = module.getClassLoader();
 
+        ClassLoader oldTccl = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
+        try {
+            // Need to do this using the deployment classloader in case the provider is not yet initialised
+            WildFlySecurityManager.setCurrentContextClassLoaderPrivileged(classLoader);
+            SmallRyeContextManagerProvider contextManagerProvider = SmallRyeContextManagerProvider.instance();
+
+            ContextManager mgr = contextManagerProvider.findContextManager(classLoader);
+            if (mgr != null) {
+                contextManagerProvider.releaseContextManager(mgr);
+            }
+        } finally {
+            WildFlySecurityManager.setCurrentContextClassLoaderPrivileged(oldTccl);
+        }
+
+        // Clean up cached thread contexts used by the Mutiny interceptors
+        ThreadContextRegistry tcr = ThreadContextRegistry.INSTANCE;
+        tcr.cleanup(classLoader);
     }
 }

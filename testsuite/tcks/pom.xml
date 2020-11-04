@@ -29,8 +29,6 @@
     <name>WildFly Reactive MicroProfile - TCKs</name>
     <packaging>pom</packaging>
     <modules>
-        <module>reactive-messaging</module>
-        <module>reactive-streams-operators</module>
         <module>context-propagation</module>
     </modules>
 

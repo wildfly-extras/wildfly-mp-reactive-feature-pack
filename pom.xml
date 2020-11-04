@@ -65,7 +65,6 @@
         <version.org.jboss.arquillian.core>1.6.0.Final</version.org.jboss.arquillian.core>
         <version.org.jboss.galleon>4.2.5.Final</version.org.jboss.galleon>
         <version.org.reactivestreams>1.0.3</version.org.reactivestreams>
-        <version.io.opentelemetry.opentelemetry>0.8.0</version.io.opentelemetry.opentelemetry>
         <!--
             Temporarily need this RC to include https://github.com/testcontainers/testcontainers-java/pull/3159
             as latest Docker for Mac does not work with earlier versions of TestContainers.
@@ -224,28 +223,6 @@
 
             <!-- External dependencies -->
             <dependency>
-                <groupId>io.opentelemetry</groupId>
-                <artifactId>opentelemetry-api</artifactId>
-                <version>${version.io.opentelemetry.opentelemetry}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.opentelemetry</groupId>
-                <artifactId>opentelemetry-context-prop</artifactId>
-                <version>${version.io.opentelemetry.opentelemetry}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
                 <groupId>io.reactivex.rxjava2</groupId>
                 <artifactId>rxjava</artifactId>
                 <version>${version.io.reactivex.rxjava}</version>
@@ -324,29 +301,7 @@
             </dependency>
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
-                <artifactId>mutiny</artifactId>
-                <version>${version.io.smallrye.smallrye-mutiny}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
                 <artifactId>mutiny-context-propagation</artifactId>
-                <version>${version.io.smallrye.smallrye-mutiny}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>mutiny-reactive-streams-operators</artifactId>
                 <version>${version.io.smallrye.smallrye-mutiny}</version>
                 <exclusions>
                     <exclusion>
@@ -369,17 +324,6 @@
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-mutiny-vertx-amqp-client</artifactId>
-                <version>${version.io.smallrye.reactive-utils}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>smallrye-mutiny-vertx-kafka-client</artifactId>
                 <version>${version.io.smallrye.reactive-utils}</version>
                 <exclusions>
                     <exclusion>
@@ -423,39 +367,6 @@
             </dependency>
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
-                <artifactId>smallrye-mutiny-vertx-core</artifactId>
-                <version>${version.io.smallrye.reactive-utils}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>smallrye-mutiny-vertx-runtime</artifactId>
-                <version>${version.io.smallrye.reactive-utils}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>smallrye-reactive-messaging-api</artifactId>
-                <version>${version.io.smallrye.smallrye-reactive-messaging}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-reactive-messaging-amqp</artifactId>
                 <version>${version.io.smallrye.smallrye-reactive-messaging}</version>
                 <exclusions>
@@ -487,89 +398,11 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>smallrye-reactive-messaging-provider</artifactId>
-                <version>${version.io.smallrye.smallrye-reactive-messaging}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+
 
             <dependency>
                 <groupId>io.vertx</groupId>
                 <artifactId>vertx-amqp-client</artifactId>
-                <version>${version.io.vertx}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-core</artifactId>
-                <version>${version.io.vertx}</version>
-                <exclusions>
-                    <!--
-                        For some reason a wildcard exclusion here triggers a dependency convergence
-                        error in the enforcer plugin. List them all individually.
-
-                        TODO replace with a wildcard exclusion once the world is on maven 3.6.2+
-                    -->
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-common</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-buffer</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-transport</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-handler</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-handler-proxy</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-codec-http</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-codec-http2</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-resolver</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-resolver-dns</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-kafka-client</artifactId>
                 <version>${version.io.vertx}</version>
                 <exclusions>
                     <exclusion>
@@ -601,17 +434,6 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka-clients</artifactId>
-                <version>${version.org.apache.kafka}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
                 <groupId>org.eclipse.microprofile.config</groupId>
                 <artifactId>microprofile-config-api</artifactId>
                 <version>${version.org.eclipse.microprofile.config.api}</version>
@@ -626,39 +448,6 @@
                 <groupId>org.eclipse.microprofile.context-propagation</groupId>
                 <artifactId>microprofile-context-propagation-api</artifactId>
                 <version>${version.org.eclipse.microprofile.context-propagation.api}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
-                <artifactId>microprofile-reactive-messaging-api</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-messaging.api}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
-                <artifactId>microprofile-reactive-streams-operators-api</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-streams-operators.api}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
-                <artifactId>microprofile-reactive-streams-operators-core</artifactId>
-                <version>${version.org.eclipse.microprofile.reactive-streams-operators.api}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>

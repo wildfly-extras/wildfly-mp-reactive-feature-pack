@@ -30,7 +30,5 @@
     <name>WildFly Reactive MicroProfile - Subsystems Parent</name>
     <modules>
         <module>context-propagation</module>
-        <module>reactive-streams-operators</module>
-        <module>reactive-messaging</module>
     </modules>
 </project>

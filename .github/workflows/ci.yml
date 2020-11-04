@@ -12,9 +12,8 @@ on:
 
 jobs:
   # This just runs mvn install like a user would on cloning the repository
-  wildfy-21:
-    name: WildFly 21
-
+  wildfy-released:
+    name: WildFly Released
     runs-on: ubuntu-latest
 
     # The pom is set up for WildFly 21 so we don't need to do anything special
@@ -44,12 +43,12 @@ jobs:
         with:
           # Expressions in the name don't seem to get resolved
           #name: ci-artifacts-mp-reactive-raw-{{job.container.id}}
-          name: ci-artifacts-mp-reactive-21
+          name: ci-artifacts-mp-reactive-wf-released
           path: artifacts.zip
 
 
-  wildfly-20:
-    # This adjusts the build to use the versions from wildfly master
+  wildfly-master:
+    # This builds against the feature branch in WildFly where the 'base' reactive functionality is contained
     name: Against WildFly master
 
     runs-on: ubuntu-latest
@@ -58,7 +57,16 @@ jobs:
       WILDFLY_VERSION: 20.0.0.Final
       WILDFLY_CORE_VERSION: 12.0.1.Final
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout feature pack
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Checkout wildfly master
+        uses: actions/checkout@v2
+        with:
+          repository: wildfly/wildfly
+          path: wildfly
 
       - uses: actions/cache@v1
         with:
@@ -72,6 +80,48 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: Initialise Feature Pack version
+        # Needed to download everything from Maven to not pollute the output in the next steps
+        run:
+          mvn help:evaluate -Dexpression=project.version -pl .
+        working-directory: main
+
+      - name: Set FEATURE_PACK_VERSION
+        run: |
+          TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
+          echo "::set-env name=FEATURE_PACK_VERSION::${TMP}" ;
+          echo "TMP ${TMP}"
+        working-directory: main
+
+      - name: Initialise WildFly versions
+        # Needed to download everything from Maven to not pollute the output in the next steps
+        run: |
+          mvn -B help:evaluate -Dexpression=project.version -pl .
+          mvn -B help:evaluate -Dexpression=version.org.wildfly.core -pl .
+        working-directory: wildfly
+
+      - name: Set WILDFLY_VERSION
+        run: |
+          TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
+          echo "::set-env name=WILDFLY_VERSION::${TMP}"
+        working-directory: wildfly
+
+      - name: Set WILDFLY_CORE_VERSION
+        run: |
+          TMP="$(mvn help:evaluate -Dexpression=version.org.wildfly.core -pl . | grep -v '^\[')"
+          echo "::set-env name=WILDFLY_CORE_VERSION::${TMP}"
+        working-directory: wildfly
+
+      - name: Show read versions
+        run: |
+          echo "Feature pack version ${FEATURE_PACK_VERSION}"
+          echo "WildFly version ${WILDFLY_VERSION}"
+          echo "WildFly Core version ${WILDFLY_CORE_VERSION}"
+
+      - name: Build WildFly master
+        run: mvn -B install -DskipTests
+        working-directory: wildfly
+
       - name: Build and Test
         run: |
           mvn --version
@@ -82,7 +132,5 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          # Expressions in the name don't seem to get resolved
-          #name: ci-artifacts-mp-reactive-wf-master-{{job.container.id}}
-          name: ci-artifacts-mp-reactive-wf-20
-          path: artifacts.zip
+          name: ci-artifacts-mp-reactive-wf-master
+          path: main/artifacts.zip

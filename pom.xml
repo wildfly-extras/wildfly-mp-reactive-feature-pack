@@ -45,36 +45,26 @@
         <!--
             Other dependency versions
         -->
-        <!--
-            These MUST be kept in sync with WildFly
-        -->
+        <!-- These MUST be kept in sync with WildFly -->
         <version.io.smallrye.reactive-utils>1.2.1</version.io.smallrye.reactive-utils>
         <version.io.smallrye.smallrye-context-propagation>1.0.19</version.io.smallrye.smallrye-context-propagation>
         <version.io.smallrye.smallrye-reactive-messaging>2.4.0</version.io.smallrye.smallrye-reactive-messaging>
         <version.io.smallrye.smallrye-reactive-streams-operators>1.1.0</version.io.smallrye.smallrye-reactive-streams-operators>
         <version.io.smallrye.smallrye-mutiny>0.10.1</version.io.smallrye.smallrye-mutiny>
-        <version.org.eclipse.microprofile.context-propagation.api>1.0.2</version.org.eclipse.microprofile.context-propagation.api>
-
-        <!--
-            Not from WildFly
-        -->
-        <version.io.rest-assured>4.1.2</version.io.rest-assured>
         <version.io.vertx>3.9.3</version.io.vertx>
+        <version.org.eclipse.microprofile.context-propagation.api>1.0.2</version.org.eclipse.microprofile.context-propagation.api>
+        <!-- Not from WildFly -->
+        <version.io.rest-assured>4.1.2</version.io.rest-assured>
         <version.org.waitility>4.0.2</version.org.waitility>
-        <version.org.jboss.arquillian.core>1.6.0.Final</version.org.jboss.arquillian.core>
-        <version.org.jboss.galleon>4.2.5.Final</version.org.jboss.galleon>
         <!--
             Temporarily need this RC to include https://github.com/testcontainers/testcontainers-java/pull/3159
             as latest Docker for Mac does not work with earlier versions of TestContainers.
         -->
         <version.org.testcontainers>1.15.0-rc2</version.org.testcontainers>
-        <!-- Same testng version as the MP TCK uses -->
-        <version.testng>6.14.3</version.testng>
-        <version.org.wildfly.arquillian>3.0.0.Final</version.org.wildfly.arquillian>
-
 
 
         <!-- Plugin versions and their dependency versions -->
+        <version.org.jboss.galleon>4.2.6.Final</version.org.jboss.galleon>
         <version.org.wildfly.checkstyle-config>1.0.8.Final</version.org.wildfly.checkstyle-config>
         <version.org.wildfly.galleon-plugins>4.2.5.Final</version.org.wildfly.galleon-plugins>
         <version.wildfly.maven.plugin>2.0.0.Final</version.wildfly.maven.plugin>
@@ -436,71 +426,10 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.jboss.arquillian.junit</groupId>
-                <artifactId>arquillian-junit-container</artifactId>
-                <version>${version.org.jboss.arquillian.core}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.test</groupId>
-                <artifactId>arquillian-test-spi</artifactId>
-                <version>${version.org.jboss.arquillian.core}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.testng</groupId>
-                <artifactId>arquillian-testng-container</artifactId>
-                <version>${version.org.jboss.arquillian.core}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.eclipse.microprofile.context-propagation</groupId>
                 <artifactId>microprofile-context-propagation-tck</artifactId>
                 <version>${version.org.eclipse.microprofile.context-propagation.api}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.wildfly.arquillian</groupId>
-                <artifactId>wildfly-arquillian-common</artifactId>
-                <version>${version.org.wildfly.arquillian}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wildfly.arquillian</groupId>
-                <artifactId>wildfly-arquillian-container-managed</artifactId>
-                <version>${version.org.wildfly.arquillian}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.jboss.sasl</groupId>
-                        <artifactId>jboss-sasl</artifactId>
-                    </exclusion>
-                    <!-- TODO remove this exclusion once this depends on Jakarta Inject -->
-                    <!-- superseded by jakarta.inject:jakarta.inject-api -->
-                    <exclusion>
-                        <groupId>javax.inject</groupId>
-                        <artifactId>javax.inject</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.wildfly.arquillian</groupId>
-                <artifactId>wildfly-arquillian-container-domain-managed</artifactId>
-                <version>${version.org.wildfly.arquillian}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wildfly.arquillian</groupId>
-                <artifactId>wildfly-arquillian-protocol-jmx</artifactId>
-                <version>${version.org.wildfly.arquillian}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.wildfly.security</groupId>
-                        <artifactId>wildfly-security-manager</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.wildfly.arquillian</groupId>
-                <artifactId>wildfly-arquillian-testenricher-msc</artifactId>
-                <version>${version.org.wildfly.arquillian}</version>
             </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>
@@ -513,12 +442,6 @@
                 <artifactId>testcontainers</artifactId>
                 <version>${version.org.testcontainers}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <scope>test</scope>
-                <version>${version.testng}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

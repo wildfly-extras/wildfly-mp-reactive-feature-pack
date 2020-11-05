@@ -42,19 +42,6 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Initialise Feature Pack version
-        # Needed to download everything from Maven to not pollute the output in the next steps
-        run:
-          mvn help:evaluate -Dexpression=project.version -pl .
-        working-directory: main
-
-      - name: Set FEATURE_PACK_VERSION
-        run: |
-          TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
-          echo "::set-env name=FEATURE_PACK_VERSION::${TMP}" ;
-          echo "TMP ${TMP}"
-        working-directory: main
-
       - name: Initialise WildFly versions
         # Needed to download everything from Maven to not pollute the output in the next steps
         run: |
@@ -90,6 +77,19 @@ jobs:
           mvn -B install -Dversion.org.wildfly=${WILDFLY_VERSION} -Dversion.org.wildfly.core=${WILDFLY_CORE_VERSION} -Dqs.test
         working-directory: main
 
+      - name: Initialise Feature Pack version
+        # Needed to download everything from Maven to not pollute the output in the next steps
+        run:
+          mvn help:evaluate -Dexpression=project.version -pl .
+        working-directory: main
+
+      - name: Set FEATURE_PACK_VERSION
+        run: |
+          TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
+          echo "::set-env name=FEATURE_PACK_VERSION::${TMP}" ;
+          echo "TMP ${TMP}"
+        working-directory: main
+        
       - name: Calculate directories to check
         run: |
           SRV_DIR="build/target/wildfly-${WILDFLY_VERSION}-mp-reactive-${FEATURE_PACK_VERSION}"

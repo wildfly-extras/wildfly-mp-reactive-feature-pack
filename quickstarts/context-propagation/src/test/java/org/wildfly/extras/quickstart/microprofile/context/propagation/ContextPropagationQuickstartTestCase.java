@@ -33,6 +33,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.as.arquillian.api.ServerSetup;
+import org.jboss.as.arquillian.container.ManagementClient;
+import org.jboss.as.test.shared.CLIServerSetupTask;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -48,6 +51,7 @@ import io.restassured.common.mapper.TypeRef;
  */
 @RunWith(Arquillian.class)
 @RunAsClient
+@ServerSetup(ContextPropagationQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class)
 public class ContextPropagationQuickstartTestCase {
     @ArquillianResource
     URL url;
@@ -130,5 +134,15 @@ public class ContextPropagationQuickstartTestCase {
 
     private String getAddress(String path) {
         return url.toExternalForm() + path;
+    }
+
+    public static class AllowExperimentalAnnotationsSetupTask extends CLIServerSetupTask {
+        @Override
+        public void setup(ManagementClient managementClient, String containerId) throws Exception {
+            this.builder.node(containerId)
+                    .setup("/system-property=jboss.as.reactive.messaging.experimental:add(value=true)")
+                    .teardown("/system-property=amqp-port:remove");
+            super.setup(managementClient, containerId);
+        }
     }
 }

@@ -50,7 +50,9 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-@ServerSetup(ReactiveMessagingMqttQuickstartTestCase.MqttBootstrapServerSetupTask.class)
+@ServerSetup({
+        ReactiveMessagingMqttQuickstartTestCase.MqttBootstrapServerSetupTask.class,
+        ReactiveMessagingMqttQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
 public class ReactiveMessagingMqttQuickstartTestCase {
     private static final int MQTT_PORT = 1883;
     private static final GenericContainer MQTT = new GenericContainer("eclipse-mosquitto:1.6.2")
@@ -92,6 +94,16 @@ public class ReactiveMessagingMqttQuickstartTestCase {
         source.close();
         int size = received.size();
         Assert.assertTrue(size + " entries, expected at least 3", size >= 3);
+    }
+
+    public static class AllowExperimentalAnnotationsSetupTask extends CLIServerSetupTask {
+        @Override
+        public void setup(ManagementClient managementClient, String containerId) throws Exception {
+            this.builder.node(containerId)
+                    .setup("/system-property=jboss.as.reactive.messaging.experimental:add(value=true)")
+                    .teardown("/system-property=amqp-port:remove");
+            super.setup(managementClient, containerId);
+        }
     }
 
     public static class MqttBootstrapServerSetupTask extends CLIServerSetupTask {

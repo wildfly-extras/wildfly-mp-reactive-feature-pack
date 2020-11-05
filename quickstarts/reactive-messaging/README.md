@@ -44,10 +44,14 @@ the [main README]((../../README.md)). You can do this by going to the relevant c
 terminal, and then run:
 ```
 galleon.sh provision ./provision.xml --dir=target/my-wildfly
-./target/my-wildfly/bin/standalone.sh
+./target/my-wildfly/bin/standalone.sh -Djboss.as.reactive.messaging.experimental=true
 ```
 This provisions the server with the relevant Galleon layers, and starts it. The
 [main README](../../README.md) contains information about the layers in this feature pack.
+
+The `-Djboss.as.reactive.messaging.experimental` system property is needed to allow annotations
+understood by the SmallRye implementation of MicroProfile Reactive Messaging that are
+not part of the MicroProfile Reactive Messaging 1.0 specification such as `@Channel`.
 
 Then in another terminal window, go to the relevant child module directory and run:
 ```

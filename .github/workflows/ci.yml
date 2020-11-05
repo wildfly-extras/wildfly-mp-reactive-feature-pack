@@ -49,7 +49,7 @@ jobs:
 
   wildfly-master:
     # This builds against the feature branch in WildFly where the 'base' reactive functionality is contained
-    name: Against WildFly master
+    name: Against WildFly Feature Branch
 
     runs-on: ubuntu-latest
 

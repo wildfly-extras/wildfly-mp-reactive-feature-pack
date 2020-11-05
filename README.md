@@ -3,7 +3,7 @@
 > :warning: This currently relies on a WildFly snapshot built from
 [kabir/wildfly/tree/reactive-port](https://github.com/kabir/wildfly/tree/reactive-port). This
 contains parts of the reactive functionality, while the rest resides in this feature pack.
-Use the []1.0.x](https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/tree/1.0.x)
+Use the [master](https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/tree/master)
 branch for stable releases. 
 
 # WildFly MicroProfile Reactive Feature Pack

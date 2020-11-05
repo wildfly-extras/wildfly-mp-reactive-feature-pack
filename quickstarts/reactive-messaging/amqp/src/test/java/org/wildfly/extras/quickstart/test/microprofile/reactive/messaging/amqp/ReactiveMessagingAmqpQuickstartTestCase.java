@@ -49,7 +49,9 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-@ServerSetup(ReactiveMessagingAmqpQuickstartTestCase.KafkaBootstrapServerSetupTask.class)
+@ServerSetup({
+        ReactiveMessagingAmqpQuickstartTestCase.KafkaBootstrapServerSetupTask.class,
+        ReactiveMessagingAmqpQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
 public class ReactiveMessagingAmqpQuickstartTestCase {
     private static final int AMQP_PORT = 5672;
     private static final GenericContainer AMQP = new GenericContainer("vromero/activemq-artemis:2.8.0-alpine")
@@ -92,6 +94,16 @@ public class ReactiveMessagingAmqpQuickstartTestCase {
         source.close();
         int size = received.size();
         Assert.assertTrue(size + " entries, expected at least 3", size >= 3);
+    }
+
+    public static class AllowExperimentalAnnotationsSetupTask extends CLIServerSetupTask {
+        @Override
+        public void setup(ManagementClient managementClient, String containerId) throws Exception {
+            this.builder.node(containerId)
+                    .setup("/system-property=jboss.as.reactive.messaging.experimental:add(value=true)")
+                    .teardown("/system-property=amqp-port:remove");
+            super.setup(managementClient, containerId);
+        }
     }
 
     public static class KafkaBootstrapServerSetupTask extends CLIServerSetupTask {

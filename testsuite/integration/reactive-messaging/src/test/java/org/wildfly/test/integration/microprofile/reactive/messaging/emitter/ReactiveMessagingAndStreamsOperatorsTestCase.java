@@ -25,18 +25,22 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.as.arquillian.api.ServerSetup;
 import org.jboss.as.test.integration.common.HttpRequest;
+import org.jboss.as.test.shared.CLIServerSetupTask;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.test.integration.microprofile.reactive.messaging.AllowExperimentalAnnotationsSetupTask;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @RunWith(Arquillian.class)
 @RunAsClient
+@ServerSetup(AllowExperimentalAnnotationsSetupTask.class)
 public class ReactiveMessagingAndStreamsOperatorsTestCase {
     @ArquillianResource
     URL url;
@@ -45,6 +49,8 @@ public class ReactiveMessagingAndStreamsOperatorsTestCase {
     public static Archive<?> getDeployment(){
         final WebArchive war = create(WebArchive.class, "messaging-rso.war");
         war.addPackage(ReactiveMessagingAndStreamsOperatorsTestCase.class.getPackage());
+        war.addClass(AllowExperimentalAnnotationsSetupTask.class);
+        war.addClass(CLIServerSetupTask.class);
         war.setWebXML(ReactiveMessagingAndStreamsOperatorsTestCase.class.getPackage(), "web.xml");
 
         return war;

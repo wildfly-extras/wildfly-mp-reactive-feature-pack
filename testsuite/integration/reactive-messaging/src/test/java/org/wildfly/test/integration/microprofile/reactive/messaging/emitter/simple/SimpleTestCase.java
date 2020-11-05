@@ -26,23 +26,29 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.as.arquillian.api.ServerSetup;
+import org.jboss.as.test.shared.CLIServerSetupTask;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.test.integration.microprofile.reactive.messaging.AllowExperimentalAnnotationsSetupTask;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @RunWith(Arquillian.class)
+@ServerSetup(AllowExperimentalAnnotationsSetupTask.class)
 public class SimpleTestCase {
 
     @Deployment
     public static Archive<?> getDeployment(){
         final WebArchive war = create(WebArchive.class, "messaging-rso.war")
                 .addClasses(SimpleTestCase.class, StreamConsumer.class, StreamEmitter.class, SimpleBean.class)
+                .addClass(AllowExperimentalAnnotationsSetupTask.class)
+                .addClass(CLIServerSetupTask.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
         return war;
     }

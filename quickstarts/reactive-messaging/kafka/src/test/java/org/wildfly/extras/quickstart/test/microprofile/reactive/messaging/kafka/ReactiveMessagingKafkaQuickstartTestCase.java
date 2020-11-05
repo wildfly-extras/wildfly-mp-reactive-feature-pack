@@ -47,7 +47,8 @@ import org.testcontainers.containers.KafkaContainer;
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-@ServerSetup(ReactiveMessagingKafkaQuickstartTestCase.KafkaBootstrapServerSetupTask.class)
+@ServerSetup({ReactiveMessagingKafkaQuickstartTestCase.KafkaBootstrapServerSetupTask.class,
+        ReactiveMessagingKafkaQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
 public class ReactiveMessagingKafkaQuickstartTestCase {
     private static final KafkaContainer KAFKA = new KafkaContainer();
 
@@ -85,6 +86,16 @@ public class ReactiveMessagingKafkaQuickstartTestCase {
         source.close();
         int size = received.size();
         Assert.assertTrue(size + " entries, expected at least 3", size >= 3);
+    }
+
+    public static class AllowExperimentalAnnotationsSetupTask extends CLIServerSetupTask {
+        @Override
+        public void setup(ManagementClient managementClient, String containerId) throws Exception {
+            this.builder.node(containerId)
+                    .setup("/system-property=jboss.as.reactive.messaging.experimental:add(value=true)")
+                    .teardown("/system-property=amqp-port:remove");
+            super.setup(managementClient, containerId);
+        }
     }
 
     public static class KafkaBootstrapServerSetupTask extends CLIServerSetupTask {

@@ -17,6 +17,10 @@
   -->
 
 <module xmlns="urn:jboss:module:1.8" name="io.vertx.client">
+    <!--
+        Keep this module here. When provisioning it will hopefully override the one from WildFly
+        so that we can add more clients if desired!
+    -->
     <properties>
         <property name="jboss.api" value="private"/>
     </properties>

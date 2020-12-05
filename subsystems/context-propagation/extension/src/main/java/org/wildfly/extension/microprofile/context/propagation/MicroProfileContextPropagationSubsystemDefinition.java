@@ -31,6 +31,7 @@ import org.jboss.as.controller.ModelOnlyRemoveStepHandler;
 import org.jboss.as.controller.OperationContext;
 import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PersistentResourceDefinition;
+import org.jboss.as.controller.ReloadRequiredRemoveStepHandler;
 import org.jboss.as.controller.SimpleResourceDefinition;
 import org.jboss.as.controller.capability.RuntimeCapability;
 import org.jboss.as.controller.registry.ManagementResourceRegistration;
@@ -59,7 +60,7 @@ public class MicroProfileContextPropagationSubsystemDefinition extends Persisten
                         MicroProfileContextPropagationExtension.SUBSYSTEM_PATH,
                         MicroProfileContextPropagationExtension.getResourceDescriptionResolver(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME))
                 .setAddHandler(AddHandler.INSTANCE)
-                .setRemoveHandler(new ModelOnlyRemoveStepHandler())
+                .setRemoveHandler(new ReloadRequiredRemoveStepHandler())
                 .setCapabilities(CONTEXT_PROPAGATION_CAPABILITY)
         );
     }

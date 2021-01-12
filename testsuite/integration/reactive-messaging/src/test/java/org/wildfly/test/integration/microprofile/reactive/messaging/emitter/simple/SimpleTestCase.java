@@ -59,7 +59,9 @@ public class SimpleTestCase {
     @Inject
     StreamEmitter streamEmitter;
 
-     @Test
+    /*
+    Need to check these two things together in testSimpleBeanAndStreamInject() instead
+    @Test
     public void testSimpleBean() {
         assertEquals(4, SimpleBean.RESULT.size());
         assertTrue(SimpleBean.RESULT.contains("HELLO"));
@@ -77,6 +79,22 @@ public class SimpleTestCase {
         assertEquals("SmallRye", consumed.get(2));
         assertEquals("reactive", consumed.get(3));
         assertEquals("message", consumed.get(4));
+    }*/
+    @Test
+    public void testSimpleBeanAndStreamInject() {
+        List<String> consumed = streamConsumer.consume();
+        assertEquals(5, consumed.size());
+        assertEquals("hello", consumed.get(0));
+        assertEquals("with", consumed.get(1));
+        assertEquals("SmallRye", consumed.get(2));
+        assertEquals("reactive", consumed.get(3));
+        assertEquals("message", consumed.get(4));
+
+        assertEquals(4, SimpleBean.RESULT.size());
+        assertTrue(SimpleBean.RESULT.contains("HELLO"));
+        assertTrue(SimpleBean.RESULT.contains("SMALLRYE"));
+        assertTrue(SimpleBean.RESULT.contains("REACTIVE"));
+        assertTrue(SimpleBean.RESULT.contains("MESSAGE"));
     }
 
     @Test

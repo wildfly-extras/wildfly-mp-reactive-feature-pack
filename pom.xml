@@ -23,7 +23,7 @@
     </parent>
     <groupId>org.wildfly.extras.reactive</groupId>
     <artifactId>wildfly-microprofile-reactive-parent</artifactId>
-    <version>1.0.2.Final-SNAPSHOT</version>
+    <version>1.0.2.Final</version>
     <packaging>pom</packaging>
     <name>WildFly Reactive MicroProfile - Parent</name>
   
@@ -38,8 +38,8 @@
     </licenses>
     <properties>
         <!-- Target WildFly version, and other parts needed for the Galleon maven plugin -->
-        <version.org.wildfly>21.0.0.Final</version.org.wildfly>
-        <version.org.wildfly.core>13.0.1.Final</version.org.wildfly.core>
+        <version.org.wildfly>22.0.0.Final</version.org.wildfly>
+        <version.org.wildfly.core>14.0.0.Final</version.org.wildfly.core>
         <version.org.wildfly.common>1.5.4.Final</version.org.wildfly.common>
 
         <!-- Other dependency versions -->

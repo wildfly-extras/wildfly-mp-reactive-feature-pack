@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-quickstart-reactive-messaging</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>1.0.2.Final-SNAPSHOT</version>
+        <version>1.0.2.Final</version>
     </parent>
     <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>

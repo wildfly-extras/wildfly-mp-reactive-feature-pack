@@ -43,7 +43,7 @@
         <version.org.wildfly.common>1.5.4.Final</version.org.wildfly.common>
 
         <!-- Other dependency versions -->
-        <version.com.fasterxml.jackson>2.10.4</version.com.fasterxml.jackson>
+        <version.com.fasterxml.jackson>2.10.5.1</version.com.fasterxml.jackson>
         <version.io.smallrye.reactive-utils>1.2.1</version.io.smallrye.reactive-utils>
         <version.io.smallrye.smallrye-context-propagation>1.0.19</version.io.smallrye.smallrye-context-propagation>
         <version.io.smallrye.smallrye-reactive-messaging>2.4.0</version.io.smallrye.smallrye-reactive-messaging>

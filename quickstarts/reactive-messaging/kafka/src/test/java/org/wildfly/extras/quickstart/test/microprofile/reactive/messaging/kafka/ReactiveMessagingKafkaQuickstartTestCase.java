@@ -42,13 +42,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.testcontainers.containers.KafkaContainer;
-import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConverter;
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-@ServerSetup(ReactiveMessagingKafkaQuickstartTestCase.AmqpBootstrapServerSetupTask.class)
+@ServerSetup(ReactiveMessagingKafkaQuickstartTestCase.KafkaBootstrapServerSetupTask.class)
 public class ReactiveMessagingKafkaQuickstartTestCase {
     private static final KafkaContainer KAFKA = new KafkaContainer();
 
@@ -88,7 +87,7 @@ public class ReactiveMessagingKafkaQuickstartTestCase {
         Assert.assertTrue(size + " entries, expected at least 3", size >= 3);
     }
 
-    public static class AmqpBootstrapServerSetupTask extends CLIServerSetupTask {
+    public static class KafkaBootstrapServerSetupTask extends CLIServerSetupTask {
 
         @Override
         public void setup(ManagementClient managementClient, String containerId) throws Exception {

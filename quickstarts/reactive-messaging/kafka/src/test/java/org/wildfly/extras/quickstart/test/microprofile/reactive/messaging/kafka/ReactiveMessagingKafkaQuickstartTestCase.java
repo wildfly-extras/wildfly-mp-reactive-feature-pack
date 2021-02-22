@@ -58,7 +58,6 @@ public class ReactiveMessagingKafkaQuickstartTestCase {
     @Deployment
     public static WebArchive createWar() throws Exception {
         WebArchive war = ShrinkWrap.create(WebArchive.class, "quickstart-test.war")
-                .addPackage(PriceConverter.class.getPackage())
                 .add(new FileAsset(new File("../core/src/main/webapp/index.html")), "/index.html")
                 .addAsWebInfResource(new File("../core/src/main/webapp/WEB-INF/web.xml"))
                 .addAsWebInfResource(new File("target/classes/META-INF/microprofile-config.properties"), "classes/META-INF/microprofile-config.properties")

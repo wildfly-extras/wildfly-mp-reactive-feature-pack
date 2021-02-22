@@ -23,7 +23,7 @@
     </parent>
     <groupId>org.wildfly.extras.reactive</groupId>
     <artifactId>wildfly-microprofile-reactive-parent</artifactId>
-    <version>1.0.2.Final</version>
+    <version>1.0.3.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WildFly Reactive MicroProfile - Parent</name>
   

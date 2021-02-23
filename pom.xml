@@ -55,13 +55,10 @@
         <version.org.eclipse.microprofile.context-propagation.api>1.0.2</version.org.eclipse.microprofile.context-propagation.api>
         <!-- Not from WildFly -->
         <version.io.rest-assured>4.1.2</version.io.rest-assured>
+        <version.io.smallrye.smallrye-context-propagation>1.0.20</version.io.smallrye.smallrye-context-propagation>
+        <version.io.strimzi.test-container>0.20.1</version.io.strimzi.test-container>
         <version.org.waitility>4.0.2</version.org.waitility>
-        <!--
-            Temporarily need this RC to include https://github.com/testcontainers/testcontainers-java/pull/3159
-            as latest Docker for Mac does not work with earlier versions of TestContainers.
-        -->
-        <version.org.testcontainers>1.15.0-rc2</version.org.testcontainers>
-
+        <version.org.testcontainers>1.15.2</version.org.testcontainers>
 
         <!-- Plugin versions and their dependency versions -->
         <version.org.jboss.galleon>4.2.6.Final</version.org.jboss.galleon>
@@ -420,6 +417,12 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>io.strimzi</groupId>
+                <artifactId>test-container</artifactId>
+                <version>${version.io.strimzi.test-container}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.awaitility</groupId>
                 <artifactId>awaitility</artifactId>
                 <version>${version.org.waitility}</version>
@@ -429,12 +432,6 @@
                 <groupId>org.eclipse.microprofile.context-propagation</groupId>
                 <artifactId>microprofile-context-propagation-tck</artifactId>
                 <version>${version.org.eclipse.microprofile.context-propagation.api}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>kafka</artifactId>
-                <version>${version.org.testcontainers}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

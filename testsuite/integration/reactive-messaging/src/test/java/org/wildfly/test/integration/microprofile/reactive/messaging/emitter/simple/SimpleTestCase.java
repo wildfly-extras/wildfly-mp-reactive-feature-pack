@@ -82,7 +82,12 @@ public class SimpleTestCase {
     }*/
     @Test
     public void testSimpleBeanAndStreamInject() {
-        List<String> consumed = streamConsumer.consume();
+        List<String> consumed = null;
+        try {
+            consumed = streamConsumer.consume();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(5, consumed.size());
         assertEquals("hello", consumed.get(0));
         assertEquals("with", consumed.get(1));

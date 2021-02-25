@@ -22,6 +22,7 @@
     <resources>
         <artifact name="${io.smallrye:smallrye-context-propagation}"/>
         <artifact name="${io.smallrye:smallrye-context-propagation-cdi}"/>
+        <artifact name="${io.smallrye:smallrye-context-propagation-storage}"/>
     </resources>
 
     <dependencies>

@@ -32,6 +32,7 @@
     </resources>
 
     <dependencies>
+        <module name="io.smallrye.context-propagation"/>
         <module name="io.smallrye.reactive.mutiny"/>
         <module name="io.smallrye.reactive.mutiny.context-propagation"/>
         <module name="org.eclipse.microprofile.context-propagation.api"/>

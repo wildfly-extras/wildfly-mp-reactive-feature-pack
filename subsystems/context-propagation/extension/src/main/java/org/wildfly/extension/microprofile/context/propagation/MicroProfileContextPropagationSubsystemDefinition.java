@@ -40,6 +40,7 @@ import org.jboss.as.server.DeploymentProcessorTarget;
 import org.jboss.dmr.ModelNode;
 import org.wildfly.extension.microprofile.context.propagation._private.MicroProfileContextPropagationLogger;
 import org.wildfly.extension.microprofile.context.propagation.deployment.ContextPropagationDependencyProcessor;
+import org.wildfly.extension.microprofile.context.propagation.deployment.ContextPropagationDeploymentProcessor;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -100,7 +101,8 @@ public class MicroProfileContextPropagationSubsystemDefinition extends Persisten
                     final int POST_MODULE_MICROPROFILE_CONTEXT_PROPAGATION = 14240;
 
                     processorTarget.addDeploymentProcessor(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, DEPENDENCIES, DEPENDENCIES_MICROPROFILE_CONTEXT_PROPAGATION, new ContextPropagationDependencyProcessor());
-                    processorTarget.addDeploymentProcessor(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, POST_MODULE, POST_MODULE_MICROPROFILE_CONTEXT_PROPAGATION, new ContextPropagationDependencyProcessor());
+                    processorTarget.addDeploymentProcessor(
+                            MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, POST_MODULE, POST_MODULE_MICROPROFILE_CONTEXT_PROPAGATION, new ContextPropagationDeploymentProcessor(WELD_CAPABILITY_NAME));
                 }
             }, RUNTIME);
 

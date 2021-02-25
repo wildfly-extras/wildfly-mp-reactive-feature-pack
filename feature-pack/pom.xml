@@ -145,8 +145,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>io.smallrye</groupId>
+            <artifactId>smallrye-context-propagation-storage</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>io.smallrye.reactive</groupId>
-            <artifactId>mutiny-context-propagation</artifactId>
+            <artifactId>mutiny-smallrye-context-propagation</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

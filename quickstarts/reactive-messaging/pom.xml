@@ -31,7 +31,6 @@
     <modules>
         <module>amqp</module>
         <module>core</module>
-        <module>kafka</module>
         <module>mqtt</module>
     </modules>
 

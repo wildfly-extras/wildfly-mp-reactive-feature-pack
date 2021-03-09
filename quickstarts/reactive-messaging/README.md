@@ -23,10 +23,16 @@ the target messaging system. They also provide a `provision.xml` to provision a 
 Galleon layers installed. Finally they contain a 
 `src/main/resources/META-INF/microprofile-config.properties` which configures the application for use with the target
 messaging system while reusing the code. These are in the following sub-modules
-    * [kafka/](kafka) - Uses Kafka as the messaging system
     * [amqp/](amqp) - Uses AMQP as the messaging system
     * [mqtt/](mqtt) - Uses MQTT as the messaging system. Due to some limitations in the MQTT protocol, this example
     copies the code from `core/` and adjusts it slightly.
+
+The reason we have the `core` module, is that we use this both for community users to try out things we don't want in
+WildFly it self yet, as well as an incubator for things that make it into WildFly itself.
+This started off containing a QuickStart for Reactive Messaging with Kafka, which can now be found
+link:here[https://github.com/wildfly/quickstart/tree/master/microprofile-reactive-messaging-kafka] (Make sure to select
+the tag for the WildFly version you are using!). In the future we may add other Reactive Messaging connectors to other
+messaging systems.
 
 ## How to run it
 First you need to build the contents of this repository. You can skip this step if you have checked out a tag since 

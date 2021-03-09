@@ -48,7 +48,6 @@
         <!-- These MUST be kept in sync with WildFly -->
         <version.io.smallrye.reactive-utils>2.1.1</version.io.smallrye.reactive-utils>
         <version.io.smallrye.smallrye-reactive-messaging>3.0.0</version.io.smallrye.smallrye-reactive-messaging>
-        <version.io.smallrye.smallrye-reactive-streams-operators>1.2.2</version.io.smallrye.smallrye-reactive-streams-operators>
         <version.io.smallrye.smallrye-mutiny>0.14.0</version.io.smallrye.smallrye-mutiny>
         <version.io.vertx>4.0.2</version.io.vertx>
         <version.org.eclipse.microprofile.context-propagation.api>1.0.2</version.org.eclipse.microprofile.context-propagation.api>
@@ -63,7 +62,7 @@
         <version.org.jboss.galleon>4.2.7.Final</version.org.jboss.galleon>
         <version.org.wildfly.checkstyle-config>1.0.8.Final</version.org.wildfly.checkstyle-config>
         <version.org.wildfly.galleon-plugins>5.0.0.Final</version.org.wildfly.galleon-plugins>
-        <version.wildfly.maven.plugin>2.2.0.Final</version.wildfly.maven.plugin>
+        <version.wildfly.maven.plugin>2.0.2.Final</version.wildfly.maven.plugin>
 
         <!-- Misc. -->
         <wildfly-extras.repo.scm.connection>git@github.com:wildfly-extras/wildfly-mp-reactive-feature-pack.git</wildfly-extras.repo.scm.connection>
@@ -263,17 +262,6 @@
             </dependency>
             <dependency>
                 <groupId>io.smallrye</groupId>
-                <artifactId>smallrye-context-propagation-propagators-rxjava2</artifactId>
-                <version>${version.io.smallrye.smallrye-context-propagation}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye</groupId>
                 <artifactId>smallrye-context-propagation-storage</artifactId>
                 <version>${version.io.smallrye.smallrye-context-propagation}</version>
                 <exclusions>
@@ -286,17 +274,6 @@
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>mutiny-smallrye-context-propagation</artifactId>
-                <version>${version.io.smallrye.smallrye-mutiny}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>mutiny-rxjava</artifactId>
                 <version>${version.io.smallrye.smallrye-mutiny}</version>
                 <exclusions>
                     <exclusion>
@@ -320,17 +297,6 @@
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-mutiny-vertx-mqtt</artifactId>
                 <version>${version.io.smallrye.reactive-utils}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>*</groupId>
-                        <artifactId>*</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.smallrye.reactive</groupId>
-                <artifactId>smallrye-reactive-converter-rxjava2</artifactId>
-                <version>${version.io.smallrye.smallrye-reactive-streams-operators}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>*</groupId>

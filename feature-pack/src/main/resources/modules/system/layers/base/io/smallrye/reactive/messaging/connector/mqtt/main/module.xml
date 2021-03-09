@@ -25,7 +25,6 @@
         <artifact name="${io.smallrye.reactive:smallrye-reactive-messaging-mqtt}"/>
     </resources>
     <dependencies>
-        <module name="io.reactivex.rxjava2.rxjava"/>
         <module name="io.smallrye.config" services="import"/>
         <module name="io.smallrye.reactive.converters.api"/>
         <module name="io.smallrye.reactive.messaging"/>

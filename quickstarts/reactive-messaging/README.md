@@ -71,16 +71,16 @@ Finally go to http://localhost:8080/quickstart/ and see the prices be updated fr
 
 ### Price Generator
 The [PriceGenerator](core/src/main/java/org/wildfly/extras/quickstart/microprofile/reactive/messaging/PriceGenerator.java) 
-is a class containing a method that generates some random prices every 5 seconds:
+is a class containing a method that simulates calling an external resource which returns a random price every 5 seconds:
 ```
 @ApplicationScoped
 public class PriceGenerator {
-    private Random random = new Random();
+    @Inject
+    private MockExternalAsyncResource mockExternalAsyncResource;
 
     @Outgoing("generated-price")
-    public Flowable<Integer> generate() {
-        return Flowable.interval(5, TimeUnit.SECONDS)
-                .map(tick -> random.nextInt(100));
+    public CompletionStage<Integer> generate() {
+        return mockExternalAsyncResource.getNextValue();
     }
 }
 ```

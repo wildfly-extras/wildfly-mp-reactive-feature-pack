@@ -32,7 +32,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
@@ -56,10 +55,7 @@ public class TxContextPropagationClientTestCase {
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .setWebXML(TxContextPropagationClientTestCase.class.getPackage(), "web.xml")
                 .addAsWebInfResource(TxContextPropagationClientTestCase.class.getPackage(), "persistence.xml", "classes/META-INF/persistence.xml")
-                .addPackage(TxContextPropagationClientTestCase.class.getPackage())
-                // TODO add to deployment unit dependencies?
-                //.addAsResource(new StringAsset("Dependencies: io.reactivex.rxjava2.rxjava,org.eclipse.microprofile.reactive-streams-operators.api\n"), "META-INF/MANIFEST.MF");
-                .addAsResource(new StringAsset("Dependencies: io.reactivex.rxjava2.rxjava\n"), "META-INF/MANIFEST.MF");
+                .addPackage(TxContextPropagationClientTestCase.class.getPackage());
 
         System.out.println(webArchive.toString(true));
         webArchive.as(ZipExporter.class).exportTo(new File("target/" + webArchive.getName()), true);
@@ -91,17 +87,8 @@ public class TxContextPropagationClientTestCase {
     }
 
     @Test()
-    public void testTransactionContextPropagationSingle() {
-        RestAssured.when().get(url.toExternalForm() + "context/transaction-single").then()
-                .statusCode(Response.Status.OK.getStatusCode())/*
-                .body(equalTo("OK"))*/;
-        awaitState(() -> RestAssured.when().get(url.toExternalForm() + "context/transaction-single2").then()
-                .statusCode(Response.Status.OK.getStatusCode()));
-    }
-
-    @Test()
     public void testTransactionContextPropagationPublisher() {
-        RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher").then()
+        RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher-builder").then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .body(equalTo("OK"));
         awaitState(() -> RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher2").then()
@@ -110,7 +97,7 @@ public class TxContextPropagationClientTestCase {
 
     @Test()
     public void testTransactionContextPropagationRsoPublisher() {
-        RestAssured.when().get(url.toExternalForm() + "context/transaction-rso-publisher").then()
+        RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher").then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .body(equalTo("OK"));
         awaitState(() -> RestAssured.when().get(url.toExternalForm() + "context/transaction-publisher2").then()

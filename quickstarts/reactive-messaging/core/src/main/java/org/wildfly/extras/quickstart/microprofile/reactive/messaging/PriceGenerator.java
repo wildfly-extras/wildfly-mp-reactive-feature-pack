@@ -16,25 +16,23 @@
 
 package org.wildfly.extras.quickstart.microprofile.reactive.messaging;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CompletionStage;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
-
-import io.reactivex.Flowable;
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
 @ApplicationScoped
 public class PriceGenerator {
-    private Random random = new Random();
+    @Inject
+    private MockExternalAsyncResource externalAsyncResource;
 
     @Outgoing("generated-price")
-    public Flowable<Integer> generate() {
-        return Flowable.interval(5, TimeUnit.SECONDS)
-                .map(tick -> random.nextInt(100));
+    public CompletionStage<Integer> generate() {
+        return externalAsyncResource.getNextValue();
     }
 
 }

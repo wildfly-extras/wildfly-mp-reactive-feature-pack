@@ -57,11 +57,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.reactivex.rxjava2</groupId>
-            <artifactId>rxjava</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse.microprofile.context-propagation</groupId>
             <artifactId>microprofile-context-propagation-api</artifactId>
             <scope>test</scope>
@@ -133,7 +128,6 @@
                                         <layer>microprofile-context-propagation</layer>
                                         <layer>microprofile-context-propagation-jta</layer>
                                         <layer>microprofile-reactive-streams-operators</layer>
-                                        <layer>microprofile-reactive-streams-operators-rxjava2</layer>
                                     </layers>
                                 </config>
                             </configurations>

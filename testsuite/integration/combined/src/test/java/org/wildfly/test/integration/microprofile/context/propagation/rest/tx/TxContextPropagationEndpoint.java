@@ -20,7 +20,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -44,8 +43,6 @@ import org.eclipse.microprofile.context.ThreadContext;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.jboss.resteasy.annotations.Stream;
 import org.reactivestreams.Publisher;
-
-import io.reactivex.Single;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -182,49 +179,7 @@ public class TxContextPropagationEndpoint {
 
     @Transactional
     @GET
-    @Path("/transaction-single")
-    public Single<String> transactionSingle() throws SystemException {
-        ContextEntity entity = new ContextEntity();
-        entity.setName("Stef");
-        em.persist(entity);
-
-        Transaction t1 = tm.getTransaction();
-        TestUtils.assertNotNull("No tx", t1);
-        // our entity
-        TestUtils.assertEquals(1, TestUtils.count(em));
-
-        return txBean.doInTxSingle()
-                // this makes sure we get executed in another scheduler
-                .delay(100, TimeUnit.MILLISECONDS)
-                .map(text -> {
-                    Transaction t2;
-                    try {
-                        t2 = tm.getTransaction();
-                    } catch (SystemException e) {
-                        throw new RuntimeException(e);
-                    }
-                    TestUtils.assertEquals(t1, t2);
-                    TestUtils.assertEquals(Status.STATUS_ACTIVE, t2.getStatus());
-                    return text;
-                });
-    }
-
-    @Transactional
-    @GET
-    @Path("/transaction-single2")
-    public Single<String> transactionSingle2() throws SystemException {
-        Single<String> ret = Single.just("OK");
-        //Check we have both entities
-        TestUtils.assertEquals(2, TestUtils.count(em));
-
-        // now delete both entities
-        TestUtils.assertEquals(2, TestUtils.deleteAll(em));
-        return ret;
-    }
-
-    @Transactional
-    @GET
-    @Path("/transaction-publisher")
+    @Path("/transaction-publisher-builder")
     @Stream(value = Stream.MODE.RAW)
     public Publisher<String> transactionPublisher() throws SystemException {
         ContextEntity entity = new ContextEntity();
@@ -237,25 +192,38 @@ public class TxContextPropagationEndpoint {
         // our entity
         TestUtils.assertEquals(1, TestUtils.count(em));
 
-        return txBean.doInTxPublisher()
+        return txBean.doInTxRsoPublisher()
                 // this makes sure we get executed in another scheduler
-                .delay(100, TimeUnit.MILLISECONDS)
+                .map(v -> {
+                    try {
+                        // RSO does not have delay() like RxJava so add our own short sleep to make
+                        // this happen after the request has completed
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                    return v;
+                })
                 .map(text -> {
                     Transaction t2;
+                    int status;
                     try {
                         t2 = tm.getTransaction();
+                        status = t2.getStatus();
                     } catch (SystemException e) {
                         throw new RuntimeException(e);
                     }
                     TestUtils.assertEquals(t1, t2);
-                    TestUtils.assertEquals(Status.STATUS_ACTIVE, t2.getStatus());
+                    TestUtils.assertEquals(Status.STATUS_ACTIVE, status);
                     return text;
-                });
+                })
+                .buildRs();
     }
 
     @Transactional
     @GET
-    @Path("/transaction-rso-publisher")
+    @Path("/transaction-publisher")
     @Stream(value = Stream.MODE.RAW)
     public Publisher<String> transactionRsoPublisher() throws SystemException {
         ContextEntity entity = new ContextEntity();
@@ -271,6 +239,8 @@ public class TxContextPropagationEndpoint {
         return txBean.doInTxRsoPublisher()
                 .map(v -> {
                     try {
+                        // RSO does not have delay() like RxJava so add our own short sleep to make
+                        // this happen after the request has completed
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();

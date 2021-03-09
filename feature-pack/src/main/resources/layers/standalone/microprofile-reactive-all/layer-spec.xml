@@ -20,7 +20,6 @@
         <layer name="microprofile-context-propagation"/>
         <layer name="microprofile-context-propagation-jta"/>
         <layer name="microprofile-reactive-messaging-connectors"/>
-        <layer name="microprofile-reactive-streams-operators-rxjava2"/>
     </dependencies>
 
     <packages>

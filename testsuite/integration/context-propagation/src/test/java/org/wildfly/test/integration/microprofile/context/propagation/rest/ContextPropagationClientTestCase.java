@@ -26,7 +26,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -49,9 +48,7 @@ public class ContextPropagationClientTestCase {
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "ctx-ppgn-endpoint.war")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .setWebXML(ContextPropagationClientTestCase.class.getPackage(), "web.xml")
-                .addPackage(ContextPropagationClientTestCase.class.getPackage())
-                // TODO add to deployment unit dependencies?
-                .addAsResource(new StringAsset("Dependencies: io.reactivex.rxjava2.rxjava\n"), "META-INF/MANIFEST.MF");
+                .addPackage(ContextPropagationClientTestCase.class.getPackage());
 
         return webArchive;
     }
@@ -65,12 +62,6 @@ public class ContextPropagationClientTestCase {
     @Test
     public void testTcclThreadContextPropagation() {
         RestAssured.when().get(url.toExternalForm() + "context/tccl-tc").then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Test
-    public void testTcclRxJavaPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/tccl-rxjava").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -91,13 +82,6 @@ public class ContextPropagationClientTestCase {
     @Test
     public void testRESTEasyThreadContextPropagation() {
         RestAssured.when().get(url.toExternalForm() + "context/resteasy-tc").then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Ignore("TODO we don't have RestEasy context propagation yet")
-    @Test
-    public void testRESTEasyRxJavaPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/resteasy-rxjava").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
@@ -124,13 +108,6 @@ public class ContextPropagationClientTestCase {
 
     @Ignore("we don't have servlet context propagation yet")
     @Test
-    public void testServletContextRxJavaPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/servlet-rxjava").then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Ignore("we don't have servlet context propagation yet")
-    @Test
     public void testServletContextRsoPropagation() {
         RestAssured.when().get(url.toExternalForm() + "context/servlet-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
@@ -149,12 +126,6 @@ public class ContextPropagationClientTestCase {
     }
 
     @Test
-    public void testCdiRxJavaPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/cdi-rxjava").then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Test
     public void testCdiRsoPropagation() {
         RestAssured.when().get(url.toExternalForm() + "context/cdi-rso").then()
                 .statusCode(Response.Status.OK.getStatusCode());
@@ -169,13 +140,6 @@ public class ContextPropagationClientTestCase {
     @Test
     public void testNoCdiThreadContextPropagation() {
         RestAssured.when().get(url.toExternalForm() + "context/nocdi-tc").then()
-                .statusCode(Response.Status.OK.getStatusCode());
-    }
-
-    @Ignore("This is not possible, since the Publisher uses the 'all' context")
-    @Test
-    public void testNoCdiRxJavaPropagation() {
-        RestAssured.when().get(url.toExternalForm() + "context/nocdi-rxjava").then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 

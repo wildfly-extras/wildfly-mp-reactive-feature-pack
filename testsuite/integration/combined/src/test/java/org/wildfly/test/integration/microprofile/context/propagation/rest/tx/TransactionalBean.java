@@ -25,10 +25,6 @@ import javax.transaction.Transactional.TxType;
 import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 
-import io.reactivex.Flowable;
-import io.reactivex.Single;
-
-
 @ApplicationScoped
 public class TransactionalBean {
 
@@ -42,28 +38,6 @@ public class TransactionalBean {
         ContextEntity entity = new ContextEntity();
         entity.setName("Stef");
         em.persist(entity);
-    }
-
-    @Transactional(value = TxType.REQUIRES_NEW)
-    public Single<String> doInTxSingle() {
-        TestUtils.assertEquals(0, TestUtils.count(em));
-
-        ContextEntity entity = new ContextEntity();
-        entity.setName("Stef");
-        em.persist(entity);
-
-        return Single.just("OK");
-    }
-
-    @Transactional(value = TxType.REQUIRES_NEW)
-    public Flowable<String> doInTxPublisher() {
-        TestUtils.assertEquals(0, TestUtils.count(em));
-
-        ContextEntity entity = new ContextEntity();
-        entity.setName("Stef");
-        em.persist(entity);
-
-        return Flowable.fromArray("OK");
     }
 
     @Transactional(value = TxType.REQUIRES_NEW)

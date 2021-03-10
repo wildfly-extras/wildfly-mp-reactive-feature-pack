@@ -30,7 +30,7 @@
         </packages>
     </feature-pack>
     <!--
-        When relasing and updating the version here. Remember to also update the version in the main README!!!
+        When releasing and updating the version here. Remember to also update the version in the main README!!!
     -->
     <feature-pack location="org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:2.0.0.Beta1-SNAPSHOT">
         <default-configs inherit="false"/>

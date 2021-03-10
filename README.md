@@ -1,14 +1,36 @@
 ![CI](https://github.com/kabir/wildfly-mp-reactive-feature-pack/workflows/Galleon%20Pack%20Template%20Java%20CI/badge.svg)
 
-> :warning: This currently relies on a WildFly snapshot built from
-[kabir/wildfly/tree/reactive-port](https://github.com/kabir/wildfly/tree/reactive-port). This
-contains parts of the reactive functionality, while the rest resides in this feature pack.
-Use the [master](https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/tree/master)
-branch for stable releases. 
+> :warning: **This stream of the feature pack only supports WildFly 23. For previous versions of WildFly, try the
+[1.0.x releases](./releases).** This is because MicroProfile Reactive Messaging and the Kafka integration moved into WildFly 23.
+Prior to WildFly 23, this functionality was supplied by this feature pack.
 
 # WildFly MicroProfile Reactive Feature Pack
 
-This repository contains a Galleon feature pack to add the MicroProfile reactive subsystems to WildFly.
+**If you are an end-user and not a project developer (or especially interested), use the latest tag for this README and other information.**
+
+This repository contains a Galleon feature pack to extend the MicroProfile reactive subsystems offered by WildFly.
+WildFly 23 itself contains:
+* MicroProfile Reactive Messaging 1.0
+** The Kafka connector
+* MicroProfile Reactive Streams Operators 1.0
+
+This feature pack contains functionality to:
+* Allow MicroProfile Reactive Messaging functionality beyond what is offered by 1.0, by passing in the
+`-Djboss.as.reactive.messaging.experimental=true` system property on server start. This allows you to use `@Channel`
+and `Emitter` which were introduced after 1.0. These allow you to have user-initiated code interact with the streams
+managed by Reactive Messaging.
+* Enable MicroProfile Context Propagation 1.0. This is useful in the context of user-initiated code interacting with
+the streams, for example to be able to propagate the main thread's transaction to reactive style callouts which might be
+happening in another thread.
+* Enable other connectors for Reactive Messaging, currently we have
+** MQTT
+** AMQP
+
+If you would like to see more Reactive Messaging connectors here and are willing to give integrating them a go, we use the
+[SmallRye](https://github.com/smallrye/smallrye-reactive-messaging) implementations. Get in touch if you are interested,
+and I can offer advice.
+
+# Installing the Feature Pack
 Galleon is the tool we use internally to build the WildFly server. See the Galleon 
 [documentation](https://docs.wildfly.org/galleon/) for more background about the concepts.
 
@@ -58,16 +80,18 @@ Weld (CDI) amongst other things.
 
 ## WildFly Layers
 There is a list of all our layers defined by WildFly and WildFly Core in our 
-[documentation](https://docs.wildfly.org/20/Admin_Guide.html#wildfly-galleon-layers).
+[documentation](https://docs.wildfly.org/23/Admin_Guide.html#wildfly-galleon-layers).
 
-However, if you want to understand better what their dependencies are, you can look at the 
+If you want to understand better what their dependencies are, you can look at the
 layer-spec.xml for the various layers in the following locations:
-* WildFly Core's [Core Feature Pack](https://github.com/wildfly/wildfly-core/tree/12.0.1.Final/core-galleon-pack/src/main/resources/layers/standalone)
-* WildFly's [Servlet Feature Pack](https://github.com/wildfly/wildfly/tree/20.0.0.Final/servlet-galleon-pack/src/main/resources/layers/standalone)
-* WildFly's [EE Feature Pack](https://github.com/wildfly/wildfly/tree/20.0.0.Final/ee-galleon-pack/src/main/resources/layers/standalone)
-* WildFly's [Full Feature Pack](https://github.com/wildfly/wildfly/tree/20.0.0.Final/galleon-pack/src/main/resources/layers/standalone)
+* WildFly Core's [Core Feature Pack](https://github.com/wildfly/wildfly-core/tree/15.0.0.Final/core-feature-pack/galleon-common/src/main/resources/layers/standalone)
+* WildFly's [Servlet Feature Pack](https://github.com/wildfly/wildfly/tree/23.0.0.Final/servlet-feature-pack/galleon-common/src/main/resources/layers/standalone)
+* WildFly's [EE Feature Pack](https://github.com/wildfly/wildfly/tree/23.0.0.Final/ee-feature-pack/galleon-common/src/main/resources/layers/standalone)
+* WildFly's [MicroProfile Feature Pack](https://github.com/wildfly/wildfly/tree/23.0.0.Final/microprofile/galleon-common/src/main/resources/layers/standalone)
 
-Note that the above links take you to the versions used for WildFly 20.0.0.Final. If you
+We will use 'WildFly Galleon Pack' to refer to these various feature packs.
+
+Note that the above links take you to the versions used for WildFly 23.0.0.Final. If you
 are interested in another/newer WildFly version, adjust the tag name in the URL. 
 
 -------------
@@ -80,7 +104,10 @@ folder. We'll explain what each of them contains, and their direct dependencies 
 ### microprofile-context-propagation
 The `microprofile-context-propagation` layer installs the `microprofile-context-propagation-smallrye` subsystem, so you can use
 the MicroProfile [Context Propagation](https://github.com/eclipse/microprofile-context-propagation) APIs 
-from your application.
+from your application. The traditional way of propagating state using ThreadLocals does not work well in the reactive
+world. Async/reactive code often creates a 'pipeline' of code blocks that get executed 'later' - in practice after the
+method defining them has returned. MicroProfile Context Propagation is there to help you deal with this, so that your
+deferred code can still for example latch onto the transaction initiated by the calling method.
 
 Note although the core context propagation mechanism works, we are still missing things in WildFly 20 for this
 to work totally. You currently get context propagation for the following:
@@ -96,56 +123,23 @@ What is missing is:
 This might still be enough for your application, and we hope to be able to add these soon. 
 
 Layer Dependencies:
-* `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
-* `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
+* `cdi` - From the WildFly Galleon Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
+* `microprofile-config` - From the WildFly Galleon Pack. It contains the `microprofile-config-smallrye` subsystem
 which implements MicroProfile Config. 
-* `microprofile-reactive-streams-operators` - From this feature pack, as described in this document.
+* `microprofile-reactive-streams-operators` - From the WildFly Galleon Pack. It contains the
+`microprofile-reactive-streams-operators-smallrye` subsystem so you can use the MicroProfile
+[Reactive Streams Operators](https://github.com/eclipse/microprofile-reactive-streams-operators)
+classes from your application.
 
 #### microprofile-context-propagation-jta
 The `microprofile-context-propagation-jta` layer installs the ThreadContextProvider propagating transactions.
 
 Layer Dependencies:
 * `microprofile-context-propagation` - From this feature pack, as described in this document.
-* `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
+* `transactions` - From the WildFly Galleon Pack. It contains the `transactions` subsystem which contains the
 `TransactionManager`. This is needed for propagation of the current transaction.
 
-### microprofile-reactive-streams-operators
-The `microprofile-reactive-streams-operators` layer installs the `microprofile-reactive-streams-operators-smallrye` subsystem,
-so you can use the MicroProfile [Reactive Streams Operators](https://github.com/eclipse/microprofile-reactive-streams-operators)
-classes from your application. 
-
-Layer Dependencies:
-* `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
-
-#### microprofile-reactive-streams-operators-rxjava2
-This layer enables the use of classes for RxJava2, e.g. `io.reactivex.Flowable` and `io.reactivex.Single`. 
-
-If provisioned, you will get:
-* Transactions extended to the end of methods returning an RxJava2 type, assuming that you have also provisioned 
-`context-propagation`
-* Automatic context propagation for RxJava2 classes, again assuming that you have also provisioned `context-propagation`
-* REST endpoints returning an RxJava2 type will be treated as asynchronous calls
-
-Layer Dependencies:
-* `microprofile-reactive-streams-operators` - From this feature pack, as described in this document.
-
-### microprofile-reactive-messaging
-The `microprofile-reactive-messaging` layer installs the `microprofile-reactive-messaging-smallrye` subsystem,
-which implements MicroProfile [Reactive Messaging](https://github.com/eclipse/microprofile-reactive-messaging) 
-functionality. 
-
-**Note:** this layer only installs the core functionality which gives you non-blocking asynchronous
-message passing within your application. To install connectors to interact with external systems you need to 
-install one of the layers that provide connectors to these external systems. They are listed in the below sub-sections.
-
-Layer Dependencies:
-* `cdi` - From WildFly's Full Feature Pack. It contains the `weld` subsystem which implements Jakarta EE CDI.
-* `microprofile-config` - From WildFly's Full Feature Pack. It contains the `microprofile-config-smallrye` subsystem
-which implements MicroProfile Config. 
-* `microprofile-reactive-streams-operators` - From this feature pack, as described above.
-* `transactions` - From WildFly's Full Feature Pack. It contains the `transactions` subsystem which contains the 
-`TransactionManager`.
-
+### MicroProfile Reactive Messaging Connectors
 #### microprofile-reactive-messaging-amqp
 The `microprofile-reactive-messaging-amqp` layer installs the AMQP connector so you can interact with AMQP enabled message
 brokers.
@@ -157,13 +151,19 @@ Layer Dependencies:
 The `microprofile-reactive-messaging-kafka` layer installs the Kafka connector so you can interact with Kafka streams.
 
 Layer Dependencies:
-* `microprofile-reactive-messaging` - From this feature pack, as described above.
+* `microprofile-reactive-messaging` - From the WildFly Galleon Pack. It contains the
+`microprofile-reactive-messaging-smallrye` subsystem so you can use the MicroProfile
+[Reactive Messaging](https://github.com/eclipse/microprofile-reactive-messaging)
+classes from your application.
 
 #### microprofile-reactive-messaging-mqtt
 The `microprofile-reactive-messaging-mqtt` layer installs the MQTT connector so you can interact with a MQTT server.
 
 Layer Dependencies:
-* `microprofile-reactive-messaging` - From this feature pack, as described above.
+* `microprofile-reactive-messaging` - From the WildFly Galleon Pack. It contains the
+`microprofile-reactive-messaging-smallrye` subsystem so you can use the MicroProfile
+[Reactive Messaging](https://github.com/eclipse/microprofile-reactive-messaging)
+classes from your application.
 
 #### microprofile-reactive-messaging-connectors
 
@@ -171,7 +171,8 @@ The `microprofile-reactive-messaging-connectors` layer is a convenience layer, w
 
 Layer Dependencies:
 * `microprofile-reactive-messaging-amqp` - From this feature pack, as described above.
-* `microprofile-reactive-messaging-kafka` - From this feature pack, as described above.
+* `microprofile-reactive-messaging-kafka` - From the WildFly Galleon Pack. It installs the Kafka connector so you
+can interact with a Kafka server.
 * `microprofile-reactive-messaging-mqtt` - From this feature pack, as described above.
 
 ### microprofile-reactive-all
@@ -196,9 +197,8 @@ The [provision.xml](provision.xml) file contains everything we need to install a
 spec subsystems.
 
 It contains a reference to the WildFly feature pack. It's version is `current` which means it will download the 
-latest released version (which at the time of writing is 20.0.0.Final. If you want to choose a different version, 
-you can modify the file and append the version as `current:19.0.0.Final` for example. Note that WildFly 19.0.0.Final
-is the first version this feature pack can be installed into, although some of the functionality requires WildFly 20.0.0.Final.
+latest released version (which at the time of writing is 23.0.0.Final. If you want to choose a different version,
+you can modify the file and append the version as `current:23.0.1.Final` for example.
 
 Next it contains a reference to this feature pack.
 
@@ -227,13 +227,13 @@ result will be the same as the zip you download from the [wildfly.org downloads 
 galleon.sh install wildfly:current --dir=wildfly
 ```
 The `wildfly:current` above tells Galleon to provision the latest version of WildFly which
-at the time of writing is 20.0.0.Final. If you want to install a particular version of 
+at the time of writing is 23.0.0.Final. If you want to install a particular version of
 WildFly, you can append the version, e.g:
 
 <!-- Leave this as is -->
-* `wildfly:current#23.0.0.Beta1-SNAPSHOT` - installs WildFly from locally build maven artifacts
+* `wildfly:current#23.0.0.Beta1` - installs WildFly from locally build maven artifacts
 
-Note that the minimal supported WildFly version for this feature pack is 20.0.0.Final. 
+Note that the minimal supported WildFly version for this feature pack is 23.0.0.Final.
 
 `--dir` specifies the directory to install the server into. In this case I am using 
 a relative directory called `wildfly`. 

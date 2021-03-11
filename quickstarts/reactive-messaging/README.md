@@ -30,7 +30,7 @@ messaging system while reusing the code. These are in the following sub-modules
 The reason we have the `core` module, is that we use this both for community users to try out things we don't want in
 WildFly it self yet, as well as an incubator for things that make it into WildFly itself.
 This started off containing a QuickStart for Reactive Messaging with Kafka, which can now be found
-link:here[https://github.com/wildfly/quickstart/tree/master/microprofile-reactive-messaging-kafka] (Make sure to select
+[here](https://github.com/wildfly/quickstart/tree/master/microprofile-reactive-messaging-kafka) (Make sure to select
 the tag for the WildFly version you are using!). In the future we may add other Reactive Messaging connectors to other
 messaging systems.
 
@@ -46,7 +46,7 @@ system by running:
 docker-compose up
 ```
 Next you need to provision a server (remember you need to have Galleon installed as described in 
-the [main README]((../../README.md)). You can do this by going to the relevant child module (e.g. `kafka/`) in a new
+the [main README](../../README.md). You can do this by going to the relevant child module (e.g. `kafka/`) in a new
 terminal, and then run:
 ```
 galleon.sh provision ./provision.xml --dir=target/my-wildfly

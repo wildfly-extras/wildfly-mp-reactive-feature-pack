@@ -88,14 +88,12 @@ jobs:
       - name: Set WILDFLY_VERSION
         run: |
           TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
-          echo "::set-env name=WILDFLY_VERSION::${TMP}"
           echo "WILDFLY_VERSION=${TMP}" >> $GITHUB_ENV
         working-directory: wildfly
 
       - name: Set WILDFLY_CORE_VERSION
         run: |
           TMP="$(mvn help:evaluate -Dexpression=version.org.wildfly.core -pl . | grep -v '^\[')"
-          echo "::set-env name=WILDFLY_CORE_VERSION::${TMP}"
           echo "WILDFLY_CORE_VERSION=${TMP}" >> $GITHUB_ENV
         working-directory: wildfly
 
@@ -124,8 +122,6 @@ jobs:
       - name: Set FEATURE_PACK_VERSION
         run: |
           TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
-          echo "::set-env name=FEATURE_PACK_VERSION::${TMP}" ;
-          echo "TMP ${TMP}"
           echo "FEATURE_PACK_VERSION=${TMP}" >> $GITHUB_ENV
         working-directory: main
 

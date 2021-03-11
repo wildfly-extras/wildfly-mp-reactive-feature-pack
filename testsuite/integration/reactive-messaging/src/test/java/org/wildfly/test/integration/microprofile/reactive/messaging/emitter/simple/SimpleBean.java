@@ -26,6 +26,8 @@ import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 
+import io.smallrye.reactive.messaging.annotations.Broadcast;
+
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
  */
@@ -34,6 +36,7 @@ public class SimpleBean {
 
     static final List<String> RESULT = new CopyOnWriteArrayList<>();
 
+    @Broadcast(2)
     @Outgoing("source")
     public PublisherBuilder<String> source() {
         return ReactiveStreams.of("hello", "with", "SmallRye", "reactive", "message");

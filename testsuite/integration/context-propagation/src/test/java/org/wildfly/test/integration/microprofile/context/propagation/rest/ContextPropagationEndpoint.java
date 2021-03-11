@@ -19,7 +19,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.CDI;
@@ -42,8 +41,6 @@ import org.eclipse.microprofile.context.ThreadContext;
 import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.reactivestreams.Publisher;
 import org.wildfly.security.manager.WildFlySecurityManager;
-
-import io.reactivex.Flowable;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -95,22 +92,6 @@ public class ContextPropagationEndpoint {
     }
 
     @GET
-    @Path("/tccl-rxjava")
-    public Publisher<String> tcclRxJavaTest() {
-        ClassLoader tccl = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
-        return Flowable.fromArray("OK")
-                // this makes sure we get executed in another scheduler
-                .delay(100, TimeUnit.MILLISECONDS)
-                .map(text -> {
-                    ClassLoader tccl2 = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
-                    if (tccl != tccl2) {
-                        throw new IllegalStateException("TCCL was not the same");
-                    }
-                    return text;
-                });
-    }
-
-    @GET
     @Path("/tccl-rso")
     public Publisher<String> tcclRsoJavaTest() {
         ClassLoader tccl = WildFlySecurityManager.getCurrentContextClassLoaderPrivileged();
@@ -157,18 +138,6 @@ public class ContextPropagationEndpoint {
     }
 
     @GET
-    @Path("/resteasy-rxjava")
-    public Publisher<String> resteasyRxJavaTest(@Context UriInfo uriInfo) {
-        return Flowable.fromArray("OK")
-                // this makes sure we get executed in another scheduler
-                .delay(100, TimeUnit.MILLISECONDS)
-                .map(text -> {
-                    uriInfo.getAbsolutePath();
-                    return text;
-                });
-    }
-
-    @GET
     @Path("/resteasy-rso")
     public Publisher<String> resteasyRsoTest(@Context UriInfo uriInfo) {
         return ReactiveStreams.of("OK")
@@ -208,19 +177,6 @@ public class ContextPropagationEndpoint {
             servletRequest.getContentType();
             return text;
         }, executor);
-    }
-
-    @GET
-    @Path("/servlet-rxjava")
-    public Publisher<String> servletRxJavaTest(@Context HttpServletRequest servletRequest) {
-        CompletableFuture<String> ret = allExecutor.completedFuture("OK");
-        return Flowable.fromArray("OK")
-                // this makes sure we get executed in another scheduler
-                .delay(100, TimeUnit.MILLISECONDS)
-                .map(text -> {
-                    servletRequest.getContentType();
-                    return text;
-                });
     }
 
     @GET
@@ -272,23 +228,6 @@ public class ContextPropagationEndpoint {
             }
             return text;
         }, executor);
-    }
-
-    @GET
-    @Path("/cdi-rxjava")
-    public Publisher<String> cdiRxJavaTest() {
-        RequestBean instance = getRequestBean();
-
-        return Flowable.fromArray("OK")
-                // this makes sure we get executed in another scheduler
-                .delay(100, TimeUnit.MILLISECONDS)
-                .map(text -> {
-                    RequestBean instance2 = getRequestBean();
-                    if (instance.id() != instance2.id()) {
-                        throw new IllegalStateException("Instances were not the same");
-                    }
-                    return text;
-                });
     }
 
     @GET

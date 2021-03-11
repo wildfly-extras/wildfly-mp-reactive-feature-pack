@@ -22,6 +22,7 @@
     <resources>
         <artifact name="${io.smallrye:smallrye-context-propagation}"/>
         <artifact name="${io.smallrye:smallrye-context-propagation-cdi}"/>
+        <artifact name="${io.smallrye:smallrye-context-propagation-storage}"/>
     </resources>
 
     <dependencies>
@@ -48,8 +49,5 @@
 
         <!-- Pulled in by the context-propagation-jta layer -->
         <module name="io.smallrye.context-propagation.providers.jta" services="import" optional="true"/>
-
-        <!-- Pulled in by reactive-streams-operators-rxjava2 layer -->
-        <module name="io.smallrye.context-propagation.propagators.rxjava2" services="import" optional="true"/>
     </dependencies>
 </module>

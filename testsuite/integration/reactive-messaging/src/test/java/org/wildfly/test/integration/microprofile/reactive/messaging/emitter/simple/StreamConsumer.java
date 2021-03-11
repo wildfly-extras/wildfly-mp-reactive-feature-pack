@@ -23,8 +23,7 @@ import javax.inject.Inject;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Message;
-
-import io.reactivex.Flowable;
+import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -34,13 +33,15 @@ public class StreamConsumer {
 
     @Inject
     @Channel("source")
-    Flowable<Message<String>> sourceStream;
+    PublisherBuilder<Message<String>> sourceStream;
 
-    public List<String> consume() {
-        return Flowable.fromPublisher(sourceStream)
+    public List<String> consume() throws Exception {
+        return sourceStream
                 .map(Message::getPayload)
                 .toList()
-                .blockingGet();
+                .run()
+                .toCompletableFuture().get();
+
     }
 
 }

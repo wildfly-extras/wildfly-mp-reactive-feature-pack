@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-reactive-parent</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>1.0.3.Final-SNAPSHOT</version>
+        <version>2.0.0.Beta1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -99,7 +99,6 @@
                                         <layer>microprofile-context-propagation</layer>
                                         <layer>microprofile-reactive-messaging</layer>
                                         <layer>microprofile-reactive-streams-operators</layer>
-                                        <layer>microprofile-reactive-streams-operators-rxjava2</layer>
                                     </layers>
                                 </config>
                             </configurations>

@@ -23,10 +23,16 @@ the target messaging system. They also provide a `provision.xml` to provision a 
 Galleon layers installed. Finally they contain a 
 `src/main/resources/META-INF/microprofile-config.properties` which configures the application for use with the target
 messaging system while reusing the code. These are in the following sub-modules
-    * [kafka/](kafka) - Uses Kafka as the messaging system
     * [amqp/](amqp) - Uses AMQP as the messaging system
     * [mqtt/](mqtt) - Uses MQTT as the messaging system. Due to some limitations in the MQTT protocol, this example
     copies the code from `core/` and adjusts it slightly.
+
+The reason we have the `core` module, is that we use this both for community users to try out things we don't want in
+WildFly it self yet, as well as an incubator for things that make it into WildFly itself.
+This started off containing a QuickStart for Reactive Messaging with Kafka, which can now be found
+link:here[https://github.com/wildfly/quickstart/tree/master/microprofile-reactive-messaging-kafka] (Make sure to select
+the tag for the WildFly version you are using!). In the future we may add other Reactive Messaging connectors to other
+messaging systems.
 
 ## How to run it
 First you need to build the contents of this repository. You can skip this step if you have checked out a tag since 
@@ -44,10 +50,14 @@ the [main README]((../../README.md)). You can do this by going to the relevant c
 terminal, and then run:
 ```
 galleon.sh provision ./provision.xml --dir=target/my-wildfly
-./target/my-wildfly/bin/standalone.sh
+./target/my-wildfly/bin/standalone.sh -Djboss.as.reactive.messaging.experimental=true
 ```
 This provisions the server with the relevant Galleon layers, and starts it. The
 [main README](../../README.md) contains information about the layers in this feature pack.
+
+The `-Djboss.as.reactive.messaging.experimental` system property is needed to allow annotations
+understood by the SmallRye implementation of MicroProfile Reactive Messaging that are
+not part of the MicroProfile Reactive Messaging 1.0 specification such as `@Channel`.
 
 Then in another terminal window, go to the relevant child module directory and run:
 ```
@@ -61,16 +71,16 @@ Finally go to http://localhost:8080/quickstart/ and see the prices be updated fr
 
 ### Price Generator
 The [PriceGenerator](core/src/main/java/org/wildfly/extras/quickstart/microprofile/reactive/messaging/PriceGenerator.java) 
-is a class containing a method that generates some random prices every 5 seconds:
+is a class containing a method that simulates calling an external resource which returns a random price every 5 seconds:
 ```
 @ApplicationScoped
 public class PriceGenerator {
-    private Random random = new Random();
+    @Inject
+    private MockExternalAsyncResource mockExternalAsyncResource;
 
     @Outgoing("generated-price")
-    public Flowable<Integer> generate() {
-        return Flowable.interval(5, TimeUnit.SECONDS)
-                .map(tick -> random.nextInt(100));
+    public CompletionStage<Integer> generate() {
+        return mockExternalAsyncResource.getNextValue();
     }
 }
 ```

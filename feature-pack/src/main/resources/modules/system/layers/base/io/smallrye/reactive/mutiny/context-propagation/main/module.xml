@@ -21,10 +21,11 @@
     </properties>
 
     <resources>
-        <artifact name="${io.smallrye.reactive:mutiny-context-propagation}"/>
+        <artifact name="${io.smallrye.reactive:mutiny-smallrye-context-propagation}"/>
     </resources>
 
     <dependencies>
+        <module name="io.smallrye.context-propagation"/>
         <module name="io.smallrye.reactive.mutiny"/>
         <module name="org.eclipse.microprofile.context-propagation.api"/>
         <module name="org.reactivestreams"/>

@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-reactive-testsuite</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>1.0.3.Final-SNAPSHOT</version>
+        <version>2.0.0.Beta1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -29,8 +29,6 @@
     <name>WildFly Reactive MicroProfile - TCKs</name>
     <packaging>pom</packaging>
     <modules>
-        <module>reactive-messaging</module>
-        <module>reactive-streams-operators</module>
         <module>context-propagation</module>
     </modules>
 

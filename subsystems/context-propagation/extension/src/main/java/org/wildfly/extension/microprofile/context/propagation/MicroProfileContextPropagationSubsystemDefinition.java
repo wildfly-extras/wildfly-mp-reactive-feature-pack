@@ -27,10 +27,10 @@ import java.util.Collections;
 
 import org.jboss.as.controller.AbstractBoottimeAddStepHandler;
 import org.jboss.as.controller.AttributeDefinition;
-import org.jboss.as.controller.ModelOnlyRemoveStepHandler;
 import org.jboss.as.controller.OperationContext;
 import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PersistentResourceDefinition;
+import org.jboss.as.controller.ReloadRequiredRemoveStepHandler;
 import org.jboss.as.controller.SimpleResourceDefinition;
 import org.jboss.as.controller.capability.RuntimeCapability;
 import org.jboss.as.controller.registry.ManagementResourceRegistration;
@@ -40,6 +40,7 @@ import org.jboss.as.server.DeploymentProcessorTarget;
 import org.jboss.dmr.ModelNode;
 import org.wildfly.extension.microprofile.context.propagation._private.MicroProfileContextPropagationLogger;
 import org.wildfly.extension.microprofile.context.propagation.deployment.ContextPropagationDependencyProcessor;
+import org.wildfly.extension.microprofile.context.propagation.deployment.ContextPropagationDeploymentProcessor;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -59,7 +60,7 @@ public class MicroProfileContextPropagationSubsystemDefinition extends Persisten
                         MicroProfileContextPropagationExtension.SUBSYSTEM_PATH,
                         MicroProfileContextPropagationExtension.getResourceDescriptionResolver(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME))
                 .setAddHandler(AddHandler.INSTANCE)
-                .setRemoveHandler(new ModelOnlyRemoveStepHandler())
+                .setRemoveHandler(new ReloadRequiredRemoveStepHandler())
                 .setCapabilities(CONTEXT_PROPAGATION_CAPABILITY)
         );
     }
@@ -100,7 +101,8 @@ public class MicroProfileContextPropagationSubsystemDefinition extends Persisten
                     final int POST_MODULE_MICROPROFILE_CONTEXT_PROPAGATION = 14240;
 
                     processorTarget.addDeploymentProcessor(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, DEPENDENCIES, DEPENDENCIES_MICROPROFILE_CONTEXT_PROPAGATION, new ContextPropagationDependencyProcessor());
-                    processorTarget.addDeploymentProcessor(MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, POST_MODULE, POST_MODULE_MICROPROFILE_CONTEXT_PROPAGATION, new ContextPropagationDependencyProcessor());
+                    processorTarget.addDeploymentProcessor(
+                            MicroProfileContextPropagationExtension.SUBSYSTEM_NAME, POST_MODULE, POST_MODULE_MICROPROFILE_CONTEXT_PROPAGATION, new ContextPropagationDeploymentProcessor(WELD_CAPABILITY_NAME));
                 }
             }, RUNTIME);
 

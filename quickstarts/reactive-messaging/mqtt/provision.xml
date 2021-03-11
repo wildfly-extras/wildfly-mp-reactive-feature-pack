@@ -29,7 +29,7 @@
             <include name="docs.licenses"/>
         </packages>
     </feature-pack>
-    <feature-pack location="org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:2.0.0.Final">
+    <feature-pack location="org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:2.0.1.Final-SNAPSHOT">
         <default-configs inherit="false"/>
         <packages inherit="false">
             <!-- If docs/licenses is desired, uncomment this line -->

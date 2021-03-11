@@ -1,7 +1,7 @@
 ![CI](https://github.com/kabir/wildfly-mp-reactive-feature-pack/workflows/Galleon%20Pack%20Template%20Java%20CI/badge.svg)
 
 > :warning: **This stream of the feature pack only supports WildFly 23. For previous versions of WildFly, try the
-[1.0.x releases](./releases).** This is because MicroProfile Reactive Messaging and the Kafka integration moved into WildFly 23.
+[1.0.x releases](/releases).** This is because MicroProfile Reactive Messaging and the Kafka integration moved into WildFly 23.
 Prior to WildFly 23, this functionality was supplied by this feature pack.
 
 # WildFly MicroProfile Reactive Feature Pack

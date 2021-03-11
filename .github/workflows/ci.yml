@@ -148,7 +148,9 @@ jobs:
         
       - name: Zip Artifacts
         run: zip -R artifacts.zip 'server.log' 'surefire-reports/*.txt' 'surefire-reports/*.xml'
+        working-directory: main
         
       - uses: actions/upload-artifact@v1
         with:
           name: ci-artifacts-mp-reactive-wf-master
+          path: main/artifacts.zip

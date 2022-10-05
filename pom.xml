@@ -509,8 +509,7 @@
         <module>feature-pack</module>
         <module>build</module>
         <module>testsuite</module>
-        <!--
-        <module>quickstarts</module>-->
+        <module>quickstarts</module>
     </modules>
 
     <profiles>

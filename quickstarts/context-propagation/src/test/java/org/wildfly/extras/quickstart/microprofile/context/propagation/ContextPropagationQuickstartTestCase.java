@@ -40,6 +40,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,6 +53,7 @@ import io.restassured.common.mapper.TypeRef;
 @RunWith(Arquillian.class)
 @RunAsClient
 @ServerSetup(ContextPropagationQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class)
+@Ignore("https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/issues/41")
 public class ContextPropagationQuickstartTestCase {
     @ArquillianResource
     URL url;

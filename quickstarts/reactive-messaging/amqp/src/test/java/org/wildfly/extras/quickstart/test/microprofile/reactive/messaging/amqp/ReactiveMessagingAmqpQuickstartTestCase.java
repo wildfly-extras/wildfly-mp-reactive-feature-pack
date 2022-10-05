@@ -39,6 +39,7 @@ import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.testcontainers.containers.GenericContainer;
@@ -52,6 +53,7 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
 @ServerSetup({
         ReactiveMessagingAmqpQuickstartTestCase.KafkaBootstrapServerSetupTask.class,
         ReactiveMessagingAmqpQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
+@Ignore("https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/issues/41")
 public class ReactiveMessagingAmqpQuickstartTestCase {
     private static final int AMQP_PORT = 5672;
     private static final GenericContainer AMQP = new GenericContainer("vromero/activemq-artemis:2.8.0-alpine")

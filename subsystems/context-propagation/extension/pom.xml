@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-context-propagation-parent</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>3.0.0.Beta1-SNAPSHOT</version>
+        <version>3.0.0.Final</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

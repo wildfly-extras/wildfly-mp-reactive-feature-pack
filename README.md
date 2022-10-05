@@ -234,7 +234,7 @@ at the time of writing is 23.0.0.Final. If you want to install a particular vers
 WildFly, you can append the version, e.g:
 
 <!-- Leave this as is -->
-* `wildfly:current#23.0.0.Beta1` - installs WildFly from locally build maven artifacts
+* `wildfly:current#23.0.0.Final` - installs WildFly from locally build maven artifacts
 
 Note that the minimal supported WildFly version for this feature pack is 23.0.0.Final.
 
@@ -259,14 +259,14 @@ can rerun the above command, and pass in more layers in the `--layers` option if
 Now to install our feature pack, we can run:
 <!-- Should be SNAPSHOT while working and not when we do a release -->
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:3.0.0.Beta1-SNAPSHOT --layers=microprofile-reactive-all --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:3.0.0.Final --layers=microprofile-reactive-all --dir=wildfly
 ```
 which will install all the layers from the MicroProfile reactive feature pack.
 
 To just install the `microprofile-reactive-streams-operators` and `microprofile-context-propagation` layers, we run this instead:
 <!-- Should be SNAPSHOT while working and not when we do a release -->
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:3.0.0.Beta1-SNAPSHOT --layers=microprofile-reactive-streams-operators,microprofile-context-propagation --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:3.0.0.Final --layers=microprofile-reactive-streams-operators,microprofile-context-propagation --dir=wildfly
 ```
 ----
 ## References

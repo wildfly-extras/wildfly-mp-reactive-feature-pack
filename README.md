@@ -38,7 +38,7 @@ Galleon is the tool we use internally to build the WildFly server. See the Galle
 **If you are an end-user and not a project developer (or especially interested), use the latest tag for this 
 README and other information.**  
 
-To install the feature pack you need to [download Galleon](https://github.com/wildfly/galleon/releases) (use the 4.x series)
+To install the feature pack you need to [download Galleon](https://github.com/wildfly/galleon/releases) (use the 5.x series)
 and unzip it somewhere. The rest of this document assumes that you have added the resulting `galleon-x.y.z.Final/bin/` folder
 to your path. 
 

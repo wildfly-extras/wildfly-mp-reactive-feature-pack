@@ -22,7 +22,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.awaitility.Awaitility;
 import org.awaitility.core.ThrowingRunnable;

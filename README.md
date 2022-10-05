@@ -38,7 +38,7 @@ Galleon is the tool we use internally to build the WildFly server. See the Galle
 **If you are an end-user and not a project developer (or especially interested), use the latest tag for this 
 README and other information.**  
 
-To install the feature pack you need to [download Galleon](https://github.com/wildfly/galleon/releases) (use the 4.x series)
+To install the feature pack you need to [download Galleon](https://github.com/wildfly/galleon/releases) (use the 5.x series)
 and unzip it somewhere. The rest of this document assumes that you have added the resulting `galleon-x.y.z.Final/bin/` folder
 to your path. 
 
@@ -234,7 +234,7 @@ at the time of writing is 23.0.0.Final. If you want to install a particular vers
 WildFly, you can append the version, e.g:
 
 <!-- Leave this as is -->
-* `wildfly:current#23.0.0.Beta1` - installs WildFly from locally build maven artifacts
+* `wildfly:current#23.0.0.Final` - installs WildFly from locally build maven artifacts
 
 Note that the minimal supported WildFly version for this feature pack is 23.0.0.Final.
 
@@ -259,14 +259,14 @@ can rerun the above command, and pass in more layers in the `--layers` option if
 Now to install our feature pack, we can run:
 <!-- Should be SNAPSHOT while working and not when we do a release -->
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:2.0.1.Final-SNAPSHOT --layers=microprofile-reactive-all --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:3.0.0.Final --layers=microprofile-reactive-all --dir=wildfly
 ```
 which will install all the layers from the MicroProfile reactive feature pack.
 
 To just install the `microprofile-reactive-streams-operators` and `microprofile-context-propagation` layers, we run this instead:
 <!-- Should be SNAPSHOT while working and not when we do a release -->
 ```
-galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:2.0.1.Final-SNAPSHOT --layers=microprofile-reactive-streams-operators,microprofile-context-propagation --dir=wildfly
+galleon.sh install org.wildfly.extras.reactive:wildfly-microprofile-reactive-feature-pack:3.0.0.Final --layers=microprofile-reactive-streams-operators,microprofile-context-propagation --dir=wildfly
 ```
 ----
 ## References

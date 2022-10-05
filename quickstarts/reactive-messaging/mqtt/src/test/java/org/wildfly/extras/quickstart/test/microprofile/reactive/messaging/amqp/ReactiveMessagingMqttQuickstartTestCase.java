@@ -21,10 +21,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.sse.SseEventSource;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.sse.SseEventSource;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -53,6 +53,7 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
 @ServerSetup({
         ReactiveMessagingMqttQuickstartTestCase.MqttBootstrapServerSetupTask.class,
         ReactiveMessagingMqttQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
+@Ignore("https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/issues/41")
 public class ReactiveMessagingMqttQuickstartTestCase {
     private static final int MQTT_PORT = 1883;
     private static final GenericContainer MQTT = new GenericContainer("eclipse-mosquitto:1.6.2")

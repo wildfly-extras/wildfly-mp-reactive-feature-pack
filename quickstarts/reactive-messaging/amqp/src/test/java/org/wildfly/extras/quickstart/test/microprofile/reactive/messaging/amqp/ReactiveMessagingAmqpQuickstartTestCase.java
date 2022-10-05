@@ -21,10 +21,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.sse.SseEventSource;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.sse.SseEventSource;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -39,6 +39,7 @@ import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.testcontainers.containers.GenericContainer;
@@ -52,6 +53,7 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
 @ServerSetup({
         ReactiveMessagingAmqpQuickstartTestCase.KafkaBootstrapServerSetupTask.class,
         ReactiveMessagingAmqpQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
+@Ignore("https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/issues/41")
 public class ReactiveMessagingAmqpQuickstartTestCase {
     private static final int AMQP_PORT = 5672;
     private static final GenericContainer AMQP = new GenericContainer("vromero/activemq-artemis:2.8.0-alpine")

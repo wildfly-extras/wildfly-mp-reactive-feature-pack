@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-reactive-quickstarts</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>2.0.1.Final-SNAPSHOT</version>
+        <version>3.0.0.Final</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -61,8 +61,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -72,7 +77,7 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
+            <artifactId>resteasy-core-spi</artifactId>
             <scope>provided</scope>
         </dependency>
 

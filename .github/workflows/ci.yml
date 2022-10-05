@@ -3,10 +3,10 @@ name: Feature Pack CI
 on: 
   push:
     branches:
-      - master
+      - 2.0.x
   pull_request:
     branches:
-      - master
+      - 2.0.x
   schedule:
     - cron: '0 0 * * *'
 
@@ -47,110 +47,3 @@ jobs:
           name: ci-artifacts-mp-reactive-21
           path: artifacts.zip
 
-
-  wildfly-master:
-    # This adjusts the build to use the versions from wildfly master
-    name: Against WildFly master
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout feature pack
-        uses: actions/checkout@v2
-        with:
-          path: main
-          
-      - name: Checkout wildfly master
-        uses: actions/checkout@v2
-        with:
-          repository: wildfly/wildfly
-          path: wildfly
-          
-      - uses: actions/cache@v1
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-            
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-          
-      - name: Initialise WildFly versions
-        # Needed to download everything from Maven to not pollute the output in the next steps
-        run: |
-          mvn -B help:evaluate -Dexpression=project.version -pl .
-          mvn -B help:evaluate -Dexpression=version.org.wildfly.core -pl .
-        working-directory: wildfly
-        
-      - name: Set WILDFLY_VERSION
-        run: |
-          TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
-          echo "WILDFLY_VERSION=${TMP}" >> $GITHUB_ENV
-        working-directory: wildfly
-
-      - name: Set WILDFLY_CORE_VERSION
-        run: |
-          TMP="$(mvn help:evaluate -Dexpression=version.org.wildfly.core -pl . | grep -v '^\[')"
-          echo "WILDFLY_CORE_VERSION=${TMP}" >> $GITHUB_ENV
-        working-directory: wildfly
-
-      - name: Show read versions
-        run: |
-          echo "Feature pack version ${FEATURE_PACK_VERSION}"
-          echo "WildFly version ${WILDFLY_VERSION}"
-          echo "WildFly Core version ${WILDFLY_CORE_VERSION}"
-          
-      - name: Build WildFly master
-        run: mvn -B install -DskipTests
-        working-directory: wildfly
-        
-      - name: Build and Test
-        run: |
-          mvn --version
-          mvn -B install -Dversion.org.wildfly=${WILDFLY_VERSION} -Dversion.org.wildfly.core=${WILDFLY_CORE_VERSION} -Dqs.test
-        working-directory: main
-        
-      - name: Initialise Feature Pack version
-        # Needed to download everything from Maven to not pollute the output in the next steps
-        run:
-          mvn help:evaluate -Dexpression=project.version -pl .
-        working-directory: main
-        
-      - name: Set FEATURE_PACK_VERSION
-        run: |
-          TMP="$(mvn help:evaluate -Dexpression=project.version -pl . | grep -v '^\[')"
-          echo "FEATURE_PACK_VERSION=${TMP}" >> $GITHUB_ENV
-        working-directory: main
-
-      - name: Calculate directories to check
-        run: |
-          SRV_DIR="build/target/wildfly-${WILDFLY_VERSION}-mp-reactive-${FEATURE_PACK_VERSION}"
-          MODULES_BASE="${SRV_DIR}/modules/system/layers/base"
-
-          echo "UNDERTOW_MODULE_XML=${MODULES_BASE}/org/wildfly/extension/undertow/main/module.xml" >> $GITHUB_ENV
-          echo "CONTROLLER_MODULE_XML=${MODULES_BASE}/org/jboss/as/controller/main/module.xml" >> $GITHUB_ENV
-          
-      - name: Check versions
-        run: |
-          if grep -q org.wildfly:wildfly-undertow:${WILDFLY_VERSION} "${UNDERTOW_MODULE_XML}" && grep -q org.wildfly.core:wildfly-controller:${WILDFLY_CORE_VERSION} "${CONTROLLER_MODULE_XML}"; then
-           echo "Versions in module.xml files as expected!"
-          else
-           echo "Versions in module.xml files not as expected!"
-           "Expected WildFly version '${WILDFLY_VERSION}' and Core version '${WILDFLY_CORE_VERSION}'"
-           echo "Showing contents of ${UNDERTOW_MODULE_XML} and ${CONTROLLER_MODULE_XML}"
-           echo "Exiting..."
-           exit 1
-          fi
-        working-directory: main
-        
-      - name: Zip Artifacts
-        run: zip -R artifacts.zip 'server.log' 'surefire-reports/*.txt' 'surefire-reports/*.xml'
-        working-directory: main
-        
-      - uses: actions/upload-artifact@v1
-        with:
-          name: ci-artifacts-mp-reactive-wf-master
-          path: main/artifacts.zip

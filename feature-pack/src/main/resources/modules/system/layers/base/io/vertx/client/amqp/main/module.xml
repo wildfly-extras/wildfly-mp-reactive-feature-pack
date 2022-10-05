@@ -27,7 +27,7 @@
 
     <dependencies>
         <module name="org.slf4j"/>
-        <module name="org.apache.log4j"/>
+        <module name="org.apache.logging.log4j.api"/>
         <module name="org.apache.qpid.proton"/>
         <module name="io.vertx.core"/>
         <module name="io.vertx.proton"/>

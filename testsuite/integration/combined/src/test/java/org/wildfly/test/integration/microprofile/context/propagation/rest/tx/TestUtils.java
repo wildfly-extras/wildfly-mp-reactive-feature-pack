@@ -18,9 +18,9 @@ package org.wildfly.test.integration.microprofile.context.propagation.rest.tx;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>

@@ -1,6 +1,6 @@
 package org.wildfly.test.integration.microprofile.context.propagation.rest;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class RequestBean {

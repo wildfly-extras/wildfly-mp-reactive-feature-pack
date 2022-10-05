@@ -18,7 +18,7 @@ package org.wildfly.test.integration.microprofile.context.propagation.rest;
 
 import java.net.URL;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;

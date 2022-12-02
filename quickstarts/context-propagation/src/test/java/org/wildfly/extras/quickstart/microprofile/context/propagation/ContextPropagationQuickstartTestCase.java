@@ -16,11 +16,14 @@
 
 package org.wildfly.extras.quickstart.microprofile.context.propagation;
 
-import io.restassured.RestAssured;
-import io.restassured.common.mapper.TypeRef;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.sse.SseEventSource;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -69,69 +72,83 @@ public class ContextPropagationQuickstartTestCase {
 
     @Test
     public void testPrices() {
-        // Check we don't have any prices
-        List<Price> prices = RestAssured.get(getAddress("prices/all")).as(new TypeRef<List<Price>>() {});
-        Assert.assertTrue(prices.isEmpty());
+        try (Client client = ClientBuilder.newClient()) {
+            // Check we don't have any prices
+            List<Price> prices = client.target(getAddress("prices/all")).request(MediaType.APPLICATION_JSON).get(new GenericType<>() {
+            });
+            Assert.assertTrue(prices.isEmpty());
 
-        // Stream the prices
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(getAddress("prices"));
-        List<Double> received = new CopyOnWriteArrayList<>();
-        SseEventSource source = SseEventSource.target(target).build();
-        source.register(inboundSseEvent -> received.add(Double.valueOf(inboundSseEvent.readData())));
-        source.open();
+            // Stream the prices
+            WebTarget target = client.target(getAddress("prices"));
+            List<Double> received = new CopyOnWriteArrayList<>();
+            SseEventSource source = SseEventSource.target(target).build();
+            source.register(inboundSseEvent -> received.add(Double.valueOf(inboundSseEvent.readData())));
+            source.open();
 
-        // Send the prices
-        Price p1 = new Price();
-        p1.setValue(1.0);
-        Price p2 = new Price();
-        p2.setValue(4.0);
-        Price p3 = new Price();
-        p3.setValue(2.0);
-        RestAssured.given().header("Content-Type", "application/json").body(p1).post(getAddress("")).then().statusCode(204);
-        RestAssured.given().header("Content-Type", "application/json").body(p2).post(getAddress("")).then().statusCode(204);
-        RestAssured.given().header("Content-Type", "application/json").body(p3).post(getAddress("")).then().statusCode(204);
+            // Send the prices
+            Price p1 = new Price();
+            p1.setValue(1.0);
+            Price p2 = new Price();
+            p2.setValue(4.0);
+            Price p3 = new Price();
+            p3.setValue(2.0);
+            final WebTarget postTarget = client.target(getAddress(""));
+            post(postTarget, p1);
+            post(postTarget, p2);
+            post(postTarget, p3);
 
-        await().atMost(100000, MILLISECONDS).until(() -> received.size() == 3);
-        source.close();
+            await().atMost(100000, MILLISECONDS).until(() -> received.size() == 3);
+            source.close();
 
-        Assert.assertTrue(received.contains(p1.getValue()));
-        Assert.assertTrue(received.contains(p2.getValue()));
-        Assert.assertTrue(received.contains(p3.getValue()));
+            Assert.assertTrue(received.contains(p1.getValue()));
+            Assert.assertTrue(received.contains(p2.getValue()));
+            Assert.assertTrue(received.contains(p3.getValue()));
 
-        prices = RestAssured.get(getAddress("prices/all")).as(new TypeRef<List<Price>>() {});
-        Assert.assertEquals(3, prices.size());
-        Assert.assertEquals(p1.getValue(), prices.get(0).getValue());
-        Assert.assertEquals(p2.getValue(), prices.get(1).getValue());
-        Assert.assertEquals(p3.getValue(), prices.get(2).getValue());
+            prices = client.target(getAddress("prices/all")).request().get(new GenericType<>() {});
+            Assert.assertEquals(3, prices.size());
+            Assert.assertEquals(p1.getValue(), prices.get(0).getValue());
+            Assert.assertEquals(p2.getValue(), prices.get(1).getValue());
+            Assert.assertEquals(p3.getValue(), prices.get(2).getValue());
+        }
     }
 
     @Test
     public void testNames() {
         // Check we don't have any names
-        List<Name> names = RestAssured.get(getAddress("names/all")).as(new TypeRef<List<Name>>() {});
-        Assert.assertTrue(names.isEmpty());
+        try (Client client = ClientBuilder.newClient()) {
+            final GenericType<List<Name>> genericType = new GenericType<>(){};
+            List<Name> names = client.target(getAddress("names/all")).request().get(genericType);
+            Assert.assertTrue(names.isEmpty());
 
-        List<Name> tcNames = RestAssured.get(getAddress("names-tc")).as(new TypeRef<List<Name>>() {});
-        Assert.assertEquals(3, tcNames.size());
+            List<Name> tcNames = client.target(getAddress("names-tc")).request().get(genericType);
+            Assert.assertEquals(3, tcNames.size());
 
-        List<Name> meNames = RestAssured.get(getAddress("names-me")).as(new TypeRef<List<Name>>() {});
-        Assert.assertEquals(3, meNames.size());
+            List<Name> meNames = client.target(getAddress("names-me")).request().get(genericType);
+            Assert.assertEquals(3, meNames.size());
 
-        names = RestAssured.get(getAddress("names/all")).as(new TypeRef<List<Name>>() {});
-        Assert.assertEquals(6, names.size());
+            names = client.target(getAddress("names/all")).request().get(genericType);
+            Assert.assertEquals(6, names.size());
 
-        Assert.assertEquals(tcNames.get(0), names.get(0));
-        Assert.assertEquals(tcNames.get(1), names.get(1));
-        Assert.assertEquals(tcNames.get(2), names.get(2));
-        Assert.assertEquals(meNames.get(0), names.get(3));
-        Assert.assertEquals(meNames.get(1), names.get(4));
-        Assert.assertEquals(meNames.get(2), names.get(5));
+            Assert.assertEquals(tcNames.get(0), names.get(0));
+            Assert.assertEquals(tcNames.get(1), names.get(1));
+            Assert.assertEquals(tcNames.get(2), names.get(2));
+            Assert.assertEquals(meNames.get(0), names.get(3));
+            Assert.assertEquals(meNames.get(1), names.get(4));
+            Assert.assertEquals(meNames.get(2), names.get(5));
+        }
     }
 
 
     private String getAddress(String path) {
         return url.toExternalForm() + path;
+    }
+
+    private static void post(final WebTarget target, final Price entity) {
+        try (Response response = target.request()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+                .post(Entity.json(entity))) {
+            Assert.assertEquals(204, response.getStatus());
+        }
     }
 
     public static class AllowExperimentalAnnotationsSetupTask extends CLIServerSetupTask {

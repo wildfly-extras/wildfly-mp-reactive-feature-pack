@@ -25,6 +25,11 @@
         <artifact name="${io.smallrye.reactive:smallrye-reactive-messaging-amqp}"/>
     </resources>
     <dependencies>
+        <module name="io.netty.netty-handler"/>
+        <module name="io.opentelemetry.api"/>
+        <module name="io.opentelemetry.context"/>
+        <module name="io.reactivex.rxjava2.rxjava"/>
+        <module name="io.smallrye.common.annotation"/>
         <module name="io.smallrye.config" services="import"/>
         <module name="io.smallrye.reactive.converters.api"/>
         <module name="io.smallrye.reactive.messaging"/>

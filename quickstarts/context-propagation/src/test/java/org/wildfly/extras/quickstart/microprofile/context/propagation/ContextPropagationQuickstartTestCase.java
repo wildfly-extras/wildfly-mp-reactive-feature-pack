@@ -16,19 +16,12 @@
 
 package org.wildfly.extras.quickstart.microprofile.context.propagation;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static org.awaitility.Awaitility.await;
-
-import java.io.File;
-import java.net.URL;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
+import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.sse.SseEventSource;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -40,12 +33,16 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import io.restassured.RestAssured;
-import io.restassured.common.mapper.TypeRef;
+import java.io.File;
+import java.net.URL;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.awaitility.Awaitility.await;
 
 /**
  * @author <a href="mailto:kabir.khan@jboss.com">Kabir Khan</a>
@@ -53,7 +50,6 @@ import io.restassured.common.mapper.TypeRef;
 @RunWith(Arquillian.class)
 @RunAsClient
 @ServerSetup(ContextPropagationQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class)
-@Ignore("https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/issues/41")
 public class ContextPropagationQuickstartTestCase {
     @ArquillianResource
     URL url;

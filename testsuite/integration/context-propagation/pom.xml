@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-reactive-testsuite-integration</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>3.0.0.Final</version>
+        <version>3.0.1.Final-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -89,6 +89,11 @@
         <dependency>
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-core-testsuite-shared</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

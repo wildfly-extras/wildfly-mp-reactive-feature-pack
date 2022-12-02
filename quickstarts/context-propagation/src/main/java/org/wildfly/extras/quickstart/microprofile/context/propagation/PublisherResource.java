@@ -40,6 +40,7 @@ public class PublisherResource {
     @Produces(MediaType.SERVER_SENT_EVENTS) // denotes that server side events (SSE) will be produced
     @SseElementType(MediaType.TEXT_PLAIN) // denotes that the contained data, within this SSE, is just regular text/plain data
     public Publisher<Double> prices() {
+        System.out.println("----> returning publisher");
         // get the next three prices from the price stream
         return ReactiveStreams.fromPublisher(prices)
                 .limit(3)
@@ -52,6 +53,9 @@ public class PublisherResource {
                     // here we are all in the same transaction
                     // thanks to context propagation
                     em.persist(priceEntity);
+
+                    // We are returning the price so it should be good
+                    System.out.println("Stored " + price);
 
                     return price;
                 })

@@ -21,7 +21,7 @@
     <parent>
         <artifactId>wildfly-microprofile-reactive-quickstarts</artifactId>
         <groupId>org.wildfly.extras.reactive</groupId>
-        <version>3.0.0.Final</version>
+        <version>3.0.1.Final-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -106,11 +106,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -135,14 +130,41 @@
             <artifactId>shrinkwrap-impl-base</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Required REST client dependencies for the client side of testing -->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-json-binding-provider</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-json-p-provider</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- End required REST client dependencies -->
+        <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-testsuite-shared</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-core-testsuite-shared</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-cli</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

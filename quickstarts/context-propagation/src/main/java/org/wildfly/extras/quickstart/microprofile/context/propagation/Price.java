@@ -16,6 +16,7 @@ public class Price {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name="priceValue")
     private Double value;
 
     public Long getId() {

@@ -53,7 +53,7 @@ import org.wildfly.extras.quickstart.microprofile.reactive.messaging.PriceConver
 @ServerSetup({
         ReactiveMessagingMqttQuickstartTestCase.MqttBootstrapServerSetupTask.class,
         ReactiveMessagingMqttQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
-@Ignore("https://github.com/wildfly-extras/wildfly-mp-reactive-feature-pack/issues/41")
+@Ignore("Issue 41 - this never worked")
 public class ReactiveMessagingMqttQuickstartTestCase {
     private static final int MQTT_PORT = 1883;
     private static final GenericContainer MQTT = new GenericContainer("eclipse-mosquitto:1.6.2")

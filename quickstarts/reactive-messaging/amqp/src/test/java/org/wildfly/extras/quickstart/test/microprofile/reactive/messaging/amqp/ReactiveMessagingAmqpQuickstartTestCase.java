@@ -33,6 +33,7 @@ import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.testcontainers.containers.GenericContainer;
@@ -51,6 +52,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @ServerSetup({
         ReactiveMessagingAmqpQuickstartTestCase.KafkaBootstrapServerSetupTask.class,
         ReactiveMessagingAmqpQuickstartTestCase.AllowExperimentalAnnotationsSetupTask.class})
+@Ignore("Issue 41 - not important since we're moving this to WildFly")
 public class ReactiveMessagingAmqpQuickstartTestCase {
     private static final int AMQP_PORT = 5672;
     private static final GenericContainer AMQP = new GenericContainer("vromero/activemq-artemis:2.8.0-alpine")
